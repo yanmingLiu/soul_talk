@@ -12,10 +12,10 @@ import 'package:soul_talk/presentation/ap/cc002/input_bar.dart';
 import 'package:soul_talk/presentation/ap/cc002/level_widget.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_list_view.dart';
-import 'package:soul_talk/presentation/v000/v_dialog.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
 import 'package:soul_talk/presentation/v000/toast.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
+import 'package:soul_talk/presentation/v000/v_dialog.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 import 'package:soul_talk/utils/navigator_obs.dart';
 
@@ -63,7 +63,7 @@ class _MessageScreenState extends State<MessageScreen> with RouteAware {
       child: Stack(
         children: [
           Positioned.fill(
-            child: NetImage(url: ctr.session.background ?? role.avatar),
+            child: VImage(url: ctr.session.background ?? role.avatar),
           ),
           if (DI.storage.chatBgImagePath.isNotEmpty)
             Positioned.fill(
@@ -125,7 +125,7 @@ class _MessageScreenState extends State<MessageScreen> with RouteAware {
       backgroundColor: Colors.transparent,
       titleSpacing: 0.0,
       leadingWidth: 48,
-      leading: Button(
+      leading: VButton(
         width: 44,
         height: 44,
         color: Colors.transparent,
@@ -192,7 +192,7 @@ class _MessageScreenState extends State<MessageScreen> with RouteAware {
             icon: Image.asset('assets/images/phone.png', width: 28, height: 28),
           ),
         const SizedBox(width: 8),
-        Button(
+        VButton(
           height: 24,
           color: const Color(0x801C1C1C),
           borderRadius: BorderRadius.circular(4),

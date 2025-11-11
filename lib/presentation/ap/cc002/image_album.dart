@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/entities/figure_image.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 
 class ImageAlbum extends StatefulWidget {
   const ImageAlbum({super.key});
@@ -143,7 +143,7 @@ class PhotoAlbumItem extends StatelessWidget {
           color: const Color(0xff1C1C1C),
           child: Stack(
             children: [
-              NetImage(
+              VImage(
                 url: !unlocked ? avatar : image.imageUrl,
                 width: imageHeight,
                 height: imageHeight,

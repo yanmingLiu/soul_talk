@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_c_serach_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
 import 'package:soul_talk/presentation/v000/empty_view.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 
 class HSearchPage extends StatefulWidget {
   const HSearchPage({super.key});
@@ -53,7 +53,7 @@ class _HSearchPageState extends State<HSearchPage> {
           backgroundColor: Colors.transparent,
           titleSpacing: 0.0,
           leadingWidth: 48,
-          leading: Button(
+          leading: VButton(
             width: 44,
             height: 44,
             color: Colors.transparent,
@@ -107,7 +107,7 @@ class _HSearchPageState extends State<HSearchPage> {
                     ),
                   ),
                 ),
-                Button(
+                VButton(
                   width: 44,
                   height: 44,
                   color: Colors.transparent,

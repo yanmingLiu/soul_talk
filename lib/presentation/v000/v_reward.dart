@@ -3,12 +3,12 @@ import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/core/constants/vs.dart';
 import 'package:soul_talk/data/lo_pi.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
-class LoginRewardView extends StatelessWidget {
-  const LoginRewardView({super.key});
+class VRewardView extends StatelessWidget {
+  const VRewardView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class LoginRewardView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        Button(
+        VButton(
           width: 240,
           onTap: () async {
             await LoginApi.getDailyReward();
@@ -179,7 +179,7 @@ class LoginRewardView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        Button(
+        VButton(
           onTap: () {
             AppRoutes.pushVip(VipSF.dailyrd);
           },
@@ -201,7 +201,7 @@ class LoginRewardView extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        Button(
+        VButton(
           width: 240,
           onTap: () async {
             await LoginApi.getDailyReward();

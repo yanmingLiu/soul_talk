@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class FloatItem extends StatelessWidget {
@@ -35,7 +35,7 @@ class FloatItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: NetImage(
+            child: VImage(
               url: url,
               width: 64,
               height: 64,

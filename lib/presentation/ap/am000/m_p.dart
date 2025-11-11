@@ -7,7 +7,7 @@ import 'package:soul_talk/presentation/ap/dm003/profile_page.dart';
 
 import '../../../app/di_depency.dart';
 import '../../../core/analytics/analytics_service.dart';
-import '../../v000/keep_alive_wrapper.dart';
+import '../../v000/k_a_w.dart';
 
 enum MainTabBarIndex { home, chat, me }
 

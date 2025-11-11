@@ -4,8 +4,8 @@ import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
-class ConsumeButton extends StatelessWidget {
-  const ConsumeButton({super.key, required this.from});
+class ConsButton extends StatelessWidget {
+  const ConsButton({super.key, required this.from});
 
   final ConsSF from;
 

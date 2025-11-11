@@ -4,11 +4,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:soul_talk/core/constants/vs.dart';
-import 'package:soul_talk/presentation/v000/login_reward_view.dart';
+import 'package:soul_talk/presentation/v000/v_alert.dart';
+import 'package:soul_talk/presentation/v000/v_reward.dart';
 
-import 'button.dart';
-import 'level_dialog.dart';
-import 'rate_view.dart';
+import 'v_button.dart';
+import 'v_level.dart';
+import 'v_rate.dart';
 
 class VDialog {
   VDialog._();
@@ -30,12 +31,6 @@ class VDialog {
       keepSingle: true,
       debounce: true,
       tag: tag,
-      // maskWidget: ClipPath(
-      //   child: BackdropFilter(
-      //     filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
-      //     child: Container(color: Colors.black.withValues(alpha: 0.8)),
-      //   ),
-      // ),
       maskColor: Colors.black.withValues(alpha: 0.8),
       builder: (context) {
         if (showCloseButton == true) {
@@ -75,60 +70,14 @@ class VDialog {
   }) async {
     return show(
       clickMaskDismiss: false,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: const Color(0xFF00120A), // 对话框背景色
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          spacing: 12,
-          children: [
-            _buildText(title ?? 'Tips', 20, FontWeight.w600),
-            if (title?.isNotEmpty == true) const SizedBox(height: 16),
-            _buildText(message, 14, FontWeight.w500),
-            if (messageWidget != null) messageWidget,
-            Button(
-              onTap: onConfirm,
-              margin: const EdgeInsets.only(top: 8),
-              color: const Color(0xFF85FFCD),
-              height: 48,
-              borderRadius: BorderRadius.circular(8),
-              child: Center(
-                child: Text(
-                  confirmText ?? 'Confirm',
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            if (cancelText?.isNotEmpty == true)
-              Button(
-                onTap: () {
-                  onCancel ?? SmartDialog.dismiss();
-                },
-                height: 48,
-                color: const Color(0x1AFFFFFF),
-                borderRadius: BorderRadius.circular(8),
-                child: Center(
-                  child: Text(
-                    'Cancel',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
+      child: VAlert(
+        title: title,
+        message: message,
+        messageWidget: messageWidget,
+        cancelText: cancelText,
+        confirmText: confirmText,
+        onCancel: onCancel,
+        onConfirm: onConfirm,
       ),
     );
   }
@@ -244,7 +193,7 @@ class VDialog {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Expanded(
-                                  child: Button(
+                                  child: VButton(
                                     onTap: onConfirm,
                                     height: 48,
                                     borderRadius: BorderRadius.circular(12),
@@ -283,7 +232,7 @@ class VDialog {
   }
 
   static Widget _buildCloseButton({void Function()? onTap}) {
-    return Button(
+    return VButton(
       onTap: () {
         SmartDialog.dismiss();
         onTap?.call();
@@ -400,7 +349,7 @@ class VDialog {
     return show(
       tag: VS.loginRewardTag,
       clickMaskDismiss: true,
-      child: LoginRewardView(),
+      child: VRewardView(),
     );
   }
 
@@ -411,7 +360,7 @@ class VDialog {
   static void showRateUs(String msg) async {
     VDialog.show(
       clickMaskDismiss: false,
-      child: RateAppWidget(msg: msg),
+      child: VRateApp(msg: msg),
       tag: VS.rateUsTag,
     );
   }

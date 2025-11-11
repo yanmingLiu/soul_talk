@@ -7,7 +7,7 @@ import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/domain/entities/message.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/cc002/text_item.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class ImageItem extends StatelessWidget {
@@ -41,7 +41,7 @@ class ImageItem extends StatelessWidget {
 
     var imageWidget = ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: NetImage(
+      child: VImage(
         url: imageUrl,
         width: imageWidth,
         height: imageHeight,

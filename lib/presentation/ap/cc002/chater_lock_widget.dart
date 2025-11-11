@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class ChaterLockView extends StatelessWidget {
@@ -52,7 +52,7 @@ class ChaterLockView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    Button(
+                    VButton(
                       color: const Color(0xFF85FFCD),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

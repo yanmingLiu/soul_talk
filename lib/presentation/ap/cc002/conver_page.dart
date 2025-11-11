@@ -5,10 +5,10 @@ import 'package:soul_talk/presentation/ap/cc002/conver_list_view.dart';
 import 'package:soul_talk/presentation/ap/cc002/fllow_list_view.dart';
 import 'package:soul_talk/presentation/ap/cc002/follow_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
-import 'package:soul_talk/presentation/v000/keep_alive_wrapper.dart';
+import 'package:soul_talk/presentation/v000/k_a_w.dart';
 import 'package:soul_talk/presentation/v000/linked_controller.dart';
 import 'package:soul_talk/presentation/v000/linked_item.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/utils/navigator_obs.dart';
 
 class ConverPage extends StatefulWidget {
@@ -168,7 +168,7 @@ class _ConverPageState extends State<ConverPage> with RouteAware {
     required bool isActive,
     void Function()? onTap,
   }) {
-    return Button(
+    return VButton(
       key: key,
       borderRadius: BorderRadius.circular(12),
       color: isActive ? Colors.black : Colors.white,

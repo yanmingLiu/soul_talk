@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/utils.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 
 class VipPage extends StatelessWidget {
   const VipPage({super.key});
@@ -20,7 +20,7 @@ class VipPage extends StatelessWidget {
             const Text('会员中心1'),
           ],
         ),
-        leading: Button(
+        leading: VButton(
           child: Center(
             child: Image.asset('assets/images/back.png', width: 24),
           ),

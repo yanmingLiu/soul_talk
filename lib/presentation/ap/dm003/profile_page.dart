@@ -4,8 +4,8 @@ import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/dm003/profile_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
-import 'package:soul_talk/presentation/v000/consume_button.dart';
+import 'package:soul_talk/presentation/v000/cons_button.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -19,7 +19,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         actions: [
-          ConsumeButton(from: ConsSF.me),
+          ConsButton(from: ConsSF.me),
           SizedBox(width: 12),
         ],
       ),
@@ -104,7 +104,7 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Button(
+                                    VButton(
                                       height: 28,
                                       borderRadius: BorderRadius.circular(14),
                                       color: Colors.white,

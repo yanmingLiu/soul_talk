@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class NetImage extends StatelessWidget {
-  const NetImage({
+class VImage extends StatelessWidget {
+  const VImage({
     super.key,
     this.url,
     this.width,

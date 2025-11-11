@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 
 class SettingMessageBackground extends StatelessWidget {
   const SettingMessageBackground({
@@ -55,7 +55,7 @@ class SettingMessageBackground extends StatelessWidget {
   }
 
   Widget _buildButton(String title, VoidCallback onTap) {
-    return Button(
+    return VButton(
       onTap: onTap,
       height: 48,
       borderRadius: BorderRadius.circular(8),

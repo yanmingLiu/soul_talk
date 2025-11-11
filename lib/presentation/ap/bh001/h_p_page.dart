@@ -5,12 +5,12 @@ import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_a_c_bloc.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
-import 'package:soul_talk/presentation/v000/consume_button.dart';
+import 'package:soul_talk/presentation/v000/cons_button.dart';
 import 'package:soul_talk/presentation/v000/linked_controller.dart';
 import 'package:soul_talk/presentation/v000/linked_item.dart';
 import 'package:soul_talk/presentation/v000/loading.dart';
-import 'package:soul_talk/presentation/v000/v_dialog.dart';
+import 'package:soul_talk/presentation/v000/toast.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,11 +54,11 @@ class _HomePageState extends State<HomePage>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ConsumeButton(from: ConsSF.home),
+                  ConsButton(from: ConsSF.home),
                   Obx(() {
                     return DI.login.vipStatus.value
                         ? SizedBox.shrink()
-                        : Button(
+                        : VButton(
                             width: 44,
                             height: 44,
                             child: Center(
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage>
                           );
                   }),
                   Spacer(),
-                  Button(
+                  VButton(
                     width: 44,
                     height: 44,
                     type: ButtonType.fill,
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage>
                   ),
                   if (DI.storage.isBest) ...[
                     SizedBox(width: 16),
-                    Button(
+                    VButton(
                       width: 44,
                       height: 44,
                       type: ButtonType.fill,
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                       onTap: () {
-                        VDialog.showLoginReward();
+                        Toast.toast('Filter function is not open yet');
                       },
                     ),
                   ],

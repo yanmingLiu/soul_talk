@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:soul_talk/core/constants/vs.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 import 'v_dialog.dart';
 
-class RateAppWidget extends StatelessWidget {
-  const RateAppWidget({super.key, required this.msg});
+class VRateApp extends StatelessWidget {
+  const VRateApp({super.key, required this.msg});
 
   final String msg;
 
@@ -79,7 +79,7 @@ class RateAppWidget extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            Button(
+                            VButton(
                               onTap: () {
                                 AppRoutes.openAppStoreReview();
                               },
@@ -97,7 +97,7 @@ class RateAppWidget extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 12),
-                            Button(
+                            VButton(
                               type: ButtonType.border,
                               height: 48,
                               onTap: close,

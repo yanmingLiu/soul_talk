@@ -8,7 +8,7 @@ import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
 import 'package:soul_talk/presentation/ap/cc002/rich_text_itemd.dart';
 import 'package:soul_talk/presentation/ap/cc002/send_item.dart';
 import 'package:soul_talk/presentation/ap/cc002/text_lock_item.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 /// 文本消息容器组件
@@ -282,7 +282,7 @@ class _TextItemState extends State<TextItem> {
 
   /// 构建举报按钮
   Widget _buildReportButton() {
-    return Button(
+    return VButton(
       width: 24.0,
       height: 24.0,
       onTap: AppRoutes.report,
@@ -293,7 +293,7 @@ class _TextItemState extends State<TextItem> {
   /// 构建翻译按钮
   Widget _buildTranslateButton(bool showTranslate) {
     return RepaintBoundary(
-      child: Button(
+      child: VButton(
         onTap: () => _handleTranslateMessage(),
         width: 24.0,
         height: 24.0,

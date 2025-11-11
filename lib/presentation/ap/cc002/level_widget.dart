@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
 import 'package:soul_talk/presentation/v000/v_ani_progress.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class LevelWidget extends StatelessWidget {
@@ -60,7 +60,7 @@ class LevelWidget extends StatelessWidget {
                   Row(
                     spacing: 4,
                     children: [
-                      NetImage(
+                      VImage(
                         url: ctr.role.avatar,
                         width: 20,
                         height: 20,

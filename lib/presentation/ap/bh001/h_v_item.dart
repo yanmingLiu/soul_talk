@@ -3,7 +3,7 @@ import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/repositories/figure_repository.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 class HomeItem extends StatelessWidget {
@@ -48,7 +48,7 @@ class HomeItem extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: NetImage(
+            child: VImage(
               url: role.avatar,
               borderRadius: BorderRadius.circular(20),
               border: role.vip == true

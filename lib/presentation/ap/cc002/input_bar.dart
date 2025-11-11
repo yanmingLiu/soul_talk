@@ -9,8 +9,8 @@ import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/cc002/message_edit_screen.dart';
 import 'package:soul_talk/presentation/ap/cc002/model_sheet.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
 import 'package:soul_talk/presentation/v000/toast.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
 import 'package:soul_talk/router/app_routers.dart';
 import 'package:soul_talk/utils/extensions.dart';
@@ -179,7 +179,7 @@ class _InputBarState extends State<InputBar> {
                             _buildSpecialButton(),
                             Flexible(child: _buildTextField()),
                             const SizedBox(width: 8),
-                            Button(
+                            VButton(
                               onTap: onSend,
                               width: 50,
                               color: Colors.transparent,

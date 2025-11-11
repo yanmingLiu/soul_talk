@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soul_talk/presentation/v000/button.dart';
-import 'package:soul_talk/presentation/v000/net_image.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
+import 'package:soul_talk/presentation/v000/v_image.dart';
 
 class ConverItem extends StatelessWidget {
   const ConverItem({
@@ -35,7 +35,7 @@ class ConverItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Button(
+    return VButton(
       borderRadius: BorderRadius.circular(0),
       color: Colors.transparent,
       onTap: onTap,
@@ -44,7 +44,7 @@ class ConverItem extends StatelessWidget {
       child: Row(
         spacing: 12,
         children: [
-          NetImage(
+          VImage(
             url: avatar,
             width: 50,
             height: 50,

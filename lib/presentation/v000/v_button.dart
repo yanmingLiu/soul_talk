@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 /// 按钮样式类型
 enum ButtonType { fill, border, text }
 
-class Button extends StatefulWidget {
-  const Button({
+class VButton extends StatefulWidget {
+  const VButton({
     super.key,
     this.child,
     this.borderRadius,
@@ -50,10 +50,10 @@ class Button extends StatefulWidget {
   final int debounceTime;
 
   @override
-  State<Button> createState() => _ButtonState();
+  State<VButton> createState() => _VButtonState();
 }
 
-class _ButtonState extends State<Button> {
+class _VButtonState extends State<VButton> {
   DateTime? _lastPressTime;
 
   /// 防抖点击处理

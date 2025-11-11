@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 
-class MessageEditScreen extends StatefulWidget {
-  const MessageEditScreen({
+class EditScreen extends StatefulWidget {
+  const EditScreen({
     super.key,
     required this.onInputTextFinish,
     this.content,
@@ -16,10 +16,10 @@ class MessageEditScreen extends StatefulWidget {
   final Function(String text) onInputTextFinish;
 
   @override
-  State<MessageEditScreen> createState() => _MessageEditScreenState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _MessageEditScreenState extends State<MessageEditScreen> {
+class _EditScreenState extends State<EditScreen> {
   final focusNode = FocusNode();
   final textController = TextEditingController();
 
@@ -115,11 +115,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                       horizontal: 16,
                       vertical: 10,
                     ),
-                    child: Image.asset(
-                      'assets/images/surebtn.png',
-                      width: 24,
-                      height: 24,
-                    ),
+                    child: Icon(Icons.select_all),
                   ),
                 ),
               ],

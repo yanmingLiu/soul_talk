@@ -26,8 +26,8 @@ class _TipsStyle {
 }
 
 /// Tips内容组件
-class TipsItem extends StatelessWidget {
-  const TipsItem({super.key, required this.msg});
+class VTips extends StatelessWidget {
+  const VTips({super.key, required this.msg});
 
   final Message msg;
 

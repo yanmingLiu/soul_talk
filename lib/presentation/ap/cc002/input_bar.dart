@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/presentation/ap/cc002/message_edit_screen.dart';
-import 'package:soul_talk/presentation/ap/cc002/model_sheet.dart';
+import 'package:soul_talk/presentation/ap/cc002/edit_screen.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_replay_sheet.dart';
 import 'package:soul_talk/presentation/v000/toast.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
@@ -102,7 +102,7 @@ class _InputBarState extends State<InputBar> {
 
   void editScene() {
     Get.bottomSheet(
-      MessageEditScreen(
+      EditScreen(
         content: ctr.session.scene ?? '',
         onInputTextFinish: (v) {
           if (v == ctr.session.scene) {
@@ -140,7 +140,7 @@ class _InputBarState extends State<InputBar> {
   void showChatModel() {
     final isLong = ctr.session.chatModel == 'long';
     Get.bottomSheet(
-      ModeSheet(
+      VReplaySheet(
         isLong: isLong,
         onTap: (bool v) {
           ctr.editChatMode(v);

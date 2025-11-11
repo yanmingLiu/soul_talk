@@ -19,14 +19,14 @@ import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 import 'package:soul_talk/utils/navigator_obs.dart';
 
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({super.key});
+class MessagePage extends StatefulWidget {
+  const MessagePage({super.key});
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  State<MessagePage> createState() => _MessagePageState();
 }
 
-class _MessageScreenState extends State<MessageScreen> with RouteAware {
+class _MessagePageState extends State<MessagePage> with RouteAware {
   final ctr = Get.put(MsgBloc());
 
   @override

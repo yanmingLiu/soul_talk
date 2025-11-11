@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:soul_talk/domain/entities/message.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/presentation/ap/cc002/audio_item.dart';
 import 'package:soul_talk/presentation/ap/cc002/image_item.dart';
-import 'package:soul_talk/presentation/ap/cc002/text_item.dart';
-import 'package:soul_talk/presentation/ap/cc002/tips_item.dart';
-import 'package:soul_talk/presentation/ap/cc002/video_item.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_audio.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_text.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_tips.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_video.dart';
 
 class MessageContainerFactory {
   MessageContainerFactory._();
 
   static final Map<MsgType, Widget Function(Message)> _containerBuilders = {
-    MsgType.tips: (msg) => TipsItem(msg: msg),
-    MsgType.maskTips: (msg) => TipsItem(msg: msg),
-    MsgType.error: (msg) => TipsItem(msg: msg),
-    MsgType.welcome: (msg) => TextItem(msg: msg),
-    MsgType.scenario: (msg) => TextItem(msg: msg, title: "Scenario:"),
-    MsgType.intro: (msg) => TextItem(msg: msg, title: "Intro:"),
-    MsgType.sendText: (msg) => TextItem(msg: msg),
-    MsgType.text: (msg) => TextItem(msg: msg),
+    MsgType.tips: (msg) => VTips(msg: msg),
+    MsgType.maskTips: (msg) => VTips(msg: msg),
+    MsgType.error: (msg) => VTips(msg: msg),
+    MsgType.welcome: (msg) => VText(msg: msg),
+    MsgType.scenario: (msg) => VText(msg: msg, title: "Scenario:"),
+    MsgType.intro: (msg) => VText(msg: msg, title: "Intro:"),
+    MsgType.sendText: (msg) => VText(msg: msg),
+    MsgType.text: (msg) => VText(msg: msg),
     MsgType.photo: (msg) => ImageItem(msg: msg),
     MsgType.clothe: (msg) => ImageItem(msg: msg),
-    MsgType.video: (msg) => VideoItem(msg: msg),
-    MsgType.audio: (msg) => AudioItem(msg: msg, key: ValueKey(msg.id)),
+    MsgType.video: (msg) => VVideo(msg: msg),
+    MsgType.audio: (msg) => VAudio(msg: msg, key: ValueKey(msg.id)),
   };
 
   /// 创建消息容器widget

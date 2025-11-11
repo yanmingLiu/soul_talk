@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ModeSheet extends StatelessWidget {
-  const ModeSheet({super.key, required this.isLong, required this.onTap});
+class VReplaySheet extends StatelessWidget {
+  const VReplaySheet({super.key, required this.isLong, required this.onTap});
 
   final bool isLong;
   final Function(bool) onTap;

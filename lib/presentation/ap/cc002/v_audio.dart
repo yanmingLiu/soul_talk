@@ -6,22 +6,21 @@ import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/core/services/audio_player_service.dart';
 import 'package:soul_talk/domain/entities/message.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/presentation/ap/cc002/text_item.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_text.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 enum PlayState { downloading, playing, paused, stopped, error }
 
-class AudioItem extends StatefulWidget {
-  const AudioItem({super.key, required this.msg});
+class VAudio extends StatefulWidget {
+  const VAudio({super.key, required this.msg});
 
   final Message msg;
 
   @override
-  State<AudioItem> createState() => _AudioItemState();
+  State<VAudio> createState() => _VAudioState();
 }
 
-class _AudioItemState extends State<AudioItem>
-    with SingleTickerProviderStateMixin {
+class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
   /// 动画控制器
   AnimationController? _controller;
 
@@ -170,7 +169,7 @@ class _AudioItemState extends State<AudioItem>
       child: Column(
         spacing: 8,
         children: [
-          TextItem(msg: widget.msg),
+          VText(msg: widget.msg),
           Row(children: [_buildAudioWidget()]),
         ],
       ),

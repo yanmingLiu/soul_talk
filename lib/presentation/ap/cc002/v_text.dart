@@ -3,26 +3,26 @@ import 'package:get/get.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/entities/message.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/presentation/ap/cc002/message_edit_screen.dart';
+import 'package:soul_talk/presentation/ap/cc002/edit_screen.dart';
 import 'package:soul_talk/presentation/ap/cc002/msg_bloc.dart';
-import 'package:soul_talk/presentation/ap/cc002/rich_text_itemd.dart';
-import 'package:soul_talk/presentation/ap/cc002/send_item.dart';
-import 'package:soul_talk/presentation/ap/cc002/text_lock_item.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_rich_text.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_send.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_text_lock.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
 /// 文本消息容器组件
-class TextItem extends StatefulWidget {
-  const TextItem({super.key, required this.msg, this.title});
+class VText extends StatefulWidget {
+  const VText({super.key, required this.msg, this.title});
 
   final Message msg;
   final String? title;
 
   @override
-  State<TextItem> createState() => _TextItemState();
+  State<VText> createState() => _VTextState();
 }
 
-class _TextItemState extends State<TextItem> {
+class _VTextState extends State<VText> {
   static const Color _bgColor = Color(0x801C1C1C);
   static const BorderRadius _borderRadius = BorderRadius.all(
     Radius.circular(16.0),
@@ -56,7 +56,7 @@ class _TextItemState extends State<TextItem> {
         if (shouldShowSend)
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
-            child: SendItem(msg: widget.msg),
+            child: VSend(msg: widget.msg),
           ),
         if (receivText != null) _buildReceiveText(context),
       ],
@@ -104,7 +104,7 @@ class _TextItemState extends State<TextItem> {
       final isLocked = _isMessageLocked();
 
       if (!isVip && isLocked) {
-        return TextLockItem(textContent: widget.msg.answer ?? '');
+        return VTextLock(textContent: widget.msg.answer ?? '');
       }
 
       return _buildText(context);
@@ -204,7 +204,7 @@ class _TextItemState extends State<TextItem> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-              RichTextItem(
+              VRichText(
                 text: content,
                 isSend: false,
                 isTypingAnimation: msg.typewriterAnimated == true,
@@ -383,7 +383,7 @@ class _TextItemState extends State<TextItem> {
   void _handleEditMessage(Message msg) {
     try {
       Get.bottomSheet(
-        MessageEditScreen(
+        EditScreen(
           content: msg.answer ?? '',
           onInputTextFinish: (value) {
             Get.back();

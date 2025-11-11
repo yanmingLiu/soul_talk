@@ -6,7 +6,7 @@ import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/domain/entities/message.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/presentation/ap/cc002/text_item.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_text.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
@@ -22,7 +22,7 @@ class ImageItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextItem(msg: msg),
+          VText(msg: msg),
           const SizedBox(height: 8),
           if (!msg.typewriterAnimated) _buildImageWidget(context),
         ],

@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-class TypingTextItem extends StatelessWidget {
-  const TypingTextItem({
+class VTyping extends StatelessWidget {
+  const VTyping({
     super.key,
     required this.text,
     required this.isSend,

@@ -24,7 +24,7 @@ class Routes {
       page: () => const ChooseLangPage(),
     ),
     GetPage(name: RouteConstants.search, page: () => const HSearchPage()),
-    GetPage(name: RouteConstants.message, page: () => const MessageScreen()),
+    GetPage(name: RouteConstants.message, page: () => const MessagePage()),
     // GetPage(name: RouteConstants.profile, page: () => const ChaterCenterPage()),
     // GetPage(name: RouteConstants.mask, page: () => const MaskListScreen()),
     // GetPage(name: RouteConstants.maskEdit, page: () => const MaskEditScreen()),

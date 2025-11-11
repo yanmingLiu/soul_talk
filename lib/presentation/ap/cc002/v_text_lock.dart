@@ -5,8 +5,8 @@ import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/router/app_routers.dart';
 
-class TextLockItem extends StatelessWidget {
-  const TextLockItem({super.key, this.onTap, required this.textContent});
+class VTextLock extends StatelessWidget {
+  const VTextLock({super.key, this.onTap, required this.textContent});
 
   final void Function()? onTap;
   final String textContent;

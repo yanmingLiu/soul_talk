@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:soul_talk/domain/entities/message.dart';
-import 'package:soul_talk/presentation/ap/cc002/typing_text_item.dart';
+import 'package:soul_talk/presentation/ap/cc002/v_typing.dart';
 
-class SendItem extends StatelessWidget {
-  const SendItem({super.key, required this.msg});
+class VSend extends StatelessWidget {
+  const VSend({super.key, required this.msg});
 
   final Message msg;
 
@@ -45,11 +45,7 @@ class SendItem extends StatelessWidget {
         ),
         constraints: BoxConstraints(maxWidth: screenWidth * 0.8),
         child: RepaintBoundary(
-          child: TypingTextItem(
-            text: text,
-            isSend: false,
-            isTypingAnimation: false,
-          ),
+          child: VTyping(text: text, isSend: false, isTypingAnimation: false),
         ),
       ),
     );

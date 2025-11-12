@@ -5,6 +5,7 @@ import 'package:soul_talk/presentation/ap/cc002/c/center_bloc.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
+import 'package:soul_talk/presentation/v000/v_sheet.dart';
 import 'package:soul_talk/router/nav_to.dart';
 
 class ChaterCenterPage extends StatefulWidget {
@@ -56,6 +57,62 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
   //   super.dispose();
   // }
 
+  void _onTapMore() {
+    VSheet.show(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          VButton(
+            onTap: () {
+              VSheet.dismiss();
+              ctr.clearHistory();
+            },
+            height: 64,
+            child: Row(
+              spacing: 16,
+              children: [
+                Image.asset('assets/images/msg_clear.png', width: 24),
+                const Text(
+                  'Clear history',
+                  style: TextStyle(
+                    color: Color(0xFF595959),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const Spacer(),
+                Image.asset('assets/images/indecateright.png', width: 24),
+              ],
+            ),
+          ),
+          VButton(
+            onTap: () {
+              VSheet.dismiss();
+              NTO.report();
+            },
+            height: 64,
+            child: Row(
+              spacing: 16,
+              children: [
+                Image.asset('assets/images/msg_rep.png', width: 24),
+                const Text(
+                  'Report',
+                  style: TextStyle(
+                    color: Color(0xFF595959),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const Spacer(),
+                Image.asset('assets/images/indecateright.png', width: 24),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -74,6 +131,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
           leading: const NavBackBtn(),
           actions: [
             GestureDetector(
+              onTap: _onTapMore,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Image.asset('assets/images/more@3x.png', width: 24),

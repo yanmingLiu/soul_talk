@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:soul_talk/presentation/ap/cc002/v/message_item.dart';
+import 'package:soul_talk/presentation/ap/cc002/v/msg_factory.dart';
 import 'package:soul_talk/presentation/ap/cc002/c/msg_bloc.dart';
 import 'package:soul_talk/utils/log_util.dart';
 

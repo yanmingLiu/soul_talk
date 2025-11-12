@@ -6,7 +6,7 @@ abstract class BaseListController<T> extends GetxController {
   var dataList = <T>[].obs;
   int page = 1;
   int size = 100;
-  var emptyType = Rx<EmptyType?>(EmptyType.noData);
+  var emptyType = Rx<EmptyType?>(EmptyType.loading);
   bool isNoMoreData = false;
   bool _isRefreshing = false;
   bool _isLoading = false;

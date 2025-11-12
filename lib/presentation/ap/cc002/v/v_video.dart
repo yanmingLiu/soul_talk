@@ -87,39 +87,32 @@ class VVideo extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 12,
-              children: [
-                const Icon(Icons.play_circle, size: 32, color: Colors.white),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF85FFCD),
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Hot Video',
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+
+            Image.asset('assets/images/lock@3x.png', width: 28),
+
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
                 ),
-              ],
+                decoration: const BoxDecoration(
+                  color: Color(0x80000000),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Hot Video',
+                  style: TextStyle(
+                    color: Color(0xFFDF78B1),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

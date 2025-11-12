@@ -116,12 +116,12 @@ class _InputBarState extends State<InputBar> {
           Get.back();
           ctr.editScene(v);
         },
-        subtitle: Row(
+        subtitle: const Row(
           spacing: 4,
           children: [
             Text(
               'Edit scenario',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Color(0xFF434343),
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -153,8 +153,8 @@ class _InputBarState extends State<InputBar> {
   Widget build(BuildContext context) {
     final bottom = MediaQuery.of(context).padding.bottom;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0x00000000), Color(0xE6000000)],
           begin: Alignment.topCenter,
@@ -164,7 +164,7 @@ class _InputBarState extends State<InputBar> {
       child: Obx(
         () => Column(
           children: [
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Stack(
               children: [
                 ClipRRect(
@@ -174,11 +174,11 @@ class _InputBarState extends State<InputBar> {
                     child: Container(
                       constraints: const BoxConstraints(maxHeight: 80),
                       decoration: BoxDecoration(
-                        color: Color(0x3D000000),
+                        color: const Color(0x3D000000),
                         borderRadius: BorderRadius.circular(24),
                         border: Border.all(
                           width: 1.5,
-                          color: Color(0x33FFFFFF),
+                          color: const Color(0x33FFFFFF),
                         ),
                       ),
                       child: Row(
@@ -238,9 +238,9 @@ class _InputBarState extends State<InputBar> {
       enableInteractiveSelection: true, // 确保文本选择功能启用
       dragStartBehavior: DragStartBehavior.down, // 优化拖拽行为
       cursorColor: Colors.white,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Type here...',
-        hintStyle: const TextStyle(
+        hintStyle: TextStyle(
           color: Color(0x80FFFFFF),
           fontSize: 14,
           fontWeight: FontWeight.w400,
@@ -249,7 +249,7 @@ class _InputBarState extends State<InputBar> {
         border: InputBorder.none,
         filled: true,
         isDense: true,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+        contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       ),
       autofocus: false,
       focusNode: focusNode,

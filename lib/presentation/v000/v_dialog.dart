@@ -8,7 +8,7 @@ import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_reward.dart';
 import 'package:soul_talk/presentation/v000/v_sheet.dart';
 
-import 'v_level.dart';
+import 'v_level_sheet.dart';
 import 'v_rate.dart';
 
 class VDialog {
@@ -83,7 +83,7 @@ class VDialog {
   }
 
   static Future<void> sheet({bool? clickMaskDismiss = false}) async {
-    return show(clickMaskDismiss: false, child: VSheet());
+    return show(clickMaskDismiss: false, child: const VSheet());
   }
 
   // static Future input({
@@ -244,7 +244,7 @@ class VDialog {
       width: 44,
       height: 44,
       borderRadius: const BorderRadius.all(Radius.circular(8)),
-      child: Center(child: Icon(Icons.close, color: Colors.white)),
+      child: const Center(child: Icon(Icons.close, color: Colors.white)),
     );
   }
 
@@ -266,7 +266,7 @@ class VDialog {
   // }
 
   static Future showChatLevel() async {
-    return show(child: const LevelDialog(), clickMaskDismiss: true);
+    return VSheet.show(const VLevelSheet());
   }
 
   static bool _isChatLevelDialogVisible = false;
@@ -311,7 +311,7 @@ class VDialog {
                   mainAxisSize: MainAxisSize.min,
                   spacing: 8,
                   children: [
-                    Image.asset('assets/images/coins.png', width: 24),
+                    Image.asset('assets/images/diamond.png', width: 24),
                     Text(
                       '+ $rewards',
                       style: const TextStyle(
@@ -331,20 +331,20 @@ class VDialog {
 
     await completer.future;
 
-    await _showLevelUpDialog(rewards);
+    // await _showLevelUpDialog(rewards);
   }
 
-  static Future<void> _showLevelUpDialog(int rewards) async {
-    await SmartDialog.show(
-      tag: VS.chatLevelUpTag,
-      clickMaskDismiss: false,
-      maskColor: Colors.transparent,
-      keepSingle: true,
-      builder: (context) {
-        return ChatLevelUpDialog(rewards: rewards);
-      },
-    );
-  }
+  // static Future<void> _showLevelUpDialog(int rewards) async {
+  //   await SmartDialog.show(
+  //     tag: VS.chatLevelUpTag,
+  //     clickMaskDismiss: false,
+  //     maskColor: Colors.transparent,
+  //     keepSingle: true,
+  //     builder: (context) {
+  //       return ChatLevelUpDialog(rewards: rewards);
+  //     },
+  //   );
+  // }
 
   static Future showLoginReward() async {
     if (checkExist(VS.loginRewardTag)) {
@@ -353,7 +353,7 @@ class VDialog {
     return show(
       tag: VS.loginRewardTag,
       clickMaskDismiss: true,
-      child: VRewardView(),
+      child: const VRewardView(),
     );
   }
 

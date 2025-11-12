@@ -53,10 +53,7 @@ class ChaterCenterController extends GetxController {
 
   void clearHistory() async {
     VDialog.alert(
-      // message: LocaleKeys.clear_history_confirmation.tr,
-      // cancelText: LocaleKeys.cancel.tr,
-      message: 'clearHistoryConfirmation',
-      cancelText: 'cancel',
+      message: "Are you sure to clear all history messages?",
       onConfirm: () async {
         VDialog.dismiss();
         await msgCtr.resetConv();
@@ -74,7 +71,7 @@ class ChaterCenterController extends GetxController {
     }
 
     Loading.show();
-    
+
     if (collect.value) {
       final res = await HomeApi.cancelCollectRole(id);
       if (res) {

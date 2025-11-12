@@ -86,48 +86,39 @@ class ImageItem extends StatelessWidget {
                   alignment: Alignment.center,
                   height: double.infinity,
                   width: double.infinity,
-                  decoration: const BoxDecoration(color: Color(0x801C1C1C)),
+                  decoration: const BoxDecoration(color: Color(0x33000000)),
                 ),
               ),
             ),
-            _buildContentButton(),
-          ],
-        ),
-      ),
-    );
-  }
+            Image.asset('assets/images/lock@3x.png', width: 28),
 
-  Column _buildContentButton() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset('assets/images/locked.png', width: 32),
-        const SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF85FFCD),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    'Hot Photo',
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                    ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                decoration: const BoxDecoration(
+                  color: Color(0x80000000),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Hot Photo',
+                  style: TextStyle(
+                    color: Color(0xFFDF78B1),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
                   ),
-                ],
+                ),
               ),
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 

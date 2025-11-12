@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:soul_talk/core/config/evn.dart';
+import 'package:soul_talk/presentation/v000/v_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../app/di_depency.dart';
@@ -265,12 +266,12 @@ class NTO {
 
   static void report() {
     void request() async {
+      VSheet.dismiss();
+
       Loading.show();
       await Future.delayed(const Duration(seconds: 1));
       Loading.dismiss();
       Toast.toast('Report successful');
-
-      VDialog.dismiss();
     }
 
     Map<String, Function> actsion = {
@@ -282,47 +283,43 @@ class NTO {
       'Illegal Drugs': request,
     };
 
-    VDialog.show(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: const Color(0xFF00120A),
-        ),
-        child: ListView.separated(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: actsion.keys.length,
-          itemBuilder: (_, index) {
-            final fn = actsion.values.toList()[index];
-            return InkWell(
-              onTap: () {
-                fn.call();
-              },
-              child: SizedBox(
-                height: 54,
-                child: Center(
-                  child: Text(
-                    actsion.keys.toList()[index],
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
+    VSheet.show(
+      GridView.builder(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: actsion.keys.length,
+        itemBuilder: (_, index) {
+          final fn = actsion.values.toList()[index];
+          return InkWell(
+            onTap: () {
+              fn.call();
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                actsion.keys.toList()[index],
+                style: const TextStyle(
+                  color: Color(0xFF595959),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Container(height: 1, color: const Color(0x1AFFFFFF));
-          },
+            ),
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+          childAspectRatio: 168.0 / 42.0,
         ),
       ),
-      clickMaskDismiss: false,
     );
   }
 }

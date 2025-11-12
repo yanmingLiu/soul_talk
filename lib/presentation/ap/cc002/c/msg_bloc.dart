@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/core/constants/api_values.dart';
-import 'package:soul_talk/core/data/lo_pi.dart';
 import 'package:soul_talk/core/data/ma_pi.dart';
 import 'package:soul_talk/core/data/ms_pi.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
@@ -14,7 +13,6 @@ import 'package:soul_talk/presentation/v000/loading.dart';
 import 'package:soul_talk/presentation/v000/toast.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
 import 'package:soul_talk/router/nav_to.dart';
-import 'package:soul_talk/utils/trans_utils.dart';
 
 import '../../../../app/di_depency.dart';
 import '../../../../core/services/trade_service.dart';
@@ -300,6 +298,7 @@ class MsgBloc extends GetxController {
       session = result;
       list.clear();
       _addDefaaultTips();
+      Toast.toast('Clear history messages success!');
       return true;
     }
     return false;
@@ -547,72 +546,72 @@ class MsgBloc extends GetxController {
     NTO.pushImagePreview(imageUrl);
   }
 
-  void translateMsg(Message msg) async {
-    Message lastMsg = list.last;
-    if (lastMsg.typewriterAnimated) {
-      Toast.toast("Wait for response");
-      return;
-    }
+  // void translateMsg(Message msg) async {
+  //   Message lastMsg = list.last;
+  //   if (lastMsg.typewriterAnimated) {
+  //     Toast.toast("Wait for response");
+  //     return;
+  //   }
 
-    final content = msg.answer;
-    final id = msg.id;
+  //   final content = msg.answer;
+  //   final id = msg.id;
 
-    // 内容为空直接返回
-    if (content == null || content.isEmpty) return;
+  //   // 内容为空直接返回
+  //   if (content == null || content.isEmpty) return;
 
-    // 定义更新消息的方法
-    Future<void> updateMessage({
-      required bool showTranslate,
-      String? translate,
-    }) async {
-      msg.showTranslate = showTranslate;
+  //   // 定义更新消息的方法
+  //   Future<void> updateMessage({
+  //     required bool showTranslate,
+  //     String? translate,
+  //   }) async {
+  //     msg.showTranslate = showTranslate;
 
-      if (id != null) {
-        _transCache(isAdd: showTranslate, id: id);
-      }
+  //     if (id != null) {
+  //       _transCache(isAdd: showTranslate, id: id);
+  //     }
 
-      if (translate != null) {
-        msg.translateAnswer = translate;
+  //     if (translate != null) {
+  //       msg.translateAnswer = translate;
 
-        if (id != null) {
-          MsgApi.saveMsgTrans(id: id, text: translate);
-        }
-      }
-      list.refresh();
-    }
+  //       if (id != null) {
+  //         MsgApi.saveMsgTrans(id: id, text: translate);
+  //       }
+  //     }
+  //     list.refresh();
+  //   }
 
-    // 根据状态处理逻辑
-    if (msg.showTranslate == true) {
-      await updateMessage(showTranslate: false);
-    } else if (msg.translateAnswer != null) {
-      await updateMessage(showTranslate: true);
-      MsgTransUtils.instance.handleTranslationClick();
-    } else {
-      logEvent('c_trans');
-      if (msg.translateAnswer == null) {
-        // 获取翻译内容
-        Loading.show();
-        String? result = await LoginApi.translateText(content);
-        Loading.dismiss();
-        // 更新消息并显示翻译
-        await updateMessage(showTranslate: true, translate: result);
-      } else {
-        await updateMessage(showTranslate: true);
-      }
+  //   // 根据状态处理逻辑
+  //   if (msg.showTranslate == true) {
+  //     await updateMessage(showTranslate: false);
+  //   } else if (msg.translateAnswer != null) {
+  //     await updateMessage(showTranslate: true);
+  //     MsgTransUtils.instance.handleTranslationClick();
+  //   } else {
+  //     logEvent('c_trans');
+  //     if (msg.translateAnswer == null) {
+  //       // 获取翻译内容
+  //       Loading.show();
+  //       String? result = await LoginApi.translateText(content);
+  //       Loading.dismiss();
+  //       // 更新消息并显示翻译
+  //       await updateMessage(showTranslate: true, translate: result);
+  //     } else {
+  //       await updateMessage(showTranslate: true);
+  //     }
 
-      MsgTransUtils.instance.handleTranslationClick();
-    }
-  }
+  //     MsgTransUtils.instance.handleTranslationClick();
+  //   }
+  // }
 
-  void _transCache({required bool isAdd, required String id}) {
-    final Set<String> ids = DI.storage.translationMsgIds;
-    if (isAdd) {
-      ids.add(id); // 重复添加会自动忽略
-    } else {
-      ids.remove(id);
-    }
-    DI.storage.setTranslationMsgIds(ids);
-  }
+  // void _transCache({required bool isAdd, required String id}) {
+  //   final Set<String> ids = DI.storage.translationMsgIds;
+  //   if (isAdd) {
+  //     ids.add(id); // 重复添加会自动忽略
+  //   } else {
+  //     ids.remove(id);
+  //   }
+  //   DI.storage.setTranslationMsgIds(ids);
+  // }
 
   Message? findLastServerMsg() {
     // 从后向前遍历消息列表

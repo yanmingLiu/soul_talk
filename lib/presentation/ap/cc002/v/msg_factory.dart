@@ -7,8 +7,8 @@ import 'package:soul_talk/presentation/ap/cc002/v/v_text.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/v_tips.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/v_video.dart';
 
-class MessageContainerFactory {
-  MessageContainerFactory._();
+class MsgFactory {
+  MsgFactory._();
 
   static final Map<MsgType, Widget Function(Message)> _containerBuilders = {
     MsgType.tips: (msg) => VTips(msg: msg),
@@ -41,6 +41,6 @@ class MessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MessageContainerFactory.createContainer(source, msg);
+    return MsgFactory.createContainer(source, msg);
   }
 }

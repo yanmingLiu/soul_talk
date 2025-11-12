@@ -11,7 +11,7 @@ class VReplaySheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Spacer(),
+        const Spacer(),
         Align(
           alignment: Alignment.centerRight,
           child: InkWell(
@@ -26,7 +26,7 @@ class VReplaySheet extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.only(
@@ -37,9 +37,9 @@ class VReplaySheet extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Reply mode',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Color(0xFF434343),
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -102,7 +102,9 @@ class VReplaySheet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   border: BoxBorder.all(
                     width: 2,
-                    color: isSelected ? Color(0xFF55CFDA) : Colors.transparent,
+                    color: isSelected
+                        ? const Color(0xFF55CFDA)
+                        : Colors.transparent,
                   ),
                 ),
                 child: Column(
@@ -112,8 +114,8 @@ class VReplaySheet extends StatelessWidget {
                     Image.asset(icon, width: 32),
                     Text(
                       title,
-                      style: TextStyle(
-                        color: const Color(0xFF181818),
+                      style: const TextStyle(
+                        color: Color(0xFF181818),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),

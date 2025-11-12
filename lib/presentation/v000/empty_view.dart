@@ -37,15 +37,15 @@ class EmptyView extends StatelessWidget {
       child: Container(
         width: 81,
         height: 32,
-        margin: EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 20),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: const Color(0xFF55CFDA),
         ),
-        child: Text(
+        child: const Text(
           'Reload',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -81,8 +81,8 @@ class EmptyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgets = [];
-
-    if (type == EmptyType.loading) {
+    if (type == EmptyType.none) {
+    } else if (type == EmptyType.loading) {
       // Loading state - show activity indicator
       widgets.add(Loading.activityIndicator());
     } else {
@@ -117,7 +117,7 @@ class EmptyView extends StatelessWidget {
   }
 }
 
-enum EmptyType { loading, noData, noNetwork, noSearch, noChat }
+enum EmptyType { none, loading, noData, noNetwork, noSearch, noChat }
 
 extension EmptyTypeExt on EmptyType {
   Widget image({
@@ -139,6 +139,7 @@ extension EmptyTypeExt on EmptyType {
         name = 'assets/images/noreach@3x.png';
         break;
       case EmptyType.loading:
+      case EmptyType.none:
         break;
     }
     return Image.asset(name, width: width, height: height);
@@ -156,6 +157,8 @@ extension EmptyTypeExt on EmptyType {
         return 'No Sirens here yet';
       case EmptyType.noChat:
         return 'No chat';
+      case EmptyType.none:
+        return '';
     }
   }
 }

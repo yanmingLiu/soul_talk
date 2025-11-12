@@ -73,7 +73,7 @@ class SearchBloc extends GetxController {
   /// 清空搜索结果
   void _clearSearchResults() {
     list.clear();
-    type.value = EmptyType.noData;
+    type.value = EmptyType.noNetwork;
   }
 
   /// 设置加载状态

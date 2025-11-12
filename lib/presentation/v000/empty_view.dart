@@ -5,7 +5,8 @@ import 'package:soul_talk/presentation/v000/loading.dart';
 class EmptyView extends StatelessWidget {
   // Constants
   static const double _defaultPaddingTop = 100.0;
-  static const double _defaultImageSize = 200.0;
+  static const double _defaultImageWidth = 300.0;
+  static const double _defaultImageHeight = 180.0;
 
   const EmptyView({
     super.key,
@@ -36,17 +37,18 @@ class EmptyView extends StatelessWidget {
       child: Container(
         width: 81,
         height: 32,
+        margin: EdgeInsets.only(top: 20),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: const Color(0xFF85FFCD),
+          color: const Color(0xFF55CFDA),
         ),
         child: Text(
-          'reload',
+          'Reload',
           style: const TextStyle(
             fontSize: 12,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),
@@ -57,7 +59,7 @@ class EmptyView extends StatelessWidget {
   Widget _createContent(double width, double height, List<Widget> widgets) {
     // Add extra space for tall screens
     if (type != EmptyType.loading && height / width > 1.3) {
-      widgets.add(const SizedBox(height: _defaultImageSize));
+      widgets.add(const SizedBox(height: _defaultImageHeight));
     }
 
     return SingleChildScrollView(
@@ -91,18 +93,14 @@ class EmptyView extends StatelessWidget {
       // Add hint text
       final String hint = type.text();
       widgets.add(
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Text(
-            hintText ?? hint,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF999999),
-              fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.italic,
-            ),
-            textAlign: TextAlign.center,
+        Text(
+          hintText ?? hint,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Color(0xFF595959),
+            fontWeight: FontWeight.w400,
           ),
+          textAlign: TextAlign.center,
         ),
       );
 
@@ -119,43 +117,45 @@ class EmptyView extends StatelessWidget {
   }
 }
 
-enum EmptyType { loading, noData, noNetwork, noSearch }
+enum EmptyType { loading, noData, noNetwork, noSearch, noChat }
 
 extension EmptyTypeExt on EmptyType {
   Widget image({
-    double width = EmptyView._defaultImageSize,
-    double height = EmptyView._defaultImageSize,
+    double width = EmptyView._defaultImageWidth,
+    double height = EmptyView._defaultImageHeight,
   }) {
-    return Icon(Icons.error_outline);
-    var name = 'assets/images/e_no_load.png';
+    var name = '';
     switch (this) {
+      case EmptyType.noChat:
+        name = 'assets/images/nochat@3x.png';
+        break;
       case EmptyType.noData:
-        name = 'assets/images/e_no_data.png';
+        name = 'assets/images/nochat@3x.png';
         break;
       case EmptyType.noNetwork:
-        name = 'assets/images/e_no_network.png';
+        name = 'assets/images/nowifi@3x.png';
         break;
       case EmptyType.noSearch:
-        name = 'assets/images/e_no_search.png';
+        name = 'assets/images/noreach@3x.png';
         break;
       case EmptyType.loading:
-        name = 'assets/images/e_no_load.png';
         break;
     }
     return Image.asset(name, width: width, height: height);
   }
 
-  /// Returns the localized text message for this empty state type
   String text() {
     switch (this) {
       case EmptyType.loading:
         return 'loading';
       case EmptyType.noData:
-        return 'noData';
+        return 'No Datas';
       case EmptyType.noNetwork:
-        return 'noNetwork';
+        return 'No network';
       case EmptyType.noSearch:
-        return 'noSearch';
+        return 'No Sirens here yet';
+      case EmptyType.noChat:
+        return 'No chat';
     }
   }
 }

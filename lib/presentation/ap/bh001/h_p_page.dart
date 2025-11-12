@@ -6,12 +6,12 @@ import 'package:soul_talk/presentation/ap/bh001/h_a_c_bloc.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
 import 'package:soul_talk/presentation/v000/cons_button.dart';
+import 'package:soul_talk/presentation/v000/empty_view.dart';
 import 'package:soul_talk/presentation/v000/linked_controller.dart';
 import 'package:soul_talk/presentation/v000/linked_item.dart';
-import 'package:soul_talk/presentation/v000/loading.dart';
 import 'package:soul_talk/presentation/v000/toast.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,35 +44,50 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      body: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          titleSpacing: 12,
-          title: Stack(
-            alignment: Alignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ConsButton(from: ConsSF.home),
-                  Obx(() {
-                    return DI.login.vipStatus.value
-                        ? SizedBox.shrink()
-                        : VButton(
-                            width: 44,
-                            height: 44,
-                            child: Center(
-                              child: Image.asset(
-                                'assets/images/vip@3x.png',
-                                width: 28,
-                              ),
+      appBar: AppBar(
+        titleSpacing: 12,
+        title: Stack(
+          alignment: Alignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const ConsButton(from: ConsSF.home),
+                Obx(() {
+                  return DI.login.vipStatus.value
+                      ? const SizedBox.shrink()
+                      : VButton(
+                          width: 44,
+                          height: 44,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/vip@3x.png',
+                              width: 28,
                             ),
-                            onTap: () {
-                              AppRoutes.pushVip(VipSF.homevip);
-                            },
-                          );
-                  }),
-                  Spacer(),
+                          ),
+                          onTap: () {
+                            NTO.pushVip(VipSF.homevip);
+                          },
+                        );
+                }),
+                const Spacer(),
+                VButton(
+                  width: 44,
+                  height: 44,
+                  type: ButtonType.fill,
+                  color: Colors.white,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/search@3x.png',
+                      width: 32,
+                    ),
+                  ),
+                  onTap: () {
+                    NTO.pushSearch();
+                  },
+                ),
+                if (DI.storage.isBest) ...[
+                  const SizedBox(width: 16),
                   VButton(
                     width: 44,
                     height: 44,
@@ -80,49 +95,33 @@ class _HomePageState extends State<HomePage>
                     color: Colors.white,
                     child: Center(
                       child: Image.asset(
-                        'assets/images/search@3x.png',
+                        'assets/images/filter@3x.png',
                         width: 32,
                       ),
                     ),
                     onTap: () {
-                      AppRoutes.pushSearch();
+                      Toast.toast('Filter function is not open yet');
                     },
                   ),
-                  if (DI.storage.isBest) ...[
-                    SizedBox(width: 16),
-                    VButton(
-                      width: 44,
-                      height: 44,
-                      type: ButtonType.fill,
-                      color: Colors.white,
-                      child: Center(
-                        child: Image.asset(
-                          'assets/images/filter@3x.png',
-                          width: 32,
-                        ),
-                      ),
-                      onTap: () {
-                        Toast.toast('Filter function is not open yet');
-                      },
-                    ),
-                  ],
                 ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('Discover'),
-                  Image.asset('assets/images/star.png', width: 22),
-                ],
-              ),
-            ],
-          ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Discover'),
+                Image.asset('assets/images/star.png', width: 22),
+              ],
+            ),
+          ],
         ),
-        body: AnimatedBuilder(
+      ),
+      body: SafeArea(
+        child: AnimatedBuilder(
           animation: _linkedController,
           builder: (_, _) {
             if (_linkedController.items.isEmpty) {
-              return Loading.activityIndicator();
+              return const EmptyView(type: EmptyType.loading);
             }
             return Column(
               children: [
@@ -170,7 +169,6 @@ class _HomePageState extends State<HomePage>
                   ctr.onTapCate(data);
                   _linkedController.select(index);
                 },
-                animation: _linkedController,
               );
             },
           );

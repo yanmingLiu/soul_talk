@@ -13,6 +13,7 @@ class VImage extends StatelessWidget {
     this.color,
     this.cacheWidth,
     this.cacheHeight,
+    this.fit,
   });
 
   final String? url;
@@ -24,6 +25,7 @@ class VImage extends StatelessWidget {
   final Color? color;
   final int? cacheWidth;
   final int? cacheHeight;
+  final BoxFit? fit;
 
   String get urlSuffix => '?x-oss-process=image/resize,p_50';
 
@@ -42,7 +44,7 @@ class VImage extends StatelessWidget {
       imageUrl: imageUrl,
       width: width,
       height: height,
-      fit: BoxFit.cover,
+      fit: fit ?? BoxFit.cover,
       cacheKey: imageUrl,
       placeholder: (context, url) => placeholder(),
       errorWidget: (context, url, error) => placeholder(),

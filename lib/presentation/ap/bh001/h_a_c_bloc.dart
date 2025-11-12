@@ -5,7 +5,7 @@ import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/am000/m_p.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 import 'package:soul_talk/router/route_constants.dart';
 import 'package:soul_talk/utils/extensions.dart';
 
@@ -80,7 +80,7 @@ class AutoCallBloc extends GetxController {
 
       const sessionId = 0;
 
-      AppRoutes.pushPhone(
+      NTO.pushPhone(
         sessionId: sessionId,
         role: _callRole!,
         showVideo: true,

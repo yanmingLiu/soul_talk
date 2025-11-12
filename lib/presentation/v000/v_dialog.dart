@@ -1,13 +1,13 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:soul_talk/core/constants/vs.dart';
 import 'package:soul_talk/presentation/v000/v_alert.dart';
+import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_reward.dart';
+import 'package:soul_talk/presentation/v000/v_sheet.dart';
 
-import 'v_button.dart';
 import 'v_level.dart';
 import 'v_rate.dart';
 
@@ -82,154 +82,158 @@ class VDialog {
     );
   }
 
-  static Future input({
-    String? title,
-    String? message,
-    String? hintText,
-    Widget? messageWidget,
-    bool? clickMaskDismiss = false,
-    String? cancelText,
-    String? confirmText,
-    void Function()? onCancel,
-    void Function()? onConfirm,
-    FocusNode? focusNode, // FocusNode 参数
-    TextEditingController? textEditingController, // TextEditingController 参数
-  }) async {
-    final focusNode1 = focusNode ?? FocusNode();
-    final textController1 = textEditingController ?? TextEditingController();
-
-    return SmartDialog.show(
-      clickMaskDismiss: clickMaskDismiss,
-      useAnimation: false, // 关闭动画
-      maskWidget: ClipPath(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
-          child: Container(color: Colors.black.withValues(alpha: 0.8)),
-        ),
-      ),
-      builder: (context) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          // 在渲染完成之后调用焦点请求，确保键盘弹出
-          focusNode1.requestFocus();
-        });
-
-        double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-
-        return AnimatedPadding(
-          duration: const Duration(milliseconds: 150),
-          curve: Curves.easeOut,
-          padding: EdgeInsets.only(bottom: keyboardHeight),
-          child: Material(
-            type: MaterialType.transparency,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 36,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF00120A), // 对话框背景色
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _buildText(title, 18, FontWeight.w600),
-                            if (title?.isNotEmpty == true)
-                              const SizedBox(height: 16),
-                            _buildText(message, 14, FontWeight.w500),
-                            if (messageWidget != null) messageWidget,
-                            const SizedBox(height: 16),
-                            Container(
-                              height: 40,
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0x1AFFFFFF),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Center(
-                                child: TextField(
-                                  autofocus: true,
-                                  textInputAction: TextInputAction.done,
-                                  onEditingComplete: () {},
-                                  minLines: 1,
-                                  maxLength: 20,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    height: 1,
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  controller: textController1,
-                                  decoration: InputDecoration(
-                                    hintText: hintText ?? 'input',
-                                    counterText: '', // 去掉字数显示
-                                    hintStyle: const TextStyle(
-                                      color: Color(0xFFB3B3B3),
-                                    ),
-                                    fillColor: Colors.transparent,
-                                    border: InputBorder.none,
-                                    filled: true,
-                                    isDense: true,
-                                  ),
-                                  focusNode: focusNode1,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 32),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: VButton(
-                                    onTap: onConfirm,
-                                    height: 48,
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Center(
-                                      child: Text(
-                                        'Confirm',
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [_buildCloseButton()],
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
+  static Future<void> sheet({bool? clickMaskDismiss = false}) async {
+    return show(clickMaskDismiss: false, child: VSheet());
   }
+
+  // static Future input({
+  //   String? title,
+  //   String? message,
+  //   String? hintText,
+  //   Widget? messageWidget,
+  //   bool? clickMaskDismiss = false,
+  //   String? cancelText,
+  //   String? confirmText,
+  //   void Function()? onCancel,
+  //   void Function()? onConfirm,
+  //   FocusNode? focusNode, // FocusNode 参数
+  //   TextEditingController? textEditingController, // TextEditingController 参数
+  // }) async {
+  //   final focusNode1 = focusNode ?? FocusNode();
+  //   final textController1 = textEditingController ?? TextEditingController();
+
+  //   return SmartDialog.show(
+  //     clickMaskDismiss: clickMaskDismiss,
+  //     useAnimation: false, // 关闭动画
+  //     maskWidget: ClipPath(
+  //       child: BackdropFilter(
+  //         filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+  //         child: Container(color: Colors.black.withValues(alpha: 0.8)),
+  //       ),
+  //     ),
+  //     builder: (context) {
+  //       WidgetsBinding.instance.addPostFrameCallback((_) {
+  //         // 在渲染完成之后调用焦点请求，确保键盘弹出
+  //         focusNode1.requestFocus();
+  //       });
+
+  //       double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
+  //       return AnimatedPadding(
+  //         duration: const Duration(milliseconds: 150),
+  //         curve: Curves.easeOut,
+  //         padding: EdgeInsets.only(bottom: keyboardHeight),
+  //         child: Material(
+  //           type: MaterialType.transparency,
+  //           child: Padding(
+  //             padding: const EdgeInsets.symmetric(horizontal: 16),
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.end,
+  //               children: [
+  //                 Stack(
+  //                   children: [
+  //                     Container(
+  //                       padding: const EdgeInsets.symmetric(
+  //                         horizontal: 20,
+  //                         vertical: 36,
+  //                       ),
+  //                       decoration: BoxDecoration(
+  //                         color: const Color(0xFF00120A), // 对话框背景色
+  //                         borderRadius: BorderRadius.circular(12),
+  //                       ),
+  //                       child: Column(
+  //                         mainAxisSize: MainAxisSize.min,
+  //                         children: [
+  //                           _buildText(title, 18, FontWeight.w600),
+  //                           if (title?.isNotEmpty == true)
+  //                             const SizedBox(height: 16),
+  //                           _buildText(message, 14, FontWeight.w500),
+  //                           if (messageWidget != null) messageWidget,
+  //                           const SizedBox(height: 16),
+  //                           Container(
+  //                             height: 40,
+  //                             margin: const EdgeInsets.symmetric(
+  //                               horizontal: 16,
+  //                             ),
+  //                             padding: const EdgeInsets.symmetric(
+  //                               horizontal: 16,
+  //                             ),
+  //                             decoration: BoxDecoration(
+  //                               color: const Color(0x1AFFFFFF),
+  //                               borderRadius: BorderRadius.circular(12),
+  //                             ),
+  //                             child: Center(
+  //                               child: TextField(
+  //                                 autofocus: true,
+  //                                 textInputAction: TextInputAction.done,
+  //                                 onEditingComplete: () {},
+  //                                 minLines: 1,
+  //                                 maxLength: 20,
+  //                                 textAlign: TextAlign.center,
+  //                                 style: const TextStyle(
+  //                                   height: 1,
+  //                                   color: Colors.white,
+  //                                   fontSize: 14,
+  //                                   fontWeight: FontWeight.w700,
+  //                                 ),
+  //                                 controller: textController1,
+  //                                 decoration: InputDecoration(
+  //                                   hintText: hintText ?? 'input',
+  //                                   counterText: '', // 去掉字数显示
+  //                                   hintStyle: const TextStyle(
+  //                                     color: Color(0xFFB3B3B3),
+  //                                   ),
+  //                                   fillColor: Colors.transparent,
+  //                                   border: InputBorder.none,
+  //                                   filled: true,
+  //                                   isDense: true,
+  //                                 ),
+  //                                 focusNode: focusNode1,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                           const SizedBox(height: 32),
+  //                           Row(
+  //                             mainAxisAlignment: MainAxisAlignment.center,
+  //                             children: [
+  //                               Expanded(
+  //                                 child: VButton(
+  //                                   onTap: onConfirm,
+  //                                   height: 48,
+  //                                   borderRadius: BorderRadius.circular(12),
+  //                                   child: Center(
+  //                                     child: Text(
+  //                                       'Confirm',
+  //                                       style: const TextStyle(
+  //                                         color: Colors.black,
+  //                                         fontSize: 16,
+  //                                         fontWeight: FontWeight.w700,
+  //                                       ),
+  //                                     ),
+  //                                   ),
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 const SizedBox(height: 20),
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.center,
+  //                   children: [_buildCloseButton()],
+  //                 ),
+  //                 const SizedBox(height: 20),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   static Widget _buildCloseButton({void Function()? onTap}) {
     return VButton(
@@ -244,25 +248,25 @@ class VDialog {
     );
   }
 
-  static Widget _buildText(
-    String? text,
-    double fontSize,
-    FontWeight fontWeight,
-  ) {
-    if (text?.isNotEmpty != true) return const SizedBox.shrink();
-    return Text(
-      text!,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
-    );
-  }
+  // static Widget _buildText(
+  //   String? text,
+  //   double fontSize,
+  //   FontWeight fontWeight,
+  // ) {
+  //   if (text?.isNotEmpty != true) return const SizedBox.shrink();
+  //   return Text(
+  //     text!,
+  //     textAlign: TextAlign.center,
+  //     style: TextStyle(
+  //       color: Colors.white,
+  //       fontSize: fontSize,
+  //       fontWeight: fontWeight,
+  //     ),
+  //   );
+  // }
 
   static Future showChatLevel() async {
-    return show(child: const LevelDialog(), clickMaskDismiss: false);
+    return show(child: const LevelDialog(), clickMaskDismiss: true);
   }
 
   static bool _isChatLevelDialogVisible = false;

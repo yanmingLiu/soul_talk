@@ -2,7 +2,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/app/di_depency.dart';
-import 'package:soul_talk/data/h_pi.dart';
+import 'package:soul_talk/core/data/h_pi.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_a_c_bloc.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
@@ -62,6 +62,7 @@ class HomeChildBloc {
         final index = list.indexWhere((element) => element.id == id);
         if (index != -1) {
           list[index].collect = e == FollowEvent.follow;
+          list.refresh();
         }
       } catch (e) {
         debugPrint('[DiscoverChildController] : $e');

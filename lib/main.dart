@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
       title: 'SoulTalk',
       themeMode: ThemeMode.light,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.transparent,
         fontFamily: 'Montserrat',
         textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),
         appBarTheme: AppBarTheme(
@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           scrolledUnderElevation: 0.0,
           elevation: 0.0,
+          titleSpacing: 12,
           titleTextStyle: TextStyle(
             color: Color(0xFF181818),
             fontSize: 18,

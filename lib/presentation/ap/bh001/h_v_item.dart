@@ -4,7 +4,7 @@ import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/repositories/figure_repository.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class HomeItem extends StatelessWidget {
   const HomeItem({
@@ -27,9 +27,9 @@ class HomeItem extends StatelessWidget {
     }
 
     if (cate == HCate.video) {
-      AppRoutes.pushPhoneGuide(role: role);
+      NTO.pushPhoneGuide(role: role);
     } else {
-      AppRoutes.pushChat(id);
+      NTO.pushChat(id);
     }
   }
 

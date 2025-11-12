@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/core/constants/vs.dart';
-import 'package:soul_talk/data/lo_pi.dart';
+import 'package:soul_talk/core/data/lo_pi.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class VRewardView extends StatelessWidget {
   const VRewardView({super.key});
@@ -181,7 +181,7 @@ class VRewardView extends StatelessWidget {
         const SizedBox(height: 8),
         VButton(
           onTap: () {
-            AppRoutes.pushVip(VipSF.dailyrd);
+            NTO.pushVip(VipSF.dailyrd);
           },
           height: 48,
           width: 240,

@@ -13,8 +13,8 @@ import 'package:soul_talk/domain/value_objects/enums.dart';
 
 import '../app/di_depency.dart';
 import '../core/analytics/analytics_service.dart';
-import '../data/lo_pi.dart';
-import '../data/p_pi.dart';
+import '../core/data/lo_pi.dart';
+import '../core/data/p_pi.dart';
 import '../domain/entities/order.dart';
 import '../presentation/v000/v_dialog.dart';
 import '../presentation/v000/loading.dart';

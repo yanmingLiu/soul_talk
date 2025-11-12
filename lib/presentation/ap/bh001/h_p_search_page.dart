@@ -8,7 +8,7 @@ import 'package:soul_talk/presentation/v000/empty_view.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class HSearchPage extends StatefulWidget {
   const HSearchPage({super.key});
@@ -56,19 +56,20 @@ class _HSearchPageState extends State<HSearchPage> {
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
           titleSpacing: 0.0,
-          leadingWidth: 48,
+          leadingWidth: 44,
           leading: NavBackBtn(color: Colors.black),
           title: Container(
-            height: 48,
+            height: 44,
             width: double.infinity,
-            margin: const EdgeInsetsDirectional.only(end: 16),
+            margin: const EdgeInsetsDirectional.only(end: 12),
             padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(14.0),
             ),
             child: Row(
               children: [
+                Image.asset('assets/images/search_tf.png', width: 12),
                 Expanded(
                   child: Center(
                     child: TextField(
@@ -100,20 +101,6 @@ class _HSearchPageState extends State<HSearchPage> {
                         isDense: true,
                       ),
                       focusNode: focusNode,
-                    ),
-                  ),
-                ),
-                VButton(
-                  width: 44,
-                  height: 44,
-                  color: Colors.transparent,
-                  onTap: () {
-                    ctr.searchQuery.value = textController.text;
-                  },
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/search_tf.png',
-                      width: 12,
                     ),
                   ),
                 ),
@@ -225,6 +212,7 @@ class _HSearchPageState extends State<HSearchPage> {
                       children: [
                         VButton(
                           onTap: () {
+                            focusNode.unfocus();
                             ctr.onCollect(index, role);
                           },
                           height: 32,
@@ -255,7 +243,7 @@ class _HSearchPageState extends State<HSearchPage> {
                         Spacer(),
                         VButton(
                           onTap: () {
-                            AppRoutes.pushChat(role.id);
+                            NTO.pushChat(role.id);
                           },
                           height: 32,
                           width: 90,

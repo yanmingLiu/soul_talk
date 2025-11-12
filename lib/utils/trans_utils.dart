@@ -2,7 +2,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class MsgTransUtils {
   static final MsgTransUtils _instance = MsgTransUtils._internal();
@@ -58,6 +58,6 @@ class MsgTransUtils {
   }
 
   void toVip() {
-    AppRoutes.pushVip(VipSF.trans);
+    NTO.pushVip(VipSF.trans);
   }
 }

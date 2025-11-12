@@ -6,7 +6,7 @@ import 'package:soul_talk/core/constants/vs.dart';
 import 'package:soul_talk/domain/entities/lang.dart';
 
 import '../../app/di_depency.dart';
-import '../../data/lo_pi.dart';
+import '../data/lo_pi.dart';
 import '../../domain/entities/price.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/value_objects/enums.dart';

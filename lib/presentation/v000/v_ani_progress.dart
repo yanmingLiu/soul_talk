@@ -14,7 +14,7 @@ class AnimationProgress extends StatefulWidget {
     required this.progress,
     this.width = 250,
     this.height = 6,
-    this.gradientColors = const [Color(0xFF00AB8E), Color(0xFF00AB8E)], // 默认渐变色
+    this.gradientColors = const [Color(0xFFDF78B1), Color(0xFFDF78B1)], // 默认渐变色
     this.trackColor = const Color(0xFFC9C9C9), // 默认轨道颜色
     this.borderRadius = 3.0,
     this.animationDuration = const Duration(milliseconds: 300), // 默认动画时长

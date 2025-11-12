@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class LinkedItem extends StatelessWidget {
   const LinkedItem({
     super.key,
-    required this.animation,
     required this.title,
     required this.isActive,
     required this.onTap,
@@ -13,7 +12,6 @@ class LinkedItem extends StatelessWidget {
     this.indicatorHeight = 4,
   });
 
-  final Listenable animation;
   final String title;
   final bool isActive;
   final Widget? icon;
@@ -25,12 +23,7 @@ class LinkedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: AnimatedBuilder(
-        animation: animation,
-        builder: (_, _) {
-          return buildTabItem(title: title, isActive: isActive, onTap: onTap);
-        },
-      ),
+      child: buildTabItem(title: title, isActive: isActive, onTap: onTap),
     );
   }
 
@@ -58,7 +51,7 @@ class LinkedItem extends StatelessWidget {
                     style ??
                     TextStyle(
                       color: isActive
-                          ? Color(0xFFDF78B1)
+                          ? const Color(0xFFDF78B1)
                           : const Color(0xFF8C8C8C),
                       fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                       fontSize: 16,
@@ -71,7 +64,7 @@ class LinkedItem extends StatelessWidget {
             width: indicatorHeight,
             height: indicatorHeight,
             decoration: BoxDecoration(
-              color: isActive ? Color(0xFFDF78B1) : Colors.transparent,
+              color: isActive ? const Color(0xFFDF78B1) : Colors.transparent,
               borderRadius: BorderRadius.circular((indicatorHeight ?? 4) * 0.5),
             ),
           ),

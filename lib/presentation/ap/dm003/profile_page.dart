@@ -6,7 +6,7 @@ import 'package:soul_talk/presentation/ap/dm003/profile_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
 import 'package:soul_talk/presentation/v000/cons_button.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
     return BaseScaffold(
       appBar: AppBar(
         elevation: 0,
-        actions: [
+        actions: const [
           ConsButton(from: ConsSF.me),
           SizedBox(width: 12),
         ],
@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -50,14 +50,14 @@ class ProfilePage extends StatelessWidget {
                         Obx(() {
                           return Text(
                             ctr.nickname.value,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF282828),
                               fontSize: 28,
                               fontWeight: FontWeight.w500,
                             ),
                           );
                         }),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Image.asset('assets/images/me_edit.png', width: 16),
                       ],
                     ),
@@ -70,15 +70,15 @@ class ProfilePage extends StatelessWidget {
                       ? Container()
                       : GestureDetector(
                           onTap: () {
-                            AppRoutes.pushVip(VipSF.mevip);
+                            NTO.pushVip(VipSF.mevip);
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               vertical: 16,
                               horizontal: 16,
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
+                            margin: const EdgeInsets.symmetric(vertical: 12),
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('assets/images/vip_bg.png'),
                                 fit: BoxFit.fill,
@@ -93,8 +93,8 @@ class ProfilePage extends StatelessWidget {
                                       'assets/images/vip@3x.png',
                                       width: 20,
                                     ),
-                                    SizedBox(width: 8),
-                                    Expanded(
+                                    const SizedBox(width: 8),
+                                    const Expanded(
                                       child: Text(
                                         'Become VIP',
                                         style: TextStyle(
@@ -108,10 +108,10 @@ class ProfilePage extends StatelessWidget {
                                       height: 28,
                                       borderRadius: BorderRadius.circular(14),
                                       color: Colors.white,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                         horizontal: 8,
                                       ),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           'Upgrade',
                                           style: TextStyle(
@@ -124,7 +124,7 @@ class ProfilePage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Text(
+                                const Text(
                                   'Unlimited message & Unlock 10+ features',
                                   style: TextStyle(
                                     color: Colors.white,
@@ -146,7 +146,7 @@ class ProfilePage extends StatelessWidget {
                     title: 'Al’s language',
                     subTitle: name,
                     onTap: () {
-                      AppRoutes.pushChooseLang();
+                      NTO.pushChooseLang();
                     },
                   );
                 }),
@@ -155,7 +155,7 @@ class ProfilePage extends StatelessWidget {
                   icon: 'assets/images/nick@3x(2).png',
                   title: 'Feedback',
                   onTap: () {
-                    AppRoutes.toEmail();
+                    NTO.toEmail();
                   },
                 ),
 
@@ -171,7 +171,7 @@ class ProfilePage extends StatelessWidget {
                     title: 'App version',
                     subTitle: ctr.version.value,
                     onTap: () {
-                      AppRoutes.openAppStore();
+                      NTO.openAppStore();
                     },
                   );
                 }),
@@ -180,7 +180,7 @@ class ProfilePage extends StatelessWidget {
                   icon: 'assets/images/nick@3x(4).png',
                   title: 'Privacy policy',
                   onTap: () {
-                    AppRoutes.toPrivacy();
+                    NTO.toPrivacy();
                   },
                 ),
 
@@ -188,10 +188,10 @@ class ProfilePage extends StatelessWidget {
                   icon: 'assets/images/nick@3x(5).png',
                   title: 'Terms of use',
                   onTap: () {
-                    AppRoutes.toTerms();
+                    NTO.toTerms();
                   },
                 ),
-                SizedBox(height: 300),
+                const SizedBox(height: 300),
               ],
             ),
           ),
@@ -213,27 +213,27 @@ class ProfilePage extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(icon, width: 20),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color(0xFF999999),
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Text(
               subTitle ?? '',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF595959),
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Image.asset('assets/images/indecateright.png', width: 24),
           ],
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 class ConsButton extends StatelessWidget {
   const ConsButton({super.key, required this.from});
@@ -10,7 +10,7 @@ class ConsButton extends StatelessWidget {
   final ConsSF from;
 
   void _onTap() {
-    AppRoutes.pushGem(from);
+    NTO.pushGem(from);
   }
 
   @override

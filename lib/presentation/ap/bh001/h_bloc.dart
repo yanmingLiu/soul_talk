@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/core/analytics/analytics_service.dart';
-import 'package:soul_talk/data/h_pi.dart';
+import 'package:soul_talk/core/data/h_pi.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/bh001/h_v_view.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 import 'package:soul_talk/router/route_constants.dart';
 
 import '../../../app/di_depency.dart';
-import '../../../data/lo_pi.dart';
+import '../../../core/data/lo_pi.dart';
 import '../../../domain/entities/tag.dart';
 import '../../../utils/log_util.dart';
 import '../../v000/k_a_w.dart';
@@ -143,7 +143,7 @@ class HomeBloc extends GetxController {
       final startRole = await getSplashRole();
       if (startRole != null) {
         final roleId = startRole.id;
-        AppRoutes.pushChat(roleId, showLoading: false);
+        NTO.pushChat(roleId, showLoading: false);
       } else {
         jumpVip(isFirstLaunch);
       }
@@ -216,7 +216,7 @@ class HomeBloc extends GetxController {
   }
 
   void jumpVip(bool isFirstLaunch) async {
-    AppRoutes.pushVip(DI.storage.isRestart ? VipSF.relaunch : VipSF.launch);
+    NTO.pushVip(DI.storage.isRestart ? VipSF.relaunch : VipSF.launch);
 
     var event = DI.storage.isBest ? 't_vipb' : 't_vipa';
 

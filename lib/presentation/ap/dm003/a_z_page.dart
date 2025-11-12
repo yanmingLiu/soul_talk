@@ -1,12 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:get/get.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:soul_talk/app/di_depency.dart';
-import 'package:soul_talk/data/lo_pi.dart';
+import 'package:soul_talk/core/data/lo_pi.dart';
 import 'package:soul_talk/domain/entities/lang.dart';
 import 'package:soul_talk/presentation/ap/dm003/a_z_item_view.dart';
 import 'package:soul_talk/presentation/ap/dm003/a_z_model.dart';
@@ -160,8 +159,8 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
         leading: IconButton(
           onPressed: () {
             Get.back();

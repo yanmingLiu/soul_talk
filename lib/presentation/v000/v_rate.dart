@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soul_talk/core/constants/vs.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
-import 'package:soul_talk/router/app_routers.dart';
+import 'package:soul_talk/router/nav_to.dart';
 
 import 'v_dialog.dart';
 
@@ -81,7 +81,7 @@ class VRateApp extends StatelessWidget {
                             const SizedBox(height: 16),
                             VButton(
                               onTap: () {
-                                AppRoutes.openAppStoreReview();
+                                NTO.openAppStoreReview();
                               },
                               color: const Color(0xFFDF78B1),
                               height: 48,

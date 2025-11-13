@@ -50,11 +50,11 @@ class NTO {
 
       // 检查角色和会话是否为 null
       if (role == null) {
-        _dismissAndShowErrorToast('role is null');
+        _dismissAndShowErrorToast('No search this role!');
         return;
       }
       if (session == null) {
-        _dismissAndShowErrorToast('session is null');
+        _dismissAndShowErrorToast('Cont not add session, please try agin!');
         return;
       }
 

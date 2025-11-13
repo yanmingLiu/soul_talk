@@ -4,9 +4,14 @@ import 'package:soul_talk/router/nav_to.dart';
 enum PolicyBottomType { gems, vip1, vip2 }
 
 class PrivacyView extends StatelessWidget {
-  const PrivacyView({super.key, required this.type});
+  const PrivacyView({
+    super.key,
+    required this.type,
+    this.textColor = const Color(0x80FFFFFF),
+  });
 
   final PolicyBottomType type;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +19,9 @@ class PrivacyView extends StatelessWidget {
       case PolicyBottomType.gems:
         return _buildGemsBottom();
       case PolicyBottomType.vip1:
-        return _buildVipBottom(const Color(0x80FFFFFF), true);
+        return _buildVipBottom(textColor, true);
       case PolicyBottomType.vip2:
-        return _buildVipBottom(const Color(0x80FFFFFF), false);
+        return _buildVipBottom(textColor, false);
     }
   }
 
@@ -35,10 +40,10 @@ class PrivacyView extends StatelessWidget {
         ),
         if (showSubscriptionText) ...[
           const SizedBox(height: 12),
-          const Text(
+          Text(
             "Subscriptions auto-renew until canceled, as described in the Terms. Cancel anytime, Cancel at least 24 hours prior to renewal to avoid additional charges. Please note that you cannot get any refund even if the subscription period is not expired.",
             style: TextStyle(
-              color: Color(0x80FFFFFF),
+              color: textColor,
               fontSize: 9,
               fontWeight: FontWeight.w300,
             ),
@@ -53,9 +58,9 @@ class PrivacyView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildButton("Terms of use", () => NTO.toTerms(), null),
+        _buildButton("Terms of use", () => NTO.toTerms(), textColor),
         _buildSeparator(),
-        _buildButton("Privacy policy", () => NTO.toPrivacy(), null),
+        _buildButton("Privacy policy", () => NTO.toPrivacy(), textColor),
       ],
     );
   }
@@ -78,7 +83,7 @@ class PrivacyView extends StatelessWidget {
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 12,
-          color: const Color(0x40ffffff),
+          color: color ?? const Color(0x40ffffff),
           fontWeight: FontWeight.w300,
           decoration: TextDecoration.underline,
           decorationColor: color ?? const Color(0x40ffffff),

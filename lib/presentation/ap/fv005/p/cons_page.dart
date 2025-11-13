@@ -10,7 +10,7 @@ import 'package:soul_talk/presentation/ap/fv005/v/v_team.dart';
 import 'package:soul_talk/presentation/v000/loading.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
-import 'package:soul_talk/presentation/v000/v_dialog.dart';
+import 'package:soul_talk/presentation/v000/v_sheet.dart';
 import 'package:soul_talk/utils/info_utils.dart';
 import 'package:soul_talk/utils/pay_utils.dart';
 
@@ -56,43 +56,40 @@ class _ConsPageState extends State<ConsPage> {
 
   void _showHelp() {
     final str = DI.storage.isBest
-        ? "1 text message: 2 gems\\n1 audio message: 4 gems\\nCall AI characters: 10 gems/min"
-        : "1 text message: 2 gems\\nCall AI characters: 10 gems/min";
+        ? "1 text message: 2 gems\n1 audio message: 4 gems\nCall AI characters: 10 gems/min"
+        : "1 text message: 2 gems\nCall AI characters: 10 gems/min";
     List<String> strList = str.split('\n');
 
-    VDialog.show(
-      clickMaskDismiss: false,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        margin: const EdgeInsets.symmetric(horizontal: 24),
-        decoration: BoxDecoration(
-          color: const Color(0xFF333333),
-          borderRadius: BorderRadius.circular(32),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(strList.length, (index) {
-            return Column(
+    VSheet.show(
+      ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (_, index) {
+          return Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0x0FDF78B1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Image.asset('assets/images/diamond.png', width: 24),
-                    const SizedBox(width: 8),
-                    Text(
-                      strList[index],
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                Image.asset('assets/images/diamond.png', width: 20),
+                Text(
+                  strList[index],
+                  style: const TextStyle(
+                    color: Color(0xFF454545),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-                const SizedBox(height: 12),
               ],
-            );
-          }),
-        ),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 12);
+        },
+        itemCount: strList.length,
       ),
     );
   }
@@ -109,109 +106,160 @@ class _ConsPageState extends State<ConsPage> {
     final price = _chooseProduct?.productDetails?.price ?? '_';
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leadingWidth: 100,
-        leading: const Row(children: [SizedBox(width: 16), NavBackBtn()]),
+        backgroundColor: Colors.white,
+        leading: const NavBackBtn(color: Colors.black),
         actions: [
           VButton(
             width: 44,
             height: 44,
             onTap: _showHelp,
-            child: const Center(child: Text('Rules')),
+            child: const Center(
+              child: Text(
+                'Rules',
+                style: TextStyle(
+                  color: Color(0xFF8C8C8C),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Color(0xFF8C8C8C),
+                  decorationThickness: 1.0,
+                ),
+              ),
+            ),
           ),
           const SizedBox(width: 16),
         ],
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 57),
-                    child: Column(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  children: [
+                    Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          height:
-                              kToolbarHeight +
-                              MediaQuery.paddingOf(context).top +
-                              16,
+                          height: 100,
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFEF1F9),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Obx(() {
+                                      return Text(
+                                        DI.login.gemBalance.value.toString(),
+                                        style: const TextStyle(
+                                          color: Color(0xFFDF78B1),
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      );
+                                    }),
+                                    const Text(
+                                      'Remaining gems',
+                                      style: TextStyle(
+                                        color: Color(0xFF8C8C8C),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Image.asset(
+                                'assets/images/diamond22@3x.png',
+                                width: 70,
+                              ),
+                            ],
+                          ),
                         ),
+                        const SizedBox(height: 24),
                         Text(
                           DI.storage.isBest
                               ? 'Open chats and Unlock Hot photo, Porn Video, Moans,Generate Images & Videos,Call Girls!'
                               : '· Buy gems to open chats ·',
-
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: Color(0xFF8C8C8C),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 12),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  _buildList(),
-                  const SizedBox(height: 180),
-                ],
+                    const SizedBox(height: 24),
+                    _buildList(),
+                  ],
+                ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: const Color(0xFF111111),
-              child: Column(
-                children: [
-                  const SizedBox(height: 16),
-                  list.isEmpty == false
-                      ? const SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
+            Column(
+              spacing: 20,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    'Please note that a one-time purchase will result in a one-time charge of $price to you.',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Color(0xFF727374),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 8),
+                      VButton(
+                        height: 48,
+                        color: const Color(0xFF55CFDA),
+                        onTap: _buy,
+                        margin: const EdgeInsets.symmetric(horizontal: 28),
+                        child: Center(
                           child: Text(
-                            'Please note that a one-time purchase will result in a one-time charge of $price to you.',
-                            textAlign: TextAlign.center,
+                            DI.storage.isBest ? 'Continue.' : 'Buy',
                             style: const TextStyle(
-                              color: Color(0xFF727374),
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
-                  const SizedBox(height: 16),
-                  VButton(
-                    color: const Color(0xFF3F8DFD),
-                    onTap: _buy,
-
-                    margin: const EdgeInsets.symmetric(horizontal: 65),
-                    child: Center(
-                      child: Text(
-                        DI.storage.isBest ? 'Continue.' : 'Buy',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
                       ),
-                    ),
+                      const SizedBox(height: 12),
+                      const PrivacyView(
+                        type: PolicyBottomType.gems,
+                        textColor: Color(0x40000000),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 12),
-                  const PrivacyView(type: PolicyBottomType.gems),
-                  SizedBox(height: context.mediaQueryPadding.bottom),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -235,13 +283,18 @@ class _ConsPageState extends State<ConsPage> {
           child: Text(
             "No subscription available",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Color(0xFF8C8C8C)),
           ),
         ),
       );
     }
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 8,
+        childAspectRatio: 170.0 / 100.0,
+      ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
@@ -255,105 +308,98 @@ class _ConsPageState extends State<ConsPage> {
 
         String discount = getDiscount(discountPercent);
         String numericPart = item.number.toString();
-        String price = item.productDetails?.price ?? '';
+        String price = item.productDetails?.price ?? '-';
 
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () {
-              _chooseProduct = item;
-              setState(() {});
-            },
-            child: Stack(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 20,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: const Color(0x333F8DFD),
-                    border: Border.all(
-                      color: isSelected
-                          ? const Color(0xFF3F8DFD)
-                          : Colors.transparent,
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 4),
-                      // Assets.images.gemls.image(width: 48),
-                      Image.asset('assets/images/diamond.png', width: 24),
-                      Text(
-                        numericPart,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const Spacer(),
-                      Column(
-                        children: [
-                          Text(
-                            discount,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            price,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+        return InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () {
+            _chooseProduct = item;
+            setState(() {});
+          },
+          child: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  border: Border.all(
+                    color: isSelected
+                        ? const Color(0xFF55CFDA)
+                        : const Color(0x0F000000),
+                    width: 2,
                   ),
                 ),
-                if (bestChoice)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 20,
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadiusDirectional.only(
-                            topEnd: Radius.circular(16),
-                            bottomStart: Radius.circular(16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Text(
+                      discount,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF8C8C8C),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/diamond.png', width: 20),
+                        Text(
+                          numericPart,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFFDF78B1),
                           ),
-                          color: Color(0xFF3F8DFD),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'best_choice',
-                            style: TextStyle(
-                              fontSize: 8,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),
+                      ],
+                    ),
+                    Text(
+                      price,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF434343),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (bestChoice)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 20,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadiusDirectional.only(
+                          topEnd: Radius.circular(16),
+                          bottomStart: Radius.circular(16),
+                        ),
+                        color: Color(0xFF3F8DFD),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'best_choice',
+                          style: TextStyle(
+                            fontSize: 8,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-              ],
-            ),
+                    ),
+                  ],
+                ),
+            ],
           ),
         );
       },
       itemCount: list.length,
-      separatorBuilder: (c, i) => const SizedBox(height: 16),
     );
   }
 }

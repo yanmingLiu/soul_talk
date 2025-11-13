@@ -7,8 +7,8 @@ import 'package:soul_talk/presentation/ap/dm003/a_z_page.dart';
 
 import '../presentation/ap/am000/l_p.dart';
 import '../presentation/ap/am000/m_p.dart';
-import '../presentation/ap/fv005/consume_page.dart';
-import '../presentation/ap/fv005/vip_page.dart';
+import '../presentation/ap/fv005/p/cons_page.dart';
+import '../presentation/ap/fv005/p/vip_page.dart';
 import '../presentation/v000/image_preview.dart';
 import '../presentation/v000/video_preview.dart';
 import 'route_constants.dart';
@@ -19,7 +19,7 @@ class Routes {
   static final List<GetPage> pages = [
     GetPage(name: RouteConstants.launch, page: () => const LaunchPage()),
     GetPage(name: RouteConstants.root, page: () => const RootPage()),
-    GetPage(name: RouteConstants.gems, page: () => const ConsumePage()),
+    GetPage(name: RouteConstants.gems, page: () => const ConsPage()),
     GetPage(
       name: RouteConstants.chooseLang,
       page: () => const ChooseLangPage(),

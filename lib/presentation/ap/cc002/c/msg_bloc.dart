@@ -54,6 +54,8 @@ class MsgBloc extends GetxController {
 
   bool isRecieving = false; // 正在接收消息
 
+  String get languageCode => DI.login.sessionLang.value?.value ?? 'en';
+
   @override
   void onInit() {
     super.onInit();
@@ -370,6 +372,8 @@ class MsgBloc extends GetxController {
         'character_id': charId,
         'conversation_id': conversationId,
         'user_id': uid,
+        'auto_translate': true,
+        'target_language': languageCode,
       };
       if (text != null) {
         body['message'] = text;

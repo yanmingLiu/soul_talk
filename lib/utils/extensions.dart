@@ -27,3 +27,12 @@ extension ListKx<T> on List<T>? {
     }
   }
 }
+
+String numFixed(dynamic nums, {int position = 2}) {
+  double num = nums is double ? nums : double.parse(nums.toString());
+  String numString = num.toStringAsFixed(position);
+
+  return numString.endsWith('.0')
+      ? numString.substring(0, numString.lastIndexOf('.'))
+      : numString;
+}

@@ -31,7 +31,7 @@ class VDialog {
       keepSingle: true,
       debounce: true,
       tag: tag,
-      maskColor: Colors.black.withValues(alpha: 0.8),
+      maskColor: Colors.black.withValues(alpha: 0.85),
       builder: (context) {
         if (showCloseButton == true) {
           return Column(
@@ -375,54 +375,50 @@ class VDialog {
 
   static Future<void> showRechargeSuccess(int number) async {
     return VDialog.show(
-      child: Container(
-        padding: const EdgeInsets.all(24),
-        margin: const EdgeInsets.symmetric(horizontal: 24),
-        decoration: BoxDecoration(
-          color: const Color(0xFF00120A),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          spacing: 8,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/diamond.png',
-              width: 120,
-              height: 84,
-              fit: BoxFit.cover,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Text(
-                  '+$number',
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF85FFCD),
-                  ),
+      child: GestureDetector(
+        onTap: () {
+          VDialog.dismiss();
+        },
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 200),
+                child: Image.asset(
+                  'assets/images/diamond22_bg@3x.png',
+                  fit: BoxFit.cover,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Text(
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 8,
+                children: [
+                  Text(
+                    '+$number',
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Text(
                     'Gems',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 24,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-      clickMaskDismiss: false,
+      clickMaskDismiss: true,
       tag: VS.rechargeSuccTag,
     );
   }

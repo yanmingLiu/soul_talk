@@ -133,13 +133,13 @@ enum Gender {
   String get icon {
     switch (this) {
       case Gender.male:
-        return 'assets/images/sex_male.png';
+        return 'assets/images/male@3x.png';
       case Gender.female:
-        return 'assets/images/sex_female.png';
+        return 'assets/images/female@3x.png';
       case Gender.nonBinary:
-        return 'assets/images/sex_no.png';
+        return 'assets/images/non@3x.png';
       case Gender.unknown:
-        return 'assets/images/sex_no.png';
+        return 'assets/images/non@3x.png';
     }
   }
 

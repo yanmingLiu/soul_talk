@@ -9,9 +9,9 @@ import 'package:soul_talk/router/nav_to.dart';
 import 'package:soul_talk/router/route_constants.dart';
 import 'package:soul_talk/utils/extensions.dart';
 
-import '../../../core/analytics/analytics_service.dart';
-import '../../../utils/log_util.dart';
-import '../../../utils/navigator_obs.dart';
+import '../../../../core/analytics/analytics_service.dart';
+import '../../../../utils/log_util.dart';
+import '../../../../utils/navigator_obs.dart';
 
 class AutoCallBloc extends GetxController {
   // 主动来电

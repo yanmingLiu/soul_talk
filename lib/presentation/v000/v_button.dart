@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// 按钮样式类型
@@ -117,12 +118,12 @@ class _VButtonState extends State<VButton> {
           : buttonChild;
     }
 
-    buttonChild = InkWell(
-      onTap: _handleTap,
+    buttonChild = CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      onPressed: _handleTap,
       focusColor: widget.focusColor ?? interactionColor,
-      hoverColor: widget.hoverColor ?? interactionColor,
-      highlightColor: widget.highlightColor ?? interactionColor,
       borderRadius: br,
+      sizeStyle: CupertinoButtonSize.small,
       child: buttonChild,
     );
 

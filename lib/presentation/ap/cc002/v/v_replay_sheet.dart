@@ -114,6 +114,7 @@ class VReplaySheet extends StatelessWidget {
                     Image.asset(icon, width: 32),
                     Text(
                       title,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Color(0xFF181818),
                         fontSize: 14,

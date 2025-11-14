@@ -126,6 +126,7 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
       leadingWidth: 0,
       leading: const SizedBox(),
       centerTitle: false,
+      titleSpacing: 12,
       title: Stack(
         alignment: Alignment.center,
         children: [
@@ -186,8 +187,9 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
-              if (DI.storage.isBest)
+
+              if (DI.storage.isBest) ...[
+                const SizedBox(width: 16),
                 GestureDetector(
                   onTap: () {
                     logEvent('c_call');
@@ -233,6 +235,7 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
                     ),
                   ),
                 ),
+              ],
             ],
           ),
           const VLevel(),

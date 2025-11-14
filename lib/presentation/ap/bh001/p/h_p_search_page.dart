@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
-import 'package:soul_talk/presentation/ap/bh001/h_c_serach_bloc.dart';
+import 'package:soul_talk/presentation/ap/bh001/c/h_c_serach_bloc.dart';
 import 'package:soul_talk/presentation/v000/base_scaffold.dart';
 import 'package:soul_talk/presentation/v000/empty_view.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
@@ -57,7 +57,7 @@ class _HSearchPageState extends State<HSearchPage> {
           scrolledUnderElevation: 0,
           titleSpacing: 0.0,
           leadingWidth: 44,
-          leading: NavBackBtn(color: Colors.black),
+          leading: const NavBackBtn(color: Colors.black),
           title: Container(
             height: 44,
             width: double.infinity,
@@ -91,10 +91,10 @@ class _HSearchPageState extends State<HSearchPage> {
                       controller: textController,
                       enableInteractiveSelection: true, // 确保文本选择功能启用
                       dragStartBehavior: DragStartBehavior.down, // 优化拖拽行为
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Type a Name to find Sirens',
                         counterText: '', // 去掉字数显示
-                        hintStyle: const TextStyle(color: Color(0xFFD9D9D9)),
+                        hintStyle: TextStyle(color: Color(0xFFD9D9D9)),
                         fillColor: Colors.transparent,
                         border: InputBorder.none,
                         filled: true,
@@ -141,7 +141,7 @@ class _HSearchPageState extends State<HSearchPage> {
 
         return Container(
           height: 180,
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -156,6 +156,12 @@ class _HSearchPageState extends State<HSearchPage> {
                 width: 100,
                 height: 162,
                 borderRadius: BorderRadius.circular(16.0),
+                border: BoxBorder.all(
+                  color: role.vip == true
+                      ? const Color(0xFFDF78B1)
+                      : Colors.white,
+                  width: 2,
+                ),
               ),
               Expanded(
                 child: Column(
@@ -177,7 +183,7 @@ class _HSearchPageState extends State<HSearchPage> {
                         ),
                         if (role.age != null)
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 6,
                               vertical: 2,
                             ),
@@ -230,8 +236,8 @@ class _HSearchPageState extends State<HSearchPage> {
                                   role.sessionCount?.toString() ?? '',
                                   style: TextStyle(
                                     color: isCollect
-                                        ? Color(0xFFDF78B1)
-                                        : Color(0xFF8C8C8C),
+                                        ? const Color(0xFFDF78B1)
+                                        : const Color(0xFF8C8C8C),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -240,7 +246,7 @@ class _HSearchPageState extends State<HSearchPage> {
                             ),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         VButton(
                           onTap: () {
                             NTO.pushChat(role.id);
@@ -249,11 +255,11 @@ class _HSearchPageState extends State<HSearchPage> {
                           width: 90,
                           type: ButtonType.border,
                           borderRadius: BorderRadius.circular(12),
-                          borderColor: Color(0xFFDF78B1),
-                          child: Center(
+                          borderColor: const Color(0xFFDF78B1),
+                          child: const Center(
                             child: Text(
                               'Chat',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Color(0xFFDF78B1),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,

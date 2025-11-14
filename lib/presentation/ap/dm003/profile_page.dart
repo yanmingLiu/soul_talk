@@ -206,7 +206,8 @@ class ProfilePage extends StatelessWidget {
     String? subTitle,
     void Function()? onTap,
   }) {
-    return GestureDetector(
+    return VButton(
+      height: 64,
       onTap: onTap,
       child: SizedBox(
         height: 64,

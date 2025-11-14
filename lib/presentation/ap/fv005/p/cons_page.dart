@@ -10,7 +10,6 @@ import 'package:soul_talk/presentation/ap/fv005/v/v_team.dart';
 import 'package:soul_talk/presentation/v000/loading.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
-import 'package:soul_talk/presentation/v000/v_dialog.dart';
 import 'package:soul_talk/presentation/v000/v_sheet.dart';
 import 'package:soul_talk/utils/info_utils.dart';
 import 'package:soul_talk/utils/pay_utils.dart';
@@ -56,9 +55,6 @@ class _ConsPageState extends State<ConsPage> {
   }
 
   void _showHelp() {
-    VDialog.showRechargeSuccess(20);
-    return;
-
     final str = DI.storage.isBest
         ? "1 text message: 2 gems\n1 audio message: 4 gems\nCall AI characters: 10 gems/min"
         : "1 text message: 2 gems\nCall AI characters: 10 gems/min";
@@ -116,8 +112,7 @@ class _ConsPageState extends State<ConsPage> {
         leading: const NavBackBtn(color: Colors.black),
         actions: [
           VButton(
-            width: 44,
-            height: 44,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             onTap: _showHelp,
             child: const Center(
               child: Text(
@@ -133,7 +128,6 @@ class _ConsPageState extends State<ConsPage> {
               ),
             ),
           ),
-          const SizedBox(width: 16),
         ],
       ),
       body: SafeArea(

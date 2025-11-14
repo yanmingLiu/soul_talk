@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
-import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
-import 'package:soul_talk/presentation/ap/bh001/h_c_bloc.dart';
-import 'package:soul_talk/presentation/ap/bh001/h_v_item.dart';
+import 'package:soul_talk/presentation/ap/bh001/c/h_bloc.dart';
+import 'package:soul_talk/presentation/ap/bh001/c/h_c_bloc.dart';
+import 'package:soul_talk/presentation/ap/bh001/v/h_v_item.dart';
 import 'package:soul_talk/presentation/v000/empty_view.dart';
 
 class HomeListView extends StatefulWidget {

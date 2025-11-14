@@ -213,7 +213,7 @@ class _VTextState extends State<VText> {
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6),
         if (!_isTypingAnimationActive(msg))
           _buildActionButtons(
             msg: msg,
@@ -283,8 +283,8 @@ class _VTextState extends State<VText> {
   /// 构建举报按钮
   Widget _buildReportButton() {
     return VButton(
-      width: 24.0,
-      height: 24.0,
+      width: 40.0,
+      height: 32.0,
       onTap: NTO.report,
       child: Image.asset('assets/images/report@3x.png'),
     );
@@ -352,7 +352,7 @@ class _VTextState extends State<VText> {
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () => _handleContinueWriting(),
-        child: Image.asset('assets/images/write@3x.png', width: 48, height: 24),
+        child: Image.asset('assets/images/write@3x.png', width: 48, height: 32),
       ),
     );
   }
@@ -371,7 +371,7 @@ class _VTextState extends State<VText> {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () => _handleEditMessage(msg),
-      child: Image.asset('assets/images/msg_edit@3x.png', width: 24),
+      child: Image.asset('assets/images/msg_edit@3x.png', width: 32),
     );
   }
 
@@ -402,7 +402,7 @@ class _VTextState extends State<VText> {
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () => _handleResendMessage(msg),
-        child: Image.asset('assets/images/retry@3x.png', width: 24),
+        child: Image.asset('assets/images/retry@3x.png', width: 32),
       ),
     );
   }

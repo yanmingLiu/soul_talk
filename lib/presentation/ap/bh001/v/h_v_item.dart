@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/repositories/figure_repository.dart';
-import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
+import 'package:soul_talk/presentation/ap/bh001/c/h_bloc.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/nav_to.dart';
 
@@ -45,91 +45,97 @@ class HomeItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: _onTap,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: VImage(
-              url: role.avatar,
-              borderRadius: BorderRadius.circular(20),
-              border: role.vip == true
-                  ? BoxBorder.all(color: const Color(0xFF85FFCD), width: 2)
-                  : null,
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: BoxBorder.all(
+            color: role.vip == true ? const Color(0xFFDF78B1) : Colors.white,
+            width: 2,
           ),
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.transparent, Colors.black],
-                stops: const [0.7, 1.0],
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: VImage(
+                url: role.avatar,
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Spacer(),
-                Row(
-                  spacing: 8,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        role.name ?? '',
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    if (role.age != null)
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0x80DF78B1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.transparent, Colors.black],
+                  stops: [0.7, 1.0],
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Spacer(),
+                  Row(
+                    spacing: 8,
+                    children: [
+                      Flexible(
                         child: Text(
-                          role.age.toString(),
+                          role.name ?? '',
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
-                  ],
-                ),
-                if (shouldShowTags) ...[
-                  _buildTags(displayTags),
-                  const SizedBox(height: 4),
-                ],
-                Text(
-                  role.aboutMe ?? '',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
+                      if (role.age != null)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0x80DF78B1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            role.age.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                ),
-              ],
+                  if (shouldShowTags) ...[
+                    _buildTags(displayTags),
+                    const SizedBox(height: 4),
+                  ],
+                  Text(
+                    role.aboutMe ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          PositionedDirectional(
-            top: 0,
-            end: 0,
-            child: _buildCollectButton(isCollect),
-          ),
-        ],
+            PositionedDirectional(
+              top: 0,
+              end: 0,
+              child: _buildCollectButton(isCollect),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -165,7 +171,7 @@ class HomeItem extends StatelessWidget {
               '${role.likes ?? 0}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: Colors.white,
@@ -184,7 +190,7 @@ class HomeItem extends StatelessWidget {
       children: [
         for (int i = 0; i < displayTags.length; i++) ...[
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
               color: const Color(0x29DF78B1),
               borderRadius: BorderRadius.circular(4),

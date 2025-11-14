@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:soul_talk/core/data/h_pi.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/entities/figure_image.dart';
-import 'package:soul_talk/presentation/ap/bh001/h_bloc.dart';
+import 'package:soul_talk/presentation/ap/bh001/c/h_bloc.dart';
 import 'package:soul_talk/presentation/ap/cc002/c/msg_bloc.dart';
 import 'package:soul_talk/presentation/v000/loading.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';

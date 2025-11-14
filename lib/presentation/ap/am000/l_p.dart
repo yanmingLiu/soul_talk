@@ -72,6 +72,7 @@ class _LaunchPageState extends State<LaunchPage>
       await Future.wait([
         Block.request(isFisrt: true),
         PayUtils().query(),
+        DI.login.loadAppLangs(),
         FBU.initializeWithRemoteConfig(),
       ]).timeout(const Duration(seconds: 7));
 

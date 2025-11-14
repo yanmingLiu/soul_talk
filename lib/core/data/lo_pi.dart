@@ -9,11 +9,12 @@ import 'package:soul_talk/core/config/evn.dart';
 import 'package:soul_talk/core/network/dio_client.dart';
 
 import '../../app/di_depency.dart';
-import '../constants/api_values.dart';
 import '../../domain/entities/base_model.dart';
 import '../../domain/entities/price.dart';
 import '../../domain/entities/user.dart';
 import '../../utils/info_utils.dart';
+import '../../utils/log_util.dart';
+import '../constants/api_values.dart';
 import 'api.dart';
 
 class LoginApi {
@@ -40,15 +41,15 @@ class LoginApi {
   static Future<User?> getUserInfo() async {
     try {
       final deviceId = await DI.storage.getDeviceId();
-      final res = await api.request(
+      final res = await api.get(
         ApiConstants.getUserInfo,
-        method: HttpMethod.get,
         queryParameters: {'device_id': deviceId},
       );
 
       final user = User.fromJson(res.data);
       return user;
     } catch (e) {
+      log.e(e);
       return null;
     }
   }

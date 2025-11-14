@@ -12,8 +12,8 @@ class CryptoUtil {
   }
 
   // AES 密钥和 IV
-  static final _key = Key.fromUtf8('xQpL7sV2fN9kR4tG');
-  static final _iv = IV.fromUtf8('mZ6cF3hJ8wP1qX7b');
+  static final _key = Key.fromUtf8('cSNnzM9schBV3Gc7');
+  static final _iv = IV.fromUtf8('wkdGIt1P5QeHAvrs');
 
   /// 加密（输出 Hex）
   static String encrypt(String content) {

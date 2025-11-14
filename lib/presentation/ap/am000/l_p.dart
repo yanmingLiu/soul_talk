@@ -8,8 +8,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:soul_talk/router/route_constants.dart';
 
 import '../../../app/di_depency.dart';
-import '../../../core/facebook/fbu.dart';
 import '../../../core/block/block.dart';
+import '../../../core/facebook/fbu.dart';
 import '../../../utils/info_utils.dart';
 import '../../../utils/log_util.dart';
 import '../../../utils/pay_utils.dart';
@@ -122,27 +122,18 @@ class _LaunchPageState extends State<LaunchPage>
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 150),
-            // Center(child: Image.asset('assets/images/logo.png', width: 100)),
-            const SizedBox(height: 50),
-            Center(
-              child: LoadingAnimationWidget.fourRotatingDots(
-                color: const Color(0xFF00AB8E),
-                size: 60,
-              ),
-            ),
-
             const Spacer(),
-
-            const Text(
-              'SoulTalk AI',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
+            Center(child: Image.asset('assets/images/logo@3x.png', width: 88)),
+            const SizedBox(height: 30),
+            Center(child: Image.asset('assets/images/word@3x.png', width: 96)),
+            const Spacer(),
+            Center(
+              child: LoadingAnimationWidget.halfTriangleDot(
+                color: const Color(0xFF55CFDA),
+                size: 30,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
           ],
         ),
       ),

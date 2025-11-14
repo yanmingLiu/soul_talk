@@ -8,7 +8,7 @@ import 'log_util.dart';
 
 class CryptoUtil {
   static void _log(String message) {
-    log.d("CryptoUtil: $message");
+    // print("CryptoUtil: $message");
   }
 
   // AES 密钥和 IV
@@ -70,9 +70,8 @@ class CryptoUtil {
     _log('原始完整路径: $originalPathWithQuery');
 
     // 2. 加密整个路径（包括查询参数）
-    final encryptedPathContent = originalPathWithQuery.isNotEmpty
-        ? encrypt(originalPathWithQuery)
-        : '';
+    final encryptedPathContent =
+        originalPathWithQuery.isNotEmpty ? encrypt(originalPathWithQuery) : '';
     _log('加密后路径: $encryptedPathContent');
 
     // 3. 构建新 URL (域名 + /alpha/加密内容)

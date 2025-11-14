@@ -9,7 +9,7 @@ import 'dio_client.dart';
 
 class CryptoInterceptor extends Interceptor {
   void _log(dynamic content) {
-    DioClient.instance.logger.d("[CryptoInterceptor]: $content");
+    // print("[CryptoInterceptor]: $content");
   }
 
   @override

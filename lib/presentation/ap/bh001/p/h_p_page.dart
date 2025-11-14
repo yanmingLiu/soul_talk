@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage>
       body: SafeArea(
         child: AnimatedBuilder(
           animation: _linkedController,
-          builder: (_, _) {
+          builder: (_, child) {
             if (_linkedController.items.isEmpty) {
               return const EmptyView(type: EmptyType.loading);
             }

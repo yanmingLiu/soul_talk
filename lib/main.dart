@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,7 +32,7 @@ void main() async {
   );
 
   // Change to Environment.prod for production
-  await DIDendency.init(env: Environment.dev);
+  await DIDendency.init(env: Environment.prod);
 
   /// 控制图片缓存大小
   PaintingBinding.instance.imageCache.maximumSize = 100;

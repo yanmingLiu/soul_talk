@@ -24,6 +24,14 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string></string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<true/>
+	<key>FacebookClientToken</key>
+	<string></string>
+	<key>FacebookDisplayName</key>
+	<string>SoulTalk</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
@@ -32,16 +40,9 @@
 	<string>Allow access to the photo album, enabling users to upload pictures to change the chat background.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>We use this permission to provide you with more relevant match recommendations and personalized content. For example, suggesting potentially compatible chat partners based on your interests.</string>
-    <key>FacebookAppID</key>
-    <string></string>
-    <key>FacebookAutoLogAppEventsEnabled</key>
-    <true/>
-    <key>FacebookClientToken</key>
-    <string></string>
-    <key>FacebookDisplayName</key>
-    <string>Aimi AI</string>
-    <key>SKAdNetworkItems</key>
+	<key>SKAdNetworkItems</key>
 	<array>
+		<true/>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>cstr6suwn9.skadnetwork</string>
@@ -255,10 +256,7 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 </dict>
 </plist>

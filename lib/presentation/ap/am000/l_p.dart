@@ -73,7 +73,7 @@ class _LaunchPageState extends State<LaunchPage>
         Block.request(isFisrt: true),
         PayUtils().query(),
         DI.login.loadAppLangs(),
-        FBU.initializeWithRemoteConfig(),
+        // FBU.initializeWithRemoteConfig(),
       ]).timeout(const Duration(seconds: 7));
 
       await DI.login.fetchUserInfo();

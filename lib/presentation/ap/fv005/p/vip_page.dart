@@ -20,7 +20,7 @@ class VipPage extends GetView<VipController> {
         _buildBackground(),
         Scaffold(
           appBar: _buildAppBar(),
-          body: Positioned.fill(child: _buildContent(context)),
+          body: _buildContent(context),
         ),
       ],
     );

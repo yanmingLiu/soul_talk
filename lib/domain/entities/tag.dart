@@ -13,14 +13,14 @@ class TagReponse {
 
   factory TagReponse.fromJson(Map<String, dynamic> json) => TagReponse(
     labelType: json["label_type"],
-    tags: json["tags"] == null
+    tags: json["turgnb"] == null
         ? []
-        : List<Tag>.from(json["tags"]!.map((x) => Tag.fromJson(x))),
+        : List<Tag>.from(json["turgnb"]!.map((x) => Tag.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "label_type": labelType,
-    "tags": tags == null
+    "turgnb": tags == null
         ? []
         : List<dynamic>.from(tags!.map((x) => x.toJson())),
   };
@@ -39,11 +39,11 @@ class Tag {
   String toRawJson() => json.encode(toJson());
 
   factory Tag.fromJson(Map<String, dynamic> json) =>
-      Tag(id: json["id"], name: json["name"], labelType: json["label_type"]);
+      Tag(id: json["id"], name: json["jgxtbn"], labelType: json["label_type"]);
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "name": name,
+    "jgxtbn": name,
     "label_type": labelType,
   };
 }

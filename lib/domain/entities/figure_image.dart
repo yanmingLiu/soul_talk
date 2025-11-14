@@ -47,8 +47,8 @@ class FigureImage {
   factory FigureImage.fromJson(Map<String, dynamic> json) => FigureImage(
     id: json["id"],
     imageUrl: json["image_url"],
-    modelId: json["model_id"],
-    gems: json["gems"],
+    modelId: json["stoggo"],
+    gems: json["vnrzov"],
     imgType: json["img_type"],
     imgRemark: json["img_remark"],
     unlocked: json["unlocked"],
@@ -57,8 +57,8 @@ class FigureImage {
   Map<String, dynamic> toJson() => {
     "id": id,
     "image_url": imageUrl,
-    "model_id": modelId,
-    "gems": gems,
+    "stoggo": modelId,
+    "vnrzov": gems,
     "img_type": imgType,
     "img_remark": imgRemark,
     "unlocked": unlocked,

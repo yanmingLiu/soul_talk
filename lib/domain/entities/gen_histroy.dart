@@ -12,7 +12,7 @@ class GenHistroy {
   String toRawJson() => json.encode(toJson());
 
   factory GenHistroy.fromJson(Map<String, dynamic> json) =>
-      GenHistroy(id: json['id'], url: json['url']);
+      GenHistroy(id: json['id'], url: json['uxpnyz']);
 
-  Map<String, dynamic> toJson() => {'id': id, 'url': url};
+  Map<String, dynamic> toJson() => {'id': id, 'uxpnyz': url};
 }

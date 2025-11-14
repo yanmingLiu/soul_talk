@@ -7,7 +7,8 @@ dart run /Users/ai3/Documents/ai_mi/test/text_replace.dart
 /// 入口方法
 void main() {
   // 指定文件夹路径（你的开发机上的绝对路径）
-  const String folderPath = '/Users/ai3/Documents/soul_talk/lib/domain/entities';
+  const String folderPath =
+      '/Users/ai3/Documents/soul_talk/lib/domain/entities';
   // 调用替换方法
   replaceJsonModel(folderPath);
 
@@ -94,8 +95,13 @@ void replaceApiPath(String filePath) {
             ".*?)'",
       ),
       (match) {
-        // 将匹配到的单引号内的内容中的旧片段替换为新片段
-        return "= '${match.group(1)!.replaceAll(oldPathSegment, newPathSegment)}'";
+        // 按路径段替换，只替换被 / 包围的完整路径段
+        String matchedContent = match.group(1)!;
+        String replacedString = matchedContent.replaceAll(
+          RegExp(r'(?<=^|/)' + RegExp.escape(oldPathSegment) + r'(?=/|$)'),
+          newPathSegment,
+        );
+        return "= '$replacedString'";
       },
     );
   }

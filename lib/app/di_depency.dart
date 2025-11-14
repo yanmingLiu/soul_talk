@@ -99,8 +99,8 @@ class DIDendency {
     // 批量设置全局请求头
     DioClient.instance.setHeaders({
       'platform': platform,
-      'device-id': deviceId,
-      // 'troZVn9Ot0iFkSwr': encryptedDeviceId,
+      // 'device-id': deviceId,
+      'FOu2y3vkwV7kjcjl': encryptedDeviceId,
       'version': version,
       'lang': 'en',
     });

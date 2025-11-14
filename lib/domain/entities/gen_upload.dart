@@ -12,11 +12,11 @@ class GenUpload {
   String toRawJson() => json.encode(toJson());
 
   factory GenUpload.fromJson(Map<String, dynamic> json) =>
-      GenUpload(estimatedTime: json['estimated_time'], uid: json['uid']);
+      GenUpload(estimatedTime: json['hmvjuo'], uid: json['zkugjr']);
 
   Map<String, dynamic> toJson() => {
-    'estimated_time': estimatedTime,
-    'uid': uid,
+    'hmvjuo': estimatedTime,
+    'zkugjr': uid,
   };
 }
 
@@ -37,7 +37,7 @@ class GenImageResult {
         ? []
         : List<String>.from(json['results']!.map((x) => x)),
     status: json['status'],
-    uid: json['uid'],
+    uid: json['zkugjr'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -45,7 +45,7 @@ class GenImageResult {
         ? []
         : List<dynamic>.from(results!.map((x) => x)),
     'status': status,
-    'uid': uid,
+    'zkugjr': uid,
   };
 }
 
@@ -79,14 +79,14 @@ class GenVideo {
   String toRawJson() => json.encode(toJson());
 
   factory GenVideo.fromJson(Map<String, dynamic> json) => GenVideo(
-    uid: json["uid"],
+    uid: json["zkugjr"],
     status: json["status"],
-    resultPath: json["result_path"],
+    resultPath: json["ssdwpi"],
   );
 
   Map<String, dynamic> toJson() => {
-    "uid": uid,
+    "zkugjr": uid,
     "status": status,
-    "result_path": resultPath,
+    "ssdwpi": resultPath,
   };
 }

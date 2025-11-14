@@ -186,119 +186,119 @@ class Figure {
 
   factory Figure.  fromJson(Map<String, dynamic> json) => Figure(
     id: json["id"],
-    age: json["age"],
-    aboutMe: json["about_me"],
-    media: json["media"] == null ? null : FigureMedia.fromJson(json["media"]),
+    age: json["jsbtpo"],
+    aboutMe: json["nsyzwq"],
+    media: json["hdsnxb"] == null ? null : FigureMedia.fromJson(json["hdsnxb"]),
     images: json["images"] == null
         ? []
         : List<FigureImage>.from(
             json["images"]!.map((x) => FigureImage.fromJson(x)),
           ),
-    avatar: json["avatar"],
+    avatar: json["vqoifz"],
     avatarVideo: json["avatar_video"],
-    name: json["name"],
-    platform: json["platform"],
-    renderStyle: json["render_style"],
-    likes: json["likes"],
-    greetings: json["greetings"] == null
+    name: json["jgxtbn"],
+    platform: json["yfvxif"],
+    renderStyle: json["yqkfgr"],
+    likes: json["kraode"],
+    greetings: json["lvszjf"] == null
         ? []
-        : List<String>.from(json["greetings"]!.map((x) => x)),
-    greetingsVoice: json["greetings_voice"] == null
+        : List<String>.from(json["lvszjf"]!.map((x) => x)),
+    greetingsVoice: json["hfrbkv"] == null
         ? []
-        : List<dynamic>.from(json["greetings_voice"]!.map((x) => x)),
-    sessionCount: json["session_count"],
-    vip: json["vip"],
-    orderNum: json["order_num"],
-    tags: json["tags"] == null
+        : List<dynamic>.from(json["hfrbkv"]!.map((x) => x)),
+    sessionCount: json["ssjrnx"],
+    vip: json["qfsgdo"],
+    orderNum: json["bajhvg"],
+    tags: json["turgnb"] == null
         ? []
-        : List<String>.from(json["tags"]!.map((x) => x)),
+        : List<String>.from(json["turgnb"]!.map((x) => x)),
     tagType: json["tag_type"],
     scenario: json["scenario"],
     temperature: json["temperature"]?.toDouble(),
-    voiceId: json["voice_id"],
-    engine: json["engine"],
-    gender: json["gender"],
-    videoChat: json["video_chat"],
-    characterVideoChat: json["character_video_chat"] == null
+    voiceId: json["bymrge"],
+    engine: json["qvkkhh"],
+    gender: json["nszsqd"],
+    videoChat: json["grxlno"],
+    characterVideoChat: json["kaemhv"] == null
         ? []
         : List<FigureVideo>.from(
-            json["character_video_chat"]!.map((x) => FigureVideo.fromJson(x)),
+            json["kaemhv"]!.map((x) => FigureVideo.fromJson(x)),
           ),
-    genPhotoTags: json["gen_photo_tags"] == null
+    genPhotoTags: json["lvyeja"] == null
         ? []
-        : List<String>.from(json["gen_photo_tags"]!.map((x) => x)),
+        : List<String>.from(json["lvyeja"]!.map((x) => x)),
     genVideoTags: json["gen_video_tags"] == null
         ? []
         : List<String>.from(json["gen_video_tags"]!.map((x) => x)),
-    genPhoto: json["gen_photo"],
-    genVideo: json["gen_video"],
-    gems: json["gems"],
+    genPhoto: json["iwptry"],
+    genVideo: json["ibrklo"],
+    gems: json["vnrzov"],
     collect: json["collect"],
-    lastMessage: json["last_message"],
+    lastMessage: json["tfehuw"],
     intro: json["intro"],
     chatNum: json["chat_num"],
     msgNum: json["msg_num"],
     mode: json["mode"],
-    cid: json["cid"],
-    cardNum: json["card_num"],
-    unlockCardNum: json["unlock_card_num"],
-    price: json["price"],
-    updateTime: json["update_time"],
+    cid: json["ajhxtl"],
+    cardNum: json["ynewls"],
+    unlockCardNum: json["qpfisp"],
+    price: json["sxxlzd"],
+    updateTime: json["fdwojm"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "age": age,
-    "about_me": aboutMe,
-    "media": media?.toJson(),
+    "jsbtpo": age,
+    "nsyzwq": aboutMe,
+    "hdsnxb": media?.toJson(),
     "images": images == null
         ? []
         : List<dynamic>.from(images!.map((x) => x.toJson())),
-    "avatar": avatar,
+    "vqoifz": avatar,
     "avatar_video": avatarVideo,
-    "name": name,
-    "platform": platform,
-    "render_style": renderStyle,
-    "likes": likes,
-    "greetings": greetings == null
+    "jgxtbn": name,
+    "yfvxif": platform,
+    "yqkfgr": renderStyle,
+    "kraode": likes,
+    "lvszjf": greetings == null
         ? []
         : List<dynamic>.from(greetings!.map((x) => x)),
-    "greetings_voice": greetingsVoice == null
+    "hfrbkv": greetingsVoice == null
         ? []
         : List<dynamic>.from(greetingsVoice!.map((x) => x)),
-    "session_count": sessionCount,
-    "vip": vip,
-    "order_num": orderNum,
-    "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
+    "ssjrnx": sessionCount,
+    "qfsgdo": vip,
+    "bajhvg": orderNum,
+    "turgnb": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
     "tag_type": tagType,
     "scenario": scenario,
     "temperature": temperature,
-    "voice_id": voiceId,
-    "engine": engine,
-    "gender": gender,
-    "video_chat": videoChat,
-    "character_video_chat": characterVideoChat == null
+    "bymrge": voiceId,
+    "qvkkhh": engine,
+    "nszsqd": gender,
+    "grxlno": videoChat,
+    "kaemhv": characterVideoChat == null
         ? []
         : List<dynamic>.from(characterVideoChat!.map((x) => x.toJson())),
-    "gen_photo_tags": genPhotoTags == null
+    "lvyeja": genPhotoTags == null
         ? []
         : List<dynamic>.from(genPhotoTags!.map((x) => x)),
     "gen_video_tags": genVideoTags == null
         ? []
         : List<dynamic>.from(genVideoTags!.map((x) => x)),
-    "gen_photo": genPhoto,
-    "gen_video": genVideo,
-    "gems": gems,
+    "iwptry": genPhoto,
+    "ibrklo": genVideo,
+    "vnrzov": gems,
     "collect": collect,
-    "last_message": lastMessage,
+    "tfehuw": lastMessage,
     "intro": intro,
     "chat_num": chatNum,
     "msg_num": msgNum,
     "mode": mode,
-    "cid": cid,
-    "card_num": cardNum,
-    "unlock_card_num": unlockCardNum,
-    "price": price,
-    "update_time": updateTime,
+    "ajhxtl": cid,
+    "ynewls": cardNum,
+    "qpfisp": unlockCardNum,
+    "sxxlzd": price,
+    "fdwojm": updateTime,
   };
 }

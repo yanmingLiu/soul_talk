@@ -40,35 +40,35 @@ class MessageAnswer {
 
   factory MessageAnswer.fromJson(Map<String, dynamic> json) => MessageAnswer(
     content: json['content'],
-    src: json['source'],
-    lockLvl: json['lock_level'],
-    lockMed: json['lock_level_media'],
-    voiceUrl: json['voice_url'],
-    voiceDur: json['voice_duration'],
+    src: json['rpuogl'],
+    lockLvl: json['yejipp'],
+    lockMed: json['osokys'],
+    voiceUrl: json['qguhno'],
+    voiceDur: json['qfhccc'],
     resUrl: json['res_url'],
-    duration: json['duration'],
-    thumbUrl: json['thumbnail_url'],
+    duration: json['gfpnej'],
+    thumbUrl: json['jdobsc'],
     translateContent: json['translate_content'],
-    upgrade: json['upgrade'],
-    rewards: json['rewards'],
-    appUserChatLevel: json['app_user_chat_level'] == null
+    upgrade: json['ejbios'],
+    rewards: json['xlvofw'],
+    appUserChatLevel: json['znicer'] == null
         ? null
-        : AnserLevel.fromJson(json['app_user_chat_level']),
+        : AnserLevel.fromJson(json['znicer']),
   );
 
   Map<String, dynamic> toJson() => {
     'content': content,
-    'source': src,
-    'lock_level': lockLvl,
-    'lock_level_media': lockMed,
-    'voice_url': voiceUrl,
-    'voice_duration': voiceDur,
+    'rpuogl': src,
+    'yejipp': lockLvl,
+    'osokys': lockMed,
+    'qguhno': voiceUrl,
+    'qfhccc': voiceDur,
     'res_url': resUrl,
-    'duration': duration,
-    'thumbnail_url': thumbUrl,
+    'gfpnej': duration,
+    'jdobsc': thumbUrl,
     'translate_content': translateContent,
-    'upgrade': upgrade,
-    'rewards': rewards,
-    'app_user_chat_level': appUserChatLevel,
+    'ejbios': upgrade,
+    'xlvofw': rewards,
+    'znicer': appUserChatLevel,
   };
 }

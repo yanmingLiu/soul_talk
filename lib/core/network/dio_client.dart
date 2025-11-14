@@ -64,7 +64,7 @@ class DioClient {
         connectTimeout: const Duration(milliseconds: _connectTimeout),
         receiveTimeout: const Duration(milliseconds: _receiveTimeout),
         sendTimeout: const Duration(milliseconds: _sendTimeout),
-        // responseType: ResponseType.plain, // 关闭自动解析
+        responseType: ResponseType.plain, // 关闭自动解析
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

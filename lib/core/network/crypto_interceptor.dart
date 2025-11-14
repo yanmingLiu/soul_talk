@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:soul_talk/core/config/evn.dart';
+import 'package:soul_talk/utils/crypto_util.dart';
 
 import 'dio_client.dart';
 
@@ -11,21 +16,20 @@ class CryptoInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     try {
       // 1. 加密 URL（路径和查询参数）
-      // final encryptedUrl = CryptoUtil.encryptUrl(
-      //   originalUrl: options.uri.toString(),
-      //   prefix: ENV.prefix,
-      // );
-      // final newUri = Uri.parse(encryptedUrl);
-      // _log("加密后的URL: $encryptedUrl");
-      // options.path = newUri.path;
-      // // 2. 加密请求体参数（data）
-
-      // if (options.contentType == 'multipart/form-data') {
-      //   _log("multipart/form-data 类型，不加密请求体参数");
-      // } else {
-      //   options.data = CryptoUtil.encryptParams(options.data);
-      //   _log("加密后的请求体参数: ${options.data}");
-      // }
+      final encryptedUrl = CryptoUtil.encryptUrl(
+        originalUrl: options.uri.toString(),
+        prefix: ENV.prefix,
+      );
+      final newUri = Uri.parse(encryptedUrl);
+      _log("加密后的URL: $encryptedUrl");
+      options.path = newUri.path;
+      // 2. 加密请求体参数（data）
+      if (options.contentType == 'multipart/form-data') {
+        _log("multipart/form-data 类型，不加密请求体参数");
+      } else {
+        options.data = CryptoUtil.encryptParams(options.data);
+        _log("加密后的请求体参数: ${options.data}");
+      }
 
       super.onRequest(options, handler);
     } catch (e) {
@@ -43,10 +47,10 @@ class CryptoInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     _log("解密前响应: ${response.data}");
     try {
-      // final decryptedData = CryptoUtil.decrypt(response.data); // 实际需替换为对称解密
-      // final jsonData = await compute(json.decode, decryptedData);
-      // response.data = jsonData;
-      // _log("解密后json: $jsonData");
+      final decryptedData = CryptoUtil.decrypt(response.data); // 实际需替换为对称解密
+      final jsonData = await compute(json.decode, decryptedData);
+      response.data = jsonData;
+      _log("解密后json: $jsonData");
 
       super.onResponse(response, handler);
     } catch (e, stackTrace) {

@@ -24,7 +24,7 @@ class BaseModel<T> {
     return BaseModel(
       success: json["success"],
       code: json["code"],
-      message: json["cnainu"],
+      message: json["qstedu"],
       data: _parseData<T>(json["data"], fromJsonT),
     );
   }
@@ -32,7 +32,7 @@ class BaseModel<T> {
   Map<String, dynamic> toJson() => {
     "success": success,
     "code": code,
-    "cnainu": message,
+    "qstedu": message,
     "data": data,
   };
 

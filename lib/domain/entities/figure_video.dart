@@ -49,23 +49,23 @@ class FigureVideo {
   factory FigureVideo.fromJson(Map<String, dynamic> json) =>
       FigureVideo(
         id: json["id"],
-        characterId: json["character_id"],
+        characterId: json["xbldvh"],
         tag: json["tag"],
-        duration: json["duration"],
-        url: json["url"],
+        duration: json["gfpnej"],
+        url: json["uxpnyz"],
         gifUrl: json["gif_url"],
-        createTime: json["create_time"],
-        updateTime: json["update_time"],
+        createTime: json["ylmsjk"],
+        updateTime: json["fdwojm"],
       );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "character_id": characterId,
+    "xbldvh": characterId,
     "tag": tag,
-    "duration": duration,
-    "url": url,
+    "gfpnej": duration,
+    "uxpnyz": url,
     "gif_url": gifUrl,
-    "create_time": createTime,
-    "update_time": updateTime,
+    "ylmsjk": createTime,
+    "fdwojm": updateTime,
   };
 }

@@ -2,19 +2,19 @@ class ApiConstants {
   ApiConstants._();
 
   // 注册
-  static const String register = '/v2/user/device/register';
+  static const String register = '/v2/user/device/eyosgp';
   // 获取用户信息
-  static const String getUserInfo = '/v2/appUser/getByDeviceId/user';
+  static const String getUserInfo = '/v2/xhjbuq/getByDeviceId/user';
   // 修改用户信息
-  static const String updateUserInfo = '/v2/appUser/updateUserInfo';
+  static const String updateUserInfo = '/v2/xhjbuq/updateUserInfo';
   // 角色列表
-  static const String roleList = '/v2/characterProfile/getAll';
+  static const String roleList = '/v2/ncybai/getAll';
   // moments list
   static const String momentsList = '/moments/getAll';
   // 根据角色 id 查询角色
-  static const String getRoleById = '/v2/characterProfile/getById';
+  static const String getRoleById = '/v2/ncybai/getById';
   // 用户减钻石
-  static const String minusGems = '/v2/appUser/minusGems';
+  static const String minusGems = '/v2/xhjbuq/minusGems';
   // 通过角色随机查一条查询
   static const String genRandomOne = '/v2/characterMedia/getByRole/randomOne';
   // 支持 auto-mask 支持角色生成
@@ -22,94 +22,94 @@ class ApiConstants {
   // undr image result
   static const String undrImageRes = '/isNaked/getUndressResult';
   // undr styles
-  static const String undrStyles = '/getStyleConfig';
+  static const String undrStyles = '/jrsgbn';
   // ios 创建订单
-  static const String createIosOrder = '/rechargeOrders/createOrder';
+  static const String createIosOrder = '/cquykf/createOrder';
   // iOS 完成订单
-  static const String verifyIosReceipt = '/rechargeOrders/finishOrder';
+  static const String verifyIosReceipt = '/cquykf/finishOrder';
   // 创建 google 订单
   static const String createAndOrder = '/pay/google/create';
   // 谷歌验签
   static const String verifyAndOrder = '/pay/google/verify';
   // 收藏角色
-  static const String collectRole = '/v2/characterProfile/collect';
+  static const String collectRole = '/v2/ncybai/collect';
   // 取消收藏角色
-  static const String cancelCollectRole = '/v2/characterProfile/cancelCollect';
+  static const String cancelCollectRole = '/v2/ncybai/cancelCollect';
   // 角色标签
-  static const String roleTag = '/v2/characterProfile/tags';
+  static const String roleTag = '/v2/ncybai/tags';
   // 会话列表
-  static const String sessionList = '/aiChatConversation/list';
+  static const String sessionList = '/bisdvu/list';
   // 新增会话
-  static const String addSession = '/aiChatConversation/add';
+  static const String addSession = '/bisdvu/add';
   // 重置会话
-  static const String resetSession = '/aiChatConversation/reset';
+  static const String resetSession = '/bisdvu/reset';
   // 删除会话
-  static const String deleteSession = '/aiChatConversation/delete';
+  static const String deleteSession = '/bisdvu/delete';
   // 收藏列表
-  static const String collectList = '/v2/characterProfile/collect/list';
+  static const String collectList = '/v2/ncybai/collect/list';
   // 消息列表
   static const String messageList = '/v2/history/getAll';
   // 语音聊天
-  static const String voiceChat = '/voices/chat';
+  static const String voiceChat = '/ktvpxp/chat';
   // 开屏随机角色
-  static const String splashRandomRole = '/platformConfig/getRecommendRole';
+  static const String splashRandomRole = '/efjceu/hlczsh';
   // 上报事件 用户参数
   static String eventParams = '/v2/user/upinfo';
   // 聊天等级配置
   static String chatLevelConfig = '/system/chatLevelConf';
   // 解锁图片
-  static String unlockImage = '/v2/characterProfile/unlockImage';
+  static String unlockImage = '/v2/ncybai/unlockImage';
   // 聊天等级
-  static String chatLevel = '/aiChatConversation/getChatLevel';
+  static String chatLevel = '/bisdvu/fjbcji';
   // translate
-  static String translate = '/translate';
+  static String translate = '/epkeao';
   // 签到
   static String signIn = '/signin';
 
   // 保存消息信息
   static String saveMsg = '/v2/history/saveMessage';
   // 用户加钻石
-  static String addGems = '/v2/appUser/plusGems';
+  static String addGems = '/v2/xhjbuq/plusGems';
   // sku 列表
-  static String skuList = '/platformConfig/getAllSku';
+  static String skuList = '/efjceu/getAllSku';
   // 编辑消息
-  static String editMsg = '/v2/message/editMsg';
+  static String editMsg = '/v2/agjrdl/vswlrp';
   // 续写
-  static String continueWrite = '/v2/message/resume/h';
+  static String continueWrite = '/v2/agjrdl/resume/h';
   // 重新发送消息
-  static String resendMsg = '/v2/message/resend/h';
+  static String resendMsg = '/v2/agjrdl/resend/h';
   // 发送消息
-  static String sendMsg = '/v2/message/conversation/ask/h';
+  static String sendMsg = '/v2/agjrdl/giirhf/ask/h';
   // 修改聊天场景
-  static String editScene = '/v2/message/conversation/change';
+  static String editScene = '/v2/agjrdl/giirhf/change';
   // 修改会话模式
-  static String editMode = '/aiChatConversation/editMode';
+  static String editMode = '/bisdvu/editMode';
   // 新建 mask
-  static String createMask = '/userProfile/add';
+  static String createMask = '/krxiil/add';
   // 编辑 mask
-  static String editMask = '/userProfile/update';
+  static String editMask = '/krxiil/update';
   // 获取 mask 列表
-  static String getMaskList = '/userProfile/getAll';
+  static String getMaskList = '/krxiil/getAll';
   // 切换 mask
-  static String changeMask = '/v2/message/conversation/changeArchive';
+  static String changeMask = '/v2/agjrdl/giirhf/changeArchive';
   // 各种价格配置
   static String getPriceConfig = '/system/price/config';
   // 删除mask
-  static String deleteMask = '/userProfile/del';
+  static String deleteMask = '/krxiil/del';
 
   // 获取风格配置
-  static const String styleConf = '/getStyleConfig';
+  static const String styleConf = '/jrsgbn';
   // 上传图片, ai 图片
-  static const String upImageForAiImage = '/v2/getUndressWith';
+  static const String upImageForAiImage = '/v2/pkhncc';
   // 获取任务结果 ai 图片
-  static const String aiImageResult = '/v2/getUndressWithResult';
+  static const String aiImageResult = '/v2/zwtcwx';
   // 上传图片, ai 视频
-  static const String upImageForAiVideo = '/getUndressWithVideo';
+  static const String upImageForAiVideo = '/warjaz';
   // 获取任务结果 ai 视频
-  static const String aiVideoResult = '/getUndressWithVideoResult';
+  static const String aiVideoResult = '/gmayiz';
   // ai生成图片历史
   static const String aiGetHistroy = '/noDressHis/getAll';
 
   // 获取支持的语种
-  static String supportLangs = '/translate/languages';
+  static String supportLangs = '/epkeao/languages';
 }

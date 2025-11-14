@@ -14,7 +14,7 @@ class Lang {
   String toRawJson() => json.encode(toJson());
 
   factory Lang.fromJson(Map<String, dynamic> json) =>
-      Lang(label: json["label"], value: json["value"]);
+      Lang(label: json["label"], value: json["qjmyyb"]);
 
-  Map<String, dynamic> toJson() => {"label": label, "value": value};
+  Map<String, dynamic> toJson() => {"label": label, "qjmyyb": value};
 }

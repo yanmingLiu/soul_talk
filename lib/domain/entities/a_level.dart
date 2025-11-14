@@ -48,23 +48,23 @@ class AnserLevel {
 
   factory AnserLevel.fromJson(Map<String, dynamic> json) => AnserLevel(
     id: json['id'],
-    userId: json['user_id'],
-    conversationId: json['conversation_id'],
+    userId: json['rukhgz'],
+    conversationId: json['luqlhc'],
     charId: json['char_id'],
     level: json['level'],
     progress: json['progress'],
     upgradeRequirements: json['upgrade_requirements'],
-    rewards: json['rewards'],
+    rewards: json['xlvofw'],
   );
 
   Map<String, dynamic> toJson() => {
     'id': id,
-    'user_id': userId,
-    'conversation_id': conversationId,
+    'rukhgz': userId,
+    'luqlhc': conversationId,
     'char_id': charId,
     'level': level,
     'progress': progress,
     'upgrade_requirements': upgradeRequirements,
-    'rewards': rewards,
+    'xlvofw': rewards,
   };
 }

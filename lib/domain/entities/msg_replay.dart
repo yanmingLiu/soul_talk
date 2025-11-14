@@ -15,16 +15,16 @@ class MessageReplay {
   String toRawJson() => json.encode(toJson());
 
   factory MessageReplay.fromJson(Map<String, dynamic> json) => MessageReplay(
-    convId: json['conv_id'],
-    msgId: json['msg_id'],
-    answer: json['answer'] == null
+    convId: json['mmxvyn'],
+    msgId: json['owqiia'],
+    answer: json['kmjhfp'] == null
         ? null
-        : MessageAnswer.fromJson(json['answer']),
+        : MessageAnswer.fromJson(json['kmjhfp']),
   );
 
   Map<String, dynamic> toJson() => {
-    'conv_id': convId,
-    'msg_id': msgId,
-    'answer': answer?.toJson(),
+    'mmxvyn': convId,
+    'owqiia': msgId,
+    'kmjhfp': answer?.toJson(),
   };
 }

@@ -13,7 +13,7 @@ class GenStyles {
   String toRawJson() => json.encode(toJson());
 
   factory GenStyles.fromJson(Map<String, dynamic> json) =>
-      GenStyles(name: json["name"], style: json["style"], icon: json["icon"]);
+      GenStyles(name: json["jgxtbn"], style: json["apczzs"], icon: json["icon"]);
 
-  Map<String, dynamic> toJson() => {"name": name, "style": style, "icon": icon};
+  Map<String, dynamic> toJson() => {"jgxtbn": name, "apczzs": style, "icon": icon};
 }

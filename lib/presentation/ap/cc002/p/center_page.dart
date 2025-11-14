@@ -108,6 +108,31 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
               ],
             ),
           ),
+          VButton(
+            onTap: () {
+              VSheet.dismiss();
+              ctr.deleteChat();
+            },
+            type: ButtonType.border,
+            borderWidth: 2,
+            borderColor: const Color(0xFFD2093A),
+            height: 48,
+            child: Row(
+              spacing: 16,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/delete@3x.png', width: 24),
+                const Text(
+                  'Delete',
+                  style: TextStyle(
+                    color: Color(0xFFD2093A),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

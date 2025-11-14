@@ -40,7 +40,7 @@ class ChaterCenterController extends GetxController {
     VDialog.alert(
       // message: LocaleKeys.delete_chat_confirmation.tr,
       // cancelText: LocaleKeys.cancel.tr,
-      message: 'deleteChatConfirmation',
+      message: "Are you sure to delete this chat?",
       onConfirm: () async {
         VDialog.dismiss();
         var res = await msgCtr.deleteConv();

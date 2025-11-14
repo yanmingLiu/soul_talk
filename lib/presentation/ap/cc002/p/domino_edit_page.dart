@@ -26,7 +26,6 @@ class DominoEditPasge extends GetView<DominoEditBloc> {
       child: Scaffold(
         backgroundColor: const Color(0xFFF9F9F9),
         appBar: _buildAppBar(),
-        resizeToAvoidBottomInset: true,
         body: SafeArea(
           bottom: false,
           child: Column(
@@ -41,7 +40,7 @@ class DominoEditPasge extends GetView<DominoEditBloc> {
   }
 
   /// 构建应用栏
-  PreferredSizeWidget _buildAppBar() {
+  AppBar _buildAppBar() {
     return AppBar(
       titleSpacing: 0.0,
       leadingWidth: 70,
@@ -302,61 +301,56 @@ class DominoEditPasge extends GetView<DominoEditBloc> {
 
   /// 构建底部按钮
   Widget _buildBottomButton(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 8,
-        ).copyWith(bottom: context.mediaQueryPadding.bottom),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ).copyWith(bottom: context.mediaQueryPadding.bottom),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
-        child: VButton(
-          onTap: controller.saveMask,
-          color: const Color(0xFF55CFDA),
-          child: !controller.isEditMode
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 4,
-                  children: [
-                    Image.asset('assets/images/diamond.png', width: 20),
-                    Text(
-                      '${controller.createCost}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    const Text(
-                      'to creat',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                )
-              : const Center(
-                  child: Text(
-                    'Save',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+      ),
+      child: VButton(
+        onTap: controller.saveMask,
+        color: const Color(0xFF55CFDA),
+        child: !controller.isEditMode
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 4,
+                children: [
+                  Image.asset('assets/images/diamond.png', width: 20),
+                  Text(
+                    '${controller.createCost}',
+                    style: const TextStyle(
                       color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
+                  const SizedBox(width: 4),
+                  const Text(
+                    'to creat',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              )
+            : const Center(
+                child: Text(
+                  'Save',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
-        ),
+              ),
       ),
     );
   }

@@ -137,7 +137,7 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
                 onTap: () {
                   NTO.pushProfile(ctr.role);
                 },
-                width: 100,
+                width: 80,
                 child: Row(
                   children: [
                     Flexible(

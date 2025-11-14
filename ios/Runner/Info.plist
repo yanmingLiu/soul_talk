@@ -28,15 +28,19 @@
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>The app requires your consent to access the local network</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We need access to your microphone for speech recognition during calls.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to the photo album, enabling users to upload pictures to change the chat background.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>We need access to speech recognition for voice input during calls.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>We use this permission to provide you with more relevant match recommendations and personalized content. For example, suggesting potentially compatible chat partners based on your interests.</string>
-	<key>SKAdNetworkItems</key>
+    <key>FacebookAppID</key>
+    <string></string>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <true/>
+    <key>FacebookClientToken</key>
+    <string></string>
+    <key>FacebookDisplayName</key>
+    <string>Aimi AI</string>
+    <key>SKAdNetworkItems</key>
 	<array>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>

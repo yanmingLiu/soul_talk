@@ -1,4 +1,3 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,20 +32,37 @@ class DominoPage extends GetView<DominoBloc> {
     // 初始化控制器
     Get.put(DominoBloc());
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
-        titleSpacing: 0.0,
-        leadingWidth: 70,
         leading: const NavBackBtn(color: Colors.black),
-        title: const Text(
-          'Select Your Profile Mask',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
+        actions: [
+          VButton(
+            onTap: () {
+              controller.pushEditPage();
+            },
+            height: 28,
+            type: ButtonType.border,
+            borderColor: const Color(0xFF55CFDA),
+            borderWidth: 1,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            borderRadius: BorderRadius.circular(8),
+            child: Row(
+              spacing: 4,
+              children: [
+                Image.asset('assets/images/add@3x.png', width: 16),
+                const Text(
+                  'Create',
+                  style: TextStyle(
+                    color: Color(0xFF00AB8E),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        centerTitle: true,
+          const SizedBox(width: 12),
+        ],
       ),
       body: Stack(
         children: [
@@ -65,6 +81,10 @@ class DominoPage extends GetView<DominoBloc> {
             left: 0,
             right: 0,
             child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ).copyWith(bottom: context.mediaQueryPadding.bottom),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
@@ -100,52 +120,26 @@ class DominoPage extends GetView<DominoBloc> {
       physics: physics,
       padding: const EdgeInsets.all(16).copyWith(bottom: bottom),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Text(
+            'Select Your Profile Mask',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 12),
           const Text(
             "Here you can set your own profile to achieve the desired chat effect. Please note that only one mask can be used in a chat, but you can open a new chat to use other cards.",
             style: TextStyle(
               fontSize: 14,
-              color: Color(0xFF4D4D4D),
-              fontWeight: FontWeight.w500,
+              color: Color(0xFF595959),
+              fontWeight: FontWeight.w300,
             ),
           ),
           const SizedBox(height: 16),
-          InkWell(
-            onTap: () {
-              controller.pushEditPage();
-            },
-            child: DottedBorder(
-              options: const RoundedRectDottedBorderOptions(
-                color: Color(0x8000AB8E),
-                strokeWidth: 1,
-                dashPattern: [6, 6],
-                radius: Radius.circular(16),
-              ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  spacing: 4,
-                  children: [
-                    Image.asset('assets/images/add@3x.png', width: 24),
-                    const Text(
-                      'Create',
-                      style: TextStyle(
-                        color: Color(0xFF00AB8E),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 22),
           Obx(() {
             if (controller.maskList.isEmpty &&
                 controller.emptyType.value != null) {
@@ -195,69 +189,34 @@ class DominoPage extends GetView<DominoBloc> {
         onTap: () {
           controller.selectMask(mask);
         },
-        child: Row(
-          spacing: 8,
+        child: Stack(
           children: [
-            GestureDetector(
-              onTap: () => controller.pushEditPage(mask: mask),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Image.asset('assets/images/edit@3x.png', width: 24),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                border: Border.all(
+                  color: isSelected ? const Color(0xFF55CFDA) : Colors.white,
+                  width: 2,
+                ),
               ),
-            ),
-            Expanded(
-              child: Stack(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    margin: const EdgeInsets.only(top: 12),
-                    width: double.infinity,
-                    constraints: const BoxConstraints(minHeight: 44),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: isSelected
-                            ? const Color(0xFF00AB8E)
-                            : Colors.transparent,
-                        width: 1,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          mask.description ?? '',
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   Row(
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
+                          horizontal: 6,
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.black,
-                          border: Border.all(
-                            color: const Color(0x33FFFFFF),
-                            width: 1,
-                          ),
+                          color: Gender.fromValue(
+                            mask.gender,
+                          ).color.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
                           spacing: 4,
@@ -268,19 +227,43 @@ class DominoPage extends GetView<DominoBloc> {
                               width: 14,
                             ),
                             Text(
-                              mask.profileName ?? '',
+                              Gender.fromValue(mask.gender).name,
                               style: TextStyle(
-                                fontSize: 10,
                                 color: Gender.fromValue(mask.gender).color,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ],
                         ),
                       ),
+                      const Spacer(),
+                      Image.asset('assets/images/edit@3x.png', width: 16),
                     ],
                   ),
+                  Text(
+                    mask.description ?? '',
+                    style: const TextStyle(
+                      color: Color(0xFF262626),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ],
+              ),
+            ),
+            PositionedDirectional(
+              top: 0,
+              end: 0,
+              child: GestureDetector(
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  color: Colors.transparent,
+                ),
+                onTap: () {
+                  controller.pushEditPage(mask: mask);
+                },
               ),
             ),
           ],

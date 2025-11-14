@@ -119,58 +119,63 @@ class _VTextState extends State<VText> {
     return widget.msg.textLock == MsgLock.private.value;
   }
 
-  /// 翻译显示逻辑配置
-  (bool, bool, String) _calculateTranslationState(Message msg) {
-    final hasTranslation =
-        msg.translateAnswer != null && msg.translateAnswer!.isNotEmpty;
-    final isAutoTranslateEnabled = DI.login.currentUser?.autoTranslate == true;
-    final isEnglishLocale = Get.deviceLocale?.languageCode == 'en';
-    final userRequestedTranslation = msg.showTranslate == true;
+  // /// 翻译显示逻辑配置
+  // (bool, bool, String) _calculateTranslationState(Message msg) {
+  //   final hasTranslation =
+  //       msg.translateAnswer != null && msg.translateAnswer!.isNotEmpty;
+  //   final isAutoTranslateEnabled = DI.login.currentUser?.autoTranslate == true;
+  //   final isEnglishLocale = Get.deviceLocale?.languageCode == 'en';
+  //   final userRequestedTranslation = msg.showTranslate == true;
 
-    // 错误隔离设计：安全获取原始内容
-    final originalContent = msg.answer ?? '';
-    final translatedContent = msg.translateAnswer ?? '';
+  //   // 错误隔离设计：安全获取原始内容
+  //   final originalContent = msg.answer ?? '';
+  //   final translatedContent = msg.translateAnswer ?? '';
 
-    bool shouldShowTranslate = false;
-    bool shouldShowTransBtn = true;
-    String displayContent = originalContent;
+  //   bool shouldShowTranslate = false;
+  //   bool shouldShowTransBtn = true;
+  //   String displayContent = originalContent;
 
-    if (isAutoTranslateEnabled) {
-      // 自动翻译模式
-      shouldShowTransBtn = false;
-      if (hasTranslation) {
-        shouldShowTranslate = true;
-        displayContent = translatedContent;
-      } else {
-        shouldShowTranslate = false;
-        displayContent = originalContent;
-      }
-    } else {
-      // 手动翻译模式
-      if (isEnglishLocale) {
-        // 英语环境下不显示翻译按钮
-        shouldShowTransBtn = false;
-      }
+  //   if (isAutoTranslateEnabled) {
+  //     // 自动翻译模式
+  //     shouldShowTransBtn = false;
+  //     if (hasTranslation) {
+  //       shouldShowTranslate = true;
+  //       displayContent = translatedContent;
+  //     } else {
+  //       shouldShowTranslate = false;
+  //       displayContent = originalContent;
+  //     }
+  //   } else {
+  //     // 手动翻译模式
+  //     if (isEnglishLocale) {
+  //       // 英语环境下不显示翻译按钮
+  //       shouldShowTransBtn = false;
+  //     }
 
-      if (userRequestedTranslation && hasTranslation) {
-        shouldShowTranslate = true;
-        displayContent = translatedContent;
-      } else {
-        shouldShowTranslate = false;
-        displayContent = originalContent;
-      }
-    }
+  //     if (userRequestedTranslation && hasTranslation) {
+  //       shouldShowTranslate = true;
+  //       displayContent = translatedContent;
+  //     } else {
+  //       shouldShowTranslate = false;
+  //       displayContent = originalContent;
+  //     }
+  //   }
 
-    return (shouldShowTranslate, shouldShowTransBtn, displayContent);
-  }
+  //   return (shouldShowTranslate, shouldShowTransBtn, displayContent);
+  // }
 
   Widget _buildText(BuildContext context) {
     final msg = widget.msg;
 
-    // 使用优化后的翻译状态计算逻辑
-    final (showTranslate, showTransBtn, content) = _calculateTranslationState(
-      msg,
-    );
+    // // 使用优化后的翻译状态计算逻辑
+    // final (showTranslate, showTransBtn, content) = _calculateTranslationState(
+    //   msg,
+    // );
+
+    final textContent =
+        msg.translateAnswer ??
+        msg.answer ??
+        "Hmm… we lost connection for a bit. Please try again!";
 
     // 性能优化：预计算屏幕宽度约束
     final maxWidth = MediaQuery.of(context).size.width * 0.8;
@@ -205,7 +210,7 @@ class _VTextState extends State<VText> {
                   ),
                 ),
               VRichText(
-                text: content,
+                text: textContent,
                 isSend: false,
                 isTypingAnimation: msg.typewriterAnimated == true,
                 onAnimationComplete: () => _handleAnimationComplete(msg),
@@ -217,8 +222,8 @@ class _VTextState extends State<VText> {
         if (!_isTypingAnimationActive(msg))
           _buildActionButtons(
             msg: msg,
-            showTranslate: showTranslate,
-            showTransBtn: showTransBtn,
+            showTranslate: false,
+            showTransBtn: false,
           ),
       ],
     );

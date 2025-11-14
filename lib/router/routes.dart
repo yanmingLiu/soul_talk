@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/presentation/ap/bh001/p/h_p_search_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/center_page.dart';
+import 'package:soul_talk/presentation/ap/cc002/p/domino_edit_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/domino_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/msg_page.dart';
 import 'package:soul_talk/presentation/ap/dm003/a_z_page.dart';
@@ -29,6 +30,7 @@ class Routes {
     GetPage(name: RouteConstants.message, page: () => const MessagePage()),
     GetPage(name: RouteConstants.profile, page: () => const ChaterCenterPage()),
     GetPage(name: RouteConstants.mask, page: () => const DominoPage()),
+    GetPage(name: RouteConstants.maskEdit, page: () => const DominoEditPasge()),
 
     // GetPage(name: RouteConstants.makeRole, page: () => const MakeRoleScreen()),
 

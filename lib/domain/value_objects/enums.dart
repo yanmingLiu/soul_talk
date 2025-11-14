@@ -146,13 +146,13 @@ enum Gender {
   Color get color {
     switch (this) {
       case Gender.male:
-        return const Color(0xFF85FFCD);
+        return const Color(0xFF55CFDA);
       case Gender.female:
-        return const Color(0xFFFEB6EA);
+        return const Color(0xFFDF78B1);
       case Gender.nonBinary:
-        return const Color(0xFFFFFF60);
+        return const Color(0xFF595959);
       case Gender.unknown:
-        return const Color(0xFF00AB8E);
+        return const Color(0xFF595959);
     }
   }
 }

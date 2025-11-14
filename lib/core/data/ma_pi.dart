@@ -1,7 +1,7 @@
-import '../constants/api_values.dart';
 import '../../domain/entities/base_model.dart';
 import '../../domain/entities/mask.dart';
 import '../../domain/entities/page_model.dart';
+import '../constants/api_values.dart';
 import 'api.dart';
 
 class MaskApi {
@@ -14,7 +14,10 @@ class MaskApi {
         ApiConstants.getMaskList,
         data: {'page': page, 'size': size, 'user_id': Api.userId},
       );
-      final res = PageModel.fromRawJson(result.data, (json) => Mask.fromRawJson(json));
+      final res = PageModel.fromJson(
+        result.data,
+        (json) => Mask.fromJson(json),
+      );
       return res.records;
     } catch (e) {
       return null;

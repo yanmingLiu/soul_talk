@@ -171,7 +171,7 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
             width: 24,
           ),
         ),
-        title: Text('Al’s language'),
+        title: const Text('Al’s language'),
       ),
       body: emptyType != null
           ? EmptyView(type: emptyType!)
@@ -190,7 +190,7 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
                       ...contactList.mapIndexed((i, e) {
                         return _buildSliver(index: i, model: e);
                       }),
-                      // SliverToBoxAdapter(child: Container(height: 140)),
+                      SliverToBoxAdapter(child: Container(height: 140)),
                     ],
                   ),
                 ),
@@ -215,7 +215,7 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
   Container _buildSaveButton() {
     final bottom = MediaQuery.of(context).padding.bottom;
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 16,
       ).copyWith(top: 16, bottom: bottom > 0 ? bottom : 16),
       color: Colors.white,
@@ -229,10 +229,10 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
               borderRadius: BorderRadius.all(Radius.circular(16)),
               color: Color(0xFF55CFDA),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
                   'Confirm',
                   style: TextStyle(
@@ -391,7 +391,7 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
     resultWidget = SliverStickyHeader(
       header: Container(
         color: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Text(
           model.section,
           style: const TextStyle(

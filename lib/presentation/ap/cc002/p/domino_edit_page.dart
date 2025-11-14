@@ -46,16 +46,16 @@ class DominoEditPasge extends GetView<DominoEditBloc> {
       titleSpacing: 0.0,
       leadingWidth: 70,
       leading: const NavBackBtn(color: Colors.black),
-      title: Obx(() {
-        return Text(
-          controller.title.value,
-          style: const TextStyle(
-            color: Color(0xFF181818),
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        );
-      }),
+      // title: Obx(() {
+      //   return Text(
+      //     controller.title.value,
+      //     style: const TextStyle(
+      //       color: Color(0xFF181818),
+      //       fontSize: 16,
+      //       fontWeight: FontWeight.w500,
+      //     ),
+      //   );
+      // }),
     );
   }
 

@@ -8,9 +8,9 @@ import 'package:soul_talk/domain/value_objects/enums.dart';
 import 'package:soul_talk/presentation/ap/cc002/c/msg_bloc.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/chater_lock_widget.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/float_item.dart';
-import 'package:soul_talk/presentation/ap/cc002/v/image_album.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/input_bar.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/msg_list_view.dart';
+import 'package:soul_talk/presentation/ap/cc002/v/v_album.dart';
 import 'package:soul_talk/presentation/ap/cc002/v/v_level.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
 import 'package:soul_talk/presentation/v000/toast.dart';
@@ -86,7 +86,6 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
               ],
             ),
           ),
-
           Positioned(
             left: 0,
             right: 0,
@@ -95,7 +94,7 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
               bottom: false,
               child: Column(
                 children: [
-                  const ImageAlbum(),
+                  const VAlbum(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Row(
@@ -187,7 +186,6 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
                   ),
                 ),
               ),
-
               if (DI.storage.isBest) ...[
                 const SizedBox(width: 16),
                 GestureDetector(

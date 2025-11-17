@@ -7,14 +7,14 @@ import 'package:soul_talk/domain/entities/figure_image.dart';
 import 'package:soul_talk/presentation/ap/cc002/c/msg_bloc.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
 
-class ImageAlbum extends StatefulWidget {
-  const ImageAlbum({super.key});
+class VAlbum extends StatefulWidget {
+  const VAlbum({super.key});
 
   @override
-  State<ImageAlbum> createState() => _ImageAlbumState();
+  State<VAlbum> createState() => _VAlbumState();
 }
 
-class _ImageAlbumState extends State<ImageAlbum> {
+class _VAlbumState extends State<VAlbum> {
   final imageHeight = 64.0;
   bool _isExpanded = true;
 
@@ -64,7 +64,7 @@ class _ImageAlbumState extends State<ImageAlbum> {
             itemBuilder: (_, idx) {
               final image = images[idx];
               final unlocked = image.unlocked ?? false;
-              return PhotoAlbumItem(
+              return VAlbumItem(
                 imageHeight: imageHeight,
                 image: image,
                 avatar: ctr.role.avatar,
@@ -84,39 +84,60 @@ class _ImageAlbumState extends State<ImageAlbum> {
             itemCount: imageCount,
           ),
         ),
-        Container(height: 1, color: const Color(0x4D333333)),
-        const SizedBox(height: 8),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-          },
-          child: Container(
-            width: 40,
-            height: 16,
-            decoration: BoxDecoration(
-              color: const Color(0x801C1C1C),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Center(
-              child: Icon(
-                color: Colors.white,
-                _isExpanded
-                    ? Icons.keyboard_arrow_up
-                    : Icons.keyboard_arrow_down,
-                size: 16,
+        Row(
+          children: [
+            const SizedBox(width: 12),
+            Expanded(
+              child: Container(
+                height: 1,
+                color: const Color(0x80FFFFFF),
               ),
             ),
-          ),
+            const SizedBox(width: 12),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+              child: Row(
+                children: [
+                  const Text(
+                    'Moments',
+                    style: TextStyle(
+                      color: Color(0x80FFFFFF),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Icon(
+                    color: const Color(0x80FFFFFF),
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    size: 16,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Container(
+                height: 1,
+                color: const Color(0x80FFFFFF),
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
         ),
+        const SizedBox(height: 8)
       ],
     );
   }
 }
 
-class PhotoAlbumItem extends StatelessWidget {
-  const PhotoAlbumItem({
+class VAlbumItem extends StatelessWidget {
+  const VAlbumItem({
     super.key,
     required this.imageHeight,
     required this.image,
@@ -134,13 +155,13 @@ class PhotoAlbumItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      borderRadius: const BorderRadius.all(Radius.circular(18)),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           height: imageHeight,
           width: imageHeight,
-          color: const Color(0xff1C1C1C),
+          color: const Color(0xff000000),
           child: Stack(
             children: [
               VImage(
@@ -149,13 +170,13 @@ class PhotoAlbumItem extends StatelessWidget {
                 height: imageHeight,
                 cacheWidth: 800,
                 cacheHeight: 800,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(18),
               ),
               if (!unlocked)
                 BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                   child: Container(
-                    color: const Color(0x901C1C1C),
+                    color: const Color(0x80000000),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

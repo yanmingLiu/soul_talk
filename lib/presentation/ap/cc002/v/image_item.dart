@@ -91,7 +91,6 @@ class ImageItem extends StatelessWidget {
               ),
             ),
             Image.asset('assets/images/lock@3x.png', width: 28),
-
             Positioned(
               bottom: 0,
               left: 0,
@@ -101,10 +100,7 @@ class ImageItem extends StatelessWidget {
                   horizontal: 12,
                   vertical: 8,
                 ),
-                decoration: const BoxDecoration(
-                  color: Color(0x80000000),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
+                decoration: const BoxDecoration(color: Color(0x80000000)),
                 alignment: Alignment.center,
                 child: const Text(
                   'Hot Photo',

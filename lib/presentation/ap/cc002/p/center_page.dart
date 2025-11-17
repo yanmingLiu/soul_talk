@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/presentation/ap/cc002/c/center_bloc.dart';
+import 'package:soul_talk/presentation/ap/cc002/v/v_album.dart';
+import 'package:soul_talk/presentation/v000/linked_item.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
@@ -22,7 +25,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
 
   final ctr = Get.put(ChaterCenterController());
 
-  // final int _index = 0;
+  int _index = 0;
 
   @override
   void initState() {
@@ -175,11 +178,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
                   children: [
                     _buildInfo(width, totalHeight),
                     const SizedBox(height: 16),
-                    // _buildIndex(),
-                    // const SizedBox(height: 16),
-                    _buildIntro(),
-                    // _buildTags(),
-                    // _buildImages(),
+                    DI.storage.isBest ? _buildContent2() : _buildContent1(),
                   ],
                 ),
               ),
@@ -196,32 +195,59 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
     );
   }
 
-  // Widget _buildIndex() {
-  //   return Row(
-  //     spacing: 24,
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: [
-  //       LinkedItem(
-  //         title: 'Info',
-  //         isActive: _index == 0,
-  //         onTap: () {
-  //           setState(() {
-  //             _index = 0;
-  //           });
-  //         },
-  //       ),
-  //       LinkedItem(
-  //         title: 'Moments',
-  //         isActive: _index == 1,
-  //         onTap: () {
-  //           setState(() {
-  //             _index = 1;
-  //           });
-  //         },
-  //       ),
-  //     ],
-  //   );
-  // }
+  Widget _buildContent1() {
+    return _buildIntro();
+  }
+
+  Widget _buildContent2() {
+    if (_index == 0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildIndex(),
+          const SizedBox(height: 16),
+          _buildIntro(),
+          _buildTags()
+        ],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildIndex(),
+          const SizedBox(height: 16),
+          _buildImages(),
+        ],
+      );
+    }
+  }
+
+  Widget _buildIndex() {
+    return Row(
+      spacing: 24,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        LinkedItem(
+          title: 'Info',
+          isActive: _index == 0,
+          onTap: () {
+            setState(() {
+              _index = 0;
+            });
+          },
+        ),
+        LinkedItem(
+          title: 'Moments',
+          isActive: _index == 1,
+          onTap: () {
+            setState(() {
+              _index = 1;
+            });
+          },
+        ),
+      ],
+    );
+  }
 
   Stack _buildInfo(double width, double totalHeight) {
     return Stack(
@@ -238,7 +264,6 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
             ),
           ),
         ),
-
         Positioned(
           bottom: 0,
           left: 0,
@@ -363,73 +388,73 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
     );
   }
 
-  // Widget _buildTags() {
-  //   if (!DI.storage.isBest) {
-  //     return const SizedBox();
-  //   }
+  Widget _buildTags() {
+    if (!DI.storage.isBest) {
+      return const SizedBox();
+    }
 
-  //   var tags = ctr.role.tags;
-  //   if (tags == null || tags.isEmpty) {
-  //     return const SizedBox();
-  //   }
+    var tags = ctr.role.tags;
+    if (tags == null || tags.isEmpty) {
+      return const SizedBox();
+    }
 
-  //   return Container(
-  //     padding: const EdgeInsets.all(12),
-  //     margin: const EdgeInsets.all(12),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(20),
-  //     ),
-  //     child: Column(
-  //       spacing: 8,
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         const Text(
-  //           'Tags',
-  //           style: TextStyle(
-  //             color: Color(0xFF8C8C8C),
-  //             fontSize: 14,
-  //             fontWeight: FontWeight.w400,
-  //           ),
-  //         ),
-  //         Wrap(
-  //           spacing: 8,
-  //           runSpacing: 8,
-  //           children: tags.map((text) {
-  //             return Row(
-  //               mainAxisSize: MainAxisSize.min,
-  //               children: [
-  //                 Container(
-  //                   padding: const EdgeInsets.symmetric(
-  //                     horizontal: 12,
-  //                     vertical: 4,
-  //                   ),
-  //                   decoration: BoxDecoration(
-  //                     color: const Color(0x1ADF78B1),
-  //                     borderRadius: const BorderRadius.all(Radius.circular(12)),
-  //                     border: Border.all(
-  //                       width: 1,
-  //                       color: const Color(0x40DF78B1),
-  //                     ),
-  //                   ),
-  //                   alignment: Alignment.center,
-  //                   child: Text(
-  //                     text,
-  //                     style: const TextStyle(
-  //                       fontSize: 12,
-  //                       fontWeight: FontWeight.w400,
-  //                       color: Color(0xFF595959),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             );
-  //           }).toList(),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+    return Container(
+      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        spacing: 8,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Tags',
+            style: TextStyle(
+              color: Color(0xFF8C8C8C),
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: tags.map((text) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0x1ADF78B1),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      border: Border.all(
+                        width: 1,
+                        color: const Color(0x40DF78B1),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      text,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF595959),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildIntro() {
     return Container(
@@ -464,58 +489,42 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
     );
   }
 
-  // Widget _buildImages() {
-  //   return Obx(() {
-  //     final images = ctr.images;
-  //     if (!DI.storage.isBest || images.isEmpty) {
-  //       return const SizedBox();
-  //     }
-  //     final imageCount = images.length;
-  //     return Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         const SizedBox(height: 20),
-  //         const Text(
-  //           'Moments',
-  //           style: TextStyle(
-  //             color: Color(0xFF4D4D4D),
-  //             fontSize: 16,
-  //             fontWeight: FontWeight.w700,
-  //           ),
-  //         ),
-  //         const SizedBox(height: 12),
-  //         GridView.builder(
-  //           physics: const NeverScrollableScrollPhysics(),
-  //           shrinkWrap: true,
-  //           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-  //             crossAxisCount: 4,
-  //             mainAxisSpacing: 4,
-  //             crossAxisSpacing: 4,
-  //             childAspectRatio: 1.0,
-  //           ),
-  //           itemBuilder: (_, idx) {
-  //             final image = images[idx];
-  //             final unlocked = image.unlocked ?? false;
-  //             return PhotoAlbumItem(
-  //               image: image,
-  //               unlocked: unlocked,
-  //               onTap: () {
-  //                 if (unlocked) {
-  //                   ctr.msgCtr.onTapImage(image);
-  //                 } else {
-  //                   ctr.msgCtr.onTapUnlockImage(image);
-  //                 }
-  //               },
-  //               imageHeight: (MediaQuery.of(context).size.width - 32 - 12) / 4,
-  //             );
-  //           },
-  //           itemCount: imageCount,
-  //         ),
-  //       ],
-  //     );
-  //   });
-  // }
+  Widget _buildImages() {
+    return Obx(() {
+      final images = ctr.images;
+      if (!DI.storage.isBest || images.isEmpty) {
+        return const SizedBox();
+      }
+      final imageCount = images.length;
+      return SizedBox(
+        height: 100,
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, index) => const SizedBox(
+            width: 8,
+          ),
+          itemBuilder: (_, idx) {
+            final image = images[idx];
+            final unlocked = image.unlocked ?? false;
+            return VAlbumItem(
+              image: image,
+              unlocked: unlocked,
+              onTap: () {
+                if (unlocked) {
+                  ctr.msgCtr.onTapImage(image);
+                } else {
+                  ctr.msgCtr.onTapUnlockImage(image);
+                }
+              },
+              imageHeight: 100,
+            );
+          },
+          itemCount: imageCount,
+        ),
+      );
+    });
+  }
 
   Widget _buildBottomButton() {
     final bottom = MediaQuery.of(context).padding.bottom;

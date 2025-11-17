@@ -87,9 +87,7 @@ class VVideo extends StatelessWidget {
                 ),
               ),
             ),
-
             Image.asset('assets/images/lock@3x.png', width: 28),
-
             Positioned(
               bottom: 0,
               left: 0,
@@ -101,7 +99,6 @@ class VVideo extends StatelessWidget {
                 ),
                 decoration: const BoxDecoration(
                   color: Color(0x80000000),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 alignment: Alignment.center,
                 child: const Text(

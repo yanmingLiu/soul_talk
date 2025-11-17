@@ -5,6 +5,7 @@ class BaseScaffold extends StatelessWidget {
   final bool extendBody;
   final bool extendBodyBehindAppBar;
   final PreferredSizeWidget? appBar;
+  final Color? backgroundColor;
 
   const BaseScaffold({
     super.key,
@@ -12,6 +13,7 @@ class BaseScaffold extends StatelessWidget {
     this.extendBody = true,
     this.extendBodyBehindAppBar = true,
     this.appBar,
+    this.backgroundColor,
   });
 
   @override
@@ -21,13 +23,12 @@ class BaseScaffold extends StatelessWidget {
         Positioned.fill(
           child: Image.asset('assets/images/bg.png', fit: BoxFit.cover),
         ),
-        Positioned.fill(
-          child: Scaffold(
-            appBar: appBar,
-            extendBody: extendBody,
-            extendBodyBehindAppBar: extendBodyBehindAppBar,
-            body: body,
-          ),
+        Scaffold(
+          appBar: appBar,
+          extendBody: extendBody,
+          extendBodyBehindAppBar: extendBodyBehindAppBar,
+          backgroundColor: backgroundColor,
+          body: body,
         ),
       ],
     );

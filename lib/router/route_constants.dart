@@ -17,6 +17,7 @@ class RouteConstants {
   static const String maskEdit = '/r1014';
   static const String makeRole = '/r1015';
   static const String chooseLang = '/r1016';
+  static const String countSku = '/r1017';
 
   static const String initial = launch;
 }

@@ -4,12 +4,13 @@ import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:soul_talk/presentation/ap/bh001/p/h_p_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/conver_page.dart';
 import 'package:soul_talk/presentation/ap/dm003/profile_page.dart';
+import 'package:soul_talk/presentation/ap/ec004/p/c_tab_page.dart';
 
 import '../../../app/di_depency.dart';
 import '../../../core/analytics/analytics_service.dart';
 import '../../v000/k_a_w.dart';
 
-enum MainTabBarIndex { home, chat, me }
+enum MainTabBarIndex { home, ai, chat, me }
 
 MainTabBarIndex mainTabIndex = MainTabBarIndex.home;
 
@@ -22,6 +23,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> with WidgetsBindingObserver {
   late List<Widget> pages = <Widget>[];
+  List<MainTabBarIndex> indexs = [];
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -45,10 +47,18 @@ class _RootPageState extends State<RootPage> with WidgetsBindingObserver {
 
     pages = [
       const KeepAliveWrapper(child: HomePage()),
+      if (DI.storage.isBest) const KeepAliveWrapper(child: CTabPage()),
       const KeepAliveWrapper(child: ConverPage()),
-      // if (DI.storage.isBest) const KeepAliveWrapper(child: CreatePage()),
       const KeepAliveWrapper(child: ProfilePage()),
     ];
+
+    indexs = [
+      MainTabBarIndex.home,
+      if (DI.storage.isBest) MainTabBarIndex.ai,
+      MainTabBarIndex.chat,
+      MainTabBarIndex.me
+    ];
+
     super.initState();
   }
 
@@ -60,20 +70,22 @@ class _RootPageState extends State<RootPage> with WidgetsBindingObserver {
   }
 
   void _onTapItem(MainTabBarIndex index) {
-    setState(() {
-      mainTabIndex = index;
-    });
+    mainTabIndex = index;
+    setState(() {});
+
     DI.login.fetchUserInfo();
   }
 
   @override
   Widget build(BuildContext context) {
+    final stackIndex = indexs.indexOf(mainTabIndex);
+
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         extendBody: true,
         bottomNavigationBar: MainTabBar(onTapItem: (p0) => _onTapItem(p0)),
-        body: LazyIndexedStack(index: mainTabIndex.index, children: pages),
+        body: LazyIndexedStack(index: stackIndex, children: pages),
       ),
     );
   }
@@ -89,27 +101,28 @@ class MainTabBar extends StatelessWidget {
     const space = 12.0;
     final bottom = MediaQuery.of(context).padding.bottom;
     final height = kBottomNavigationBarHeight + bottom;
-    final allWidth =
-        MediaQuery.of(context).size.width -
+    final allWidth = MediaQuery.of(context).size.width -
         12 * 2 -
         (space * MainTabBarIndex.values.length);
-    final itemWidth = allWidth / 3;
+
+    final count = DI.storage.isBest ? 4 : 3;
+    final itemWidth = allWidth / count;
 
     return Container(
       height: height,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 8,
       ).copyWith(bottom: bottom),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [const Color(0xFFFFF2F9), const Color(0xFFFFFFFF)],
+          colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         spacing: space,
         children: [
           TabBarItem(
@@ -121,6 +134,16 @@ class MainTabBar extends StatelessWidget {
             isActive: mainTabIndex == MainTabBarIndex.home,
             onTap: onTapItem,
           ),
+          if (DI.storage.isBest)
+            TabBarItem(
+              itemWidth: itemWidth,
+              index: MainTabBarIndex.ai,
+              title: 'AI Photo',
+              icon: 'assets/images/tab_c_d.png',
+              activeIcon: 'assets/images/tab_c_s.png',
+              isActive: mainTabIndex == MainTabBarIndex.ai,
+              onTap: onTapItem,
+            ),
           TabBarItem(
             itemWidth: itemWidth,
             index: MainTabBarIndex.chat,
@@ -170,8 +193,8 @@ class TabBarItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap?.call(index),
       child: Container(
-        width: itemWidth,
         height: 44,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: isActive ? Colors.black : Colors.transparent,
           borderRadius: BorderRadius.circular(22),
@@ -184,7 +207,7 @@ class TabBarItem extends StatelessWidget {
             if (isActive)
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,

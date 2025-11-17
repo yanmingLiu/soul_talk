@@ -7,6 +7,8 @@ import 'package:soul_talk/presentation/ap/cc002/p/domino_edit_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/domino_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/msg_page.dart';
 import 'package:soul_talk/presentation/ap/dm003/a_z_page.dart';
+import 'package:soul_talk/presentation/ap/p006/p/p006_guide_page.dart';
+import 'package:soul_talk/presentation/ap/p006/p/p006_page.dart';
 
 import '../presentation/ap/am000/l_p.dart';
 import '../presentation/ap/am000/m_p.dart';
@@ -68,22 +70,23 @@ class Routes {
       preventDuplicates: true,
     ),
 
-    // GetPage(
-    //   name: RouteConstants.phone,
-    //   page: () => const CallScreen(),
-    //   transition: Transition.downToUp,
-    //   popGesture: false,
-    //   preventDuplicates: true,
-    //   fullscreenDialog: true,
-    // ),
-    // GetPage(
-    //   name: RouteConstants.phoneGuide,
-    //   page: () => const CallGuideScreen(),
-    //   transition: Transition.downToUp,
-    //   popGesture: false,
-    //   preventDuplicates: true,
-    //   fullscreenDialog: true,
-    // ),
+    GetPage(
+      name: RouteConstants.phone,
+      page: () => const P006Page(),
+      transition: Transition.downToUp,
+      popGesture: false,
+      preventDuplicates: true,
+      fullscreenDialog: true,
+    ),
+    
+    GetPage(
+      name: RouteConstants.phoneGuide,
+      page: () => const P006GuidePage(),
+      transition: Transition.downToUp,
+      popGesture: false,
+      preventDuplicates: true,
+      fullscreenDialog: true,
+    ),
 
     // GetPage(
     //   name: RouteConstants.countSku,

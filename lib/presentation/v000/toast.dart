@@ -11,6 +11,7 @@ class Toast {
       builder: (_) {
         return Container(
           padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.circular(12),

@@ -53,10 +53,10 @@ post_install do |installer|
         # https://pub.dev/packages/permission_handler
 
         # dart: PermissionGroup.microphone
-        # 'PERMISSION_MICROPHONE=1',
+        'PERMISSION_MICROPHONE=1',
 
         # dart: PermissionGroup.speech
-        # 'PERMISSION_SPEECH_RECOGNIZER=1',
+        'PERMISSION_SPEECH_RECOGNIZER=1',
     ]
 
     # 添加Swift优化级别设置

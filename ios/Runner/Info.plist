@@ -35,12 +35,17 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>The app requires your consent to access the local network</string>
+	<string>Access to your local network is needed to enable features like device-to-device communication and smooth connectivity within your local network.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to the photo album, enabling users to upload pictures to change the chat background.</string>
+	<string>Allow access to your photo library so you can upload images to customize your chat background.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>We use this permission to provide you with more relevant match recommendations and personalized content. For example, suggesting potentially compatible chat partners based on your interests.</string>
-	<key>SKAdNetworkItems</key>
+	<string>With your permission, we may track your preferences to offer more relevant recommendations—like suggesting chat partners who share your interests—and personalized content tailored to you.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need access to your microphone so you can speak naturally during voice interactions with AI, ensuring smooth communication.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Speech recognition access is required to convert your voice to text, helping AI understand your needs accurately.</string>
+    
+    <key>SKAdNetworkItems</key>
 	<array>
 		<true/>
 		<dict>

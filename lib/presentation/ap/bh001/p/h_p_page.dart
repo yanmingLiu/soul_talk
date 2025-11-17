@@ -9,7 +9,6 @@ import 'package:soul_talk/presentation/v000/cons_button.dart';
 import 'package:soul_talk/presentation/v000/empty_view.dart';
 import 'package:soul_talk/presentation/v000/linked_controller.dart';
 import 'package:soul_talk/presentation/v000/linked_item.dart';
-import 'package:soul_talk/presentation/v000/toast.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/router/nav_to.dart';
 
@@ -93,15 +92,20 @@ class _HomePageState extends State<HomePage>
                     height: 44,
                     type: ButtonType.fill,
                     color: Colors.white,
+                    onTap: ctr.onTapFilter,
                     child: Center(
-                      child: Image.asset(
-                        'assets/images/filter@3x.png',
-                        width: 32,
-                      ),
+                      child: Obx(() {
+                        return ctr.selectTags.isNotEmpty
+                            ? Image.asset(
+                                'assets/images/tagselected@3x.png',
+                                width: 32,
+                              )
+                            : Image.asset(
+                                'assets/images/filter@3x.png',
+                                width: 32,
+                              );
+                      }),
                     ),
-                    onTap: () {
-                      Toast.toast('Filter function is not open yet');
-                    },
                   ),
                 ],
               ],

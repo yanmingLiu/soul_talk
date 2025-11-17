@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/presentation/ap/bh001/p/h_p_search_page.dart';
+import 'package:soul_talk/presentation/ap/bh001/p/h_tag_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/center_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/domino_edit_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/domino_page.dart';
@@ -49,11 +50,14 @@ class Routes {
       preventDuplicates: true,
     ),
 
-    // GetPage(
-    //   name: RouteConstants.homeFilter,
-    //   page: () => const TagChooseScreen(),
-    //   transition: Transition.downToUp,
-    // ),
+    GetPage(
+      name: RouteConstants.homeFilter,
+      page: () => const TagChooseScreen(),
+      transition: Transition.downToUp,
+      fullscreenDialog: true,
+      preventDuplicates: true,
+      opaque: false,
+    ),
     GetPage(
       name: RouteConstants.vip,
       page: () => const PopScope(

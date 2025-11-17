@@ -1,30 +1,38 @@
+import 'dart:io';
+
+import 'package:get/get.dart';
+import 'package:soul_talk/core/config/evn.dart';
+import 'package:soul_talk/core/constants/vs.dart';
+import 'package:soul_talk/utils/info_utils.dart';
+
 import '../../app/di_depency.dart';
+import '../../utils/log_util.dart';
 
 class Block {
   static Future request({bool isFisrt = false}) async {
-    await DI.storage.setIsBird(false);
-    // final keyBird = DI.storage.isBest;
-    // if (ENV.isDebugMode) {
-    //   DI.storage.setIsBird(false);
-    //   return;
-    // }
-    // log.d('fetchSwitches isBig = $keyBird isFisrt = $isFisrt');
-    // if (keyBird && isFisrt == false) {
-    //   return;
-    // }
 
-    // try {
-    //   if (Platform.isIOS) {
-    //     await _requestIos();
-    //   } else if (Platform.isAndroid) {
-    //     await _requestAnd();
-    //   }
-    // } catch (e) {
-    //   log.e('Error in requesClk: $e');
-    // }
+    final keyBird = DI.storage.isBest;
+    if (ENV.isDebugMode) {
+      DI.storage.setIsBird(true);
+      return;
+    }
+    log.d('fetchSwitches isBig = $keyBird isFisrt = $isFisrt');
+    if (keyBird && isFisrt == false) {
+      return;
+    }
+
+    try {
+      if (Platform.isIOS) {
+        await _requestIos();
+      } else if (Platform.isAndroid) {
+        await _requestAnd();
+      }
+    } catch (e) {
+      log.e('Error in requesClk: $e');
+    }
   }
 
-  /*
+
   // iOS 点击事件请求
   static Future<void> _requestIos() async {
     try {
@@ -96,5 +104,5 @@ class Block {
       log.e('Error in _requestAndroidClk: $e');
     }
   }
-*/
+
 }

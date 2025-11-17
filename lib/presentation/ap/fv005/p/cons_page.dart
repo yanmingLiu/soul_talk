@@ -289,7 +289,7 @@ class _ConsPageState extends State<ConsPage> {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 12,
+        mainAxisSpacing: 0,
         crossAxisSpacing: 8,
         childAspectRatio: 170.0 / 100.0,
       ),
@@ -319,6 +319,7 @@ class _ConsPageState extends State<ConsPage> {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
+                margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -368,23 +369,21 @@ class _ConsPageState extends State<ConsPage> {
               ),
               if (bestChoice)
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
                       height: 20,
                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadiusDirectional.only(
-                          topEnd: Radius.circular(16),
-                          bottomStart: Radius.circular(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF16C576), Color(0xFF4EAB7A)],
                         ),
-                        color: Color(0xFF3F8DFD),
                       ),
                       child: const Center(
                         child: Text(
-                          'best_choice',
+                          'Best Value',
                           style: TextStyle(
-                            fontSize: 8,
+                            fontSize: 10,
                             fontWeight: FontWeight.w400,
                             color: Colors.white,
                           ),

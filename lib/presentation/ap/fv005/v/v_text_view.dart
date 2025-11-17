@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:soul_talk/app/di_depency.dart';
-import 'package:soul_talk/presentation/v000/v_graient_text.dart';
 import 'package:soul_talk/presentation/v000/v_place_text.dart';
 
 class VTextView extends StatelessWidget {
@@ -32,52 +31,19 @@ class VTextView extends StatelessWidget {
 
   /// 构建大版本标题
   Widget _buildBigVersionTitle() {
-    return const Row(
-      spacing: 12,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GradientText(
-          textAlign: TextAlign.center,
-          data: "50%",
-          gradient: LinearGradient(
-            colors: [Color(0xFFF4FCFF), Color(0xFF49AAFF)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.0, 1.0],
-          ),
-          style: TextStyle(fontSize: 64, fontWeight: FontWeight.w800),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 38),
-          child: GradientText(
-            textAlign: TextAlign.center,
-            data: "OFF",
-            gradient: LinearGradient(
-              colors: [Color(0xFFF4FCFF), Color(0xFF49AAFF)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: [0.0, 1.0],
-            ),
-            style: TextStyle(fontSize: 64, fontWeight: FontWeight.w800),
-          ),
-        ),
-      ],
+    return Image.asset(
+      'assets/images/title2@3x.png',
+      width: 232,
+      height: 58,
     );
   }
 
   /// 构建小版本标题
   Widget _buildSmallVersionTitle() {
-    return GradientText.linear(
-      'Upgrade to VIP',
-      textAlign: TextAlign.center,
-      colors: const [
-        Color(0xFFFF88CA),
-        Color(0xFFFFA3DC),
-        Color(0xFFC1F0FF),
-        Color(0xFFFFB3DD),
-      ],
-      stops: const [0.0, 0.2, 0.3, 1.0],
-      style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w800),
+    return Image.asset(
+      'assets/images/title1@3x.png',
+      width: 248,
+      height: 31,
     );
   }
 
@@ -96,8 +62,8 @@ class VTextView extends StatelessWidget {
       "Enjoy The Best Chat Experience",
       style: TextStyle(
         color: Colors.white,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

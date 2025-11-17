@@ -10,7 +10,6 @@ import '../../utils/log_util.dart';
 
 class Block {
   static Future request({bool isFisrt = false}) async {
-
     final keyBird = DI.storage.isBest;
     if (ENV.isDebugMode) {
       DI.storage.setIsBird(true);
@@ -31,7 +30,6 @@ class Block {
       log.e('Error in requesClk: $e');
     }
   }
-
 
   // iOS 点击事件请求
   static Future<void> _requestIos() async {
@@ -104,5 +102,4 @@ class Block {
       log.e('Error in _requestAndroidClk: $e');
     }
   }
-
 }

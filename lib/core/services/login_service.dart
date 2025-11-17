@@ -6,11 +6,11 @@ import 'package:soul_talk/core/constants/vs.dart';
 import 'package:soul_talk/domain/entities/lang.dart';
 
 import '../../app/di_depency.dart';
-import '../data/lo_pi.dart';
 import '../../domain/entities/price.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/value_objects/enums.dart';
 import '../../utils/log_util.dart';
+import '../data/lo_pi.dart';
 
 class LoginService extends GetxService {
   bool _loadingState = false;
@@ -38,7 +38,7 @@ class LoginService extends GetxService {
   Future<void> performRegister() async {
     try {
       final userCached = DI.storage.user;
-      if (userCached != null) {
+      if (userCached != null && userCached.id != null) {
         _currentUser = userCached;
         return;
       }
@@ -239,17 +239,15 @@ class LoginService extends GetxService {
 
   // 后台更新语言数据的方法
   void _updateAppLangsInBackground() {
-    LoginApi.getAppLangs()
-        .then((data) {
-          if (data != null) {
-            appLangs = data;
-            DI.storage.setAppLangs(json.encode(data));
-            log.d('Updated appLangs from API in background: ${appLangs?.keys}');
-          }
-        })
-        .catchError((e) {
-          log.e('Background update appLangs failed: $e');
-        });
+    LoginApi.getAppLangs().then((data) {
+      if (data != null) {
+        appLangs = data;
+        DI.storage.setAppLangs(json.encode(data));
+        log.d('Updated appLangs from API in background: ${appLangs?.keys}');
+      }
+    }).catchError((e) {
+      log.e('Background update appLangs failed: $e');
+    });
   }
 
   Future<void> loadAppLangs() async {

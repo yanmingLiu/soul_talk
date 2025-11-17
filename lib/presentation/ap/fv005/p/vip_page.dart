@@ -70,7 +70,11 @@ class VipPage extends GetView<VipController> {
   /// 构建背景
   Widget _buildBackground() {
     return Positioned.fill(
-      child: Image.asset('assets/images/x@3x.png', fit: BoxFit.cover),
+      child: Image.asset(
+          DI.storage.isBest
+              ? 'assets/images/x2@3x.png'
+              : 'assets/images/x@3x.png',
+          fit: BoxFit.cover),
     );
   }
 
@@ -95,7 +99,7 @@ class VipPage extends GetView<VipController> {
             const SkuListWidget(),
             const SizedBox(height: 8),
             PrivacyView(
-              type: DI.storage.isBest
+              type: !DI.storage.isBest
                   ? PolicyBottomType.vip2
                   : PolicyBottomType.vip1,
             ),

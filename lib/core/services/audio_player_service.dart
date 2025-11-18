@@ -284,10 +284,39 @@ class AudioPlayerService extends GetxService {
     }
   }
 
+  Future<void> pausedPlay(String msgId) async {
+    try {
+      debugPrint('🎧 pausedPlay, msgId: $msgId');
+
+      final currentAudio = currentPlayingAudio.value;
+      if (currentAudio?.msgId == msgId) {
+        await _audioPlayer?.pause();
+      }
+
+      _updateAudioState(msgId, AudioPlayState.paused);
+    } catch (e) {
+      debugPrint('❌ pausedPlay: $e');
+    }
+  }
+
+  Future<void> resumePlay(String msgId) async {
+    try {
+      debugPrint('🎧 pausedPlay, msgId: $msgId');
+
+      final currentAudio = currentPlayingAudio.value;
+      if (currentAudio?.msgId == msgId) {
+        await _audioPlayer?.resume();
+      }
+
+      _updateAudioState(msgId, AudioPlayState.playing);
+    } catch (e) {
+      debugPrint('❌ pausedPlay: $e');
+    }
+  }
+
   /// 停止所有音频播放
   Future<void> stopAll() async {
     try {
-      debugPrint('🎧 AudioPlayerService: 停止所有音频播放');
       await _audioPlayer?.stop();
       currentPlayingAudio.value = null;
 
@@ -297,13 +326,10 @@ class AudioPlayerService extends GetxService {
         if (audioState?.state == AudioPlayState.playing ||
             audioState?.state == AudioPlayState.downloading) {
           _updateAudioState(msgId, AudioPlayState.stopped);
-          debugPrint(
-            '🎧 AudioPlayerService: 停止音频 $msgId, 原状态: ${audioState?.state}',
-          );
         }
       }
     } catch (e) {
-      debugPrint('⚠️ AudioPlayerService: 停止所有播放异常: $e');
+      debugPrint('❌ stopAll: $e');
     }
   }
 
@@ -318,7 +344,6 @@ class AudioPlayerService extends GetxService {
   Future<void> _stopCurrentAudio() async {
     final currentAudio = currentPlayingAudio.value;
     if (currentAudio != null) {
-      debugPrint('🎧 AudioPlayerService: 停止当前音频, msgId: ${currentAudio.msgId}');
       await _audioPlayer?.stop();
       _updateAudioState(currentAudio.msgId, AudioPlayState.stopped);
       currentPlayingAudio.value = null;
@@ -336,8 +361,6 @@ class AudioPlayerService extends GetxService {
 
     while (_retryCount[retryKey]! < _maxRetryCount) {
       try {
-        debugPrint('🎧 AudioPlayerService: 开始下载音频, URL: $audioUrl');
-
         // 如果需要强制重新下载，先删除已存在的文件
         if (forceRedownload) {
           final fileName = FileDownloader.instance.generateFileNameFromUrl(
@@ -349,7 +372,6 @@ class AudioPlayerService extends GetxService {
           final existingFile = File(existingFilePath);
           if (await existingFile.exists()) {
             await existingFile.delete();
-            debugPrint('🎧 AudioPlayerService: 已删除旧缓存文件: $existingFilePath');
           }
         }
 
@@ -358,7 +380,7 @@ class AudioPlayerService extends GetxService {
             .timeout(
               const Duration(seconds: _downloadTimeoutSeconds),
               onTimeout: () => throw TimeoutException(
-                '下载超时',
+                'Download time out',
                 const Duration(seconds: _downloadTimeoutSeconds),
               ),
             );
@@ -367,13 +389,10 @@ class AudioPlayerService extends GetxService {
           _retryCount.remove(retryKey); // 清除重试次数
           return filePath;
         } else {
-          throw Exception('下载返回空路径或文件不存在');
+          throw Exception('Download error');
         }
       } catch (e) {
         _retryCount[retryKey] = _retryCount[retryKey]! + 1;
-        debugPrint(
-          '⚠️ AudioPlayerService: 下载失败 (${_retryCount[retryKey]}/$_maxRetryCount): $e',
-        );
 
         if (_retryCount[retryKey]! >= _maxRetryCount) {
           _retryCount.remove(retryKey);
@@ -397,11 +416,10 @@ class AudioPlayerService extends GetxService {
       if (duration != null) {
         return duration.inMilliseconds;
       } else {
-        debugPrint('⚠️ AudioPlayerService: 无法获取音频时长');
         return 0;
       }
     } catch (e) {
-      debugPrint('⚠️ AudioPlayerService: 获取音频时长异常: $e');
+      debugPrint('❌_getAudioDuration: $e');
       return 0;
     }
   }
@@ -413,29 +431,27 @@ class AudioPlayerService extends GetxService {
 
       // 检查文件是否存在
       if (!await file.exists()) {
-        debugPrint('⚠️ AudioPlayerService: 音频文件不存在: $filePath');
+        debugPrint('⚠️_validateAudioFile: $filePath');
         return false;
       }
 
       // 检查文件大小（小于1KB可能是不完整的）
       final fileSize = await file.length();
       if (fileSize < 1024) {
-        debugPrint('⚠️ AudioPlayerService: 音频文件过小: ${fileSize}B');
+        debugPrint('⚠️ _validateAudioFile: ${fileSize}B');
         return false;
       }
 
       // 检查时长合理性（小于1秒可能有问题）
       if (duration < 1000) {
-        debugPrint('⚠️ AudioPlayerService: 音频时长过短: ${duration}ms');
+        debugPrint('⚠️ _validateAudioFile: ${duration}ms');
         return false;
       }
 
-      debugPrint(
-        '🎧 AudioPlayerService: 音频文件验证通过, 文件大小: ${fileSize}B, 时长: ${duration}ms',
-      );
+      debugPrint('🎧 _validateAudioFile: ${fileSize}B, : ${duration}ms');
       return true;
     } catch (e) {
-      debugPrint('⚠️ AudioPlayerService: 验证音频文件异常: $e');
+      debugPrint('❌ _validateAudioFile: $e');
       return false;
     }
   }
@@ -447,18 +463,13 @@ class AudioPlayerService extends GetxService {
     int duration,
   ) async {
     try {
-      debugPrint(
-        '🎧 AudioPlayerService: 开始播放音频文件, msgId: $msgId, 路径: $filePath, duration: $duration',
-      );
-
       if (_audioPlayer == null) {
-        throw Exception('音频播放器未初始化');
+        throw Exception('Player not init');
       }
 
       // 播放前最后一次检查状态
       final currentState = _audioStates[msgId];
       if (currentState?.state == AudioPlayState.stopped) {
-        debugPrint('🎧 AudioPlayerService: 音频在播放前被停止，取消播放, msgId: $msgId');
         return;
       }
 
@@ -476,20 +487,16 @@ class AudioPlayerService extends GetxService {
       // 触发状态更新
       _audioStates.refresh();
 
-      debugPrint('🎧 AudioPlayerService: 开始播放音频文件');
-
       // 开始播放
-      await _audioPlayer!
-          .play(DeviceFileSource(filePath))
-          .timeout(
+      await _audioPlayer!.play(DeviceFileSource(filePath)).timeout(
             const Duration(seconds: _playTimeoutSeconds),
             onTimeout: () => throw TimeoutException(
-              '播放超时',
+              'Player timeout',
               const Duration(seconds: _playTimeoutSeconds),
             ),
           );
     } catch (e) {
-      debugPrint('⚠️ AudioPlayerService: 播放音频文件异常: $e');
+      debugPrint('❌AudioPlayerService: $e');
       _updateAudioState(
         msgId,
         AudioPlayState.error,
@@ -518,7 +525,7 @@ class AudioPlayerService extends GetxService {
     );
 
     _audioStates[msgId] = newState;
-    debugPrint('🎧 AudioPlayerService: 音频状态更新, msgId: $msgId, state: $state');
+    debugPrint('🎧 _updateAudioState msgId: $msgId, state: $state');
   }
 
   /// 清理资源

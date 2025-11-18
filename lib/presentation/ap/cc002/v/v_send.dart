@@ -17,9 +17,8 @@ class VSend extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: isRTL
-          ? CrossAxisAlignment.start
-          : CrossAxisAlignment.end,
+      crossAxisAlignment:
+          isRTL ? CrossAxisAlignment.start : CrossAxisAlignment.end,
       children: [
         _buildMessageContainer(sendText, screenWidth, context),
         if (showLoading) _buildLoadingIndicator(context),
@@ -41,7 +40,11 @@ class VSend extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         decoration: const BoxDecoration(
           color: Color(0xFF38ADB7),
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: BorderRadiusDirectional.only(
+            topStart: Radius.circular(16.0),
+            topEnd: Radius.circular(16.0),
+            bottomStart: Radius.circular(16.0),
+          ),
         ),
         constraints: BoxConstraints(maxWidth: screenWidth * 0.8),
         child: RepaintBoundary(

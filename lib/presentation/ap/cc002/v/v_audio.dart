@@ -42,16 +42,13 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
   /// 检查是否需要恢复播放状态
   void _checkRestoredPlayState() {
     try {
-      debugPrint('🎧 AudioContainer: 检查恢复播放状态, msgId: $_msgId');
-
       // 检查全局管理器中的状态
       final audioState = _audioManager.getAudioState(_msgId);
       if (audioState?.state == AudioPlayState.playing) {
-        debugPrint('🎧 AudioContainer: 恢复播放动画, msgId: $_msgId');
         _startPlayAnimation();
       }
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 检查恢复状态异常: $e');
+      debugPrint('_checkRestoredPlayState e: $e');
     }
   }
 
@@ -59,16 +56,13 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
   void _initializeAnimationController() {
     try {
       _controller = AnimationController(vsync: this);
-      debugPrint('🎧 AudioContainer: 动画控制器初始化成功, msgId: $_msgId');
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 动画控制器初始化失败: $e');
+      debugPrint('_initializeAnimationController e: $e');
     }
   }
 
   @override
   void dispose() {
-    debugPrint('🎧 AudioContainer: 组件销毁开始, msgId: $_msgId');
-    // _audioManager.stopAll();
     _cleanupResources();
     super.dispose();
   }
@@ -77,9 +71,8 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
   void _cleanupResources() {
     try {
       _controller?.dispose();
-      debugPrint('🎧 AudioContainer: 资源清理完成, msgId: $_msgId');
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 资源清理异常: $e');
+      debugPrint('_cleanupResources e: $e');
     }
   }
 
@@ -89,19 +82,19 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
       child: ColorFiltered(
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         child: Lottie.asset(
-          'assets/json/voice_play.json',
+          'assets/images/Audio.json',
           controller: _controller,
           fit: BoxFit.fill,
           onLoaded: (composition) {
             // 只设置动画持续时间，不控制播放
             _controller?.duration = composition.duration;
-            debugPrint(
-              '🎧 AudioContainer: Lottie动画加载完成, 动画时长: ${composition.duration}',
-            );
           },
           errorBuilder: (context, error, stackTrace) {
-            debugPrint('⚠️ AudioContainer: Lottie加载失败: $error');
-            return const Icon(Icons.audiotrack, color: Colors.white, size: 24);
+            return const Icon(
+              Icons.audiotrack,
+              color: Colors.deepOrange,
+              size: 24,
+            );
           },
         ),
       ),
@@ -112,22 +105,35 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
   Future<void> _startAudioPlay() async {
     try {
       logEvent('c_news_voice');
-
-      debugPrint('🎧 AudioContainer: 开始播放音频, msgId: $_msgId');
       // // https://static.amorai.net/2.mp3
       await _audioManager.startPlay(_msgId, widget.msg.audioUrl);
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 播放音频异常: $e');
+      debugPrint('_startAudioPlay e: $e');
     }
   }
 
   /// 停止音频播放 - 使用全局管理器
   Future<void> _stopAudioPlay() async {
     try {
-      debugPrint('🎧 AudioContainer: 停止音频播放, msgId: $_msgId');
       await _audioManager.stopPlay(_msgId);
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 停止音频播放异常: $e');
+      debugPrint('_stopAudioPlay e: $e');
+    }
+  }
+
+  Future<void> _pausedPlay() async {
+    try {
+      await _audioManager.pausedPlay(_msgId);
+    } catch (e) {
+      debugPrint('_stopAudioPlay e: $e');
+    }
+  }
+
+  Future<void> _resumePlay() async {
+    try {
+      await _audioManager.resumePlay(_msgId);
+    } catch (e) {
+      debugPrint('_stopAudioPlay e: $e');
     }
   }
 
@@ -136,7 +142,6 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
     if (!mounted) return;
 
     try {
-      debugPrint('🎧 AudioContainer: 开始循环播放动画, msgId: $_msgId');
       // 确保动画控制器有持续时间，并将其作为周期参数传入
       if (_controller?.duration != null) {
         _controller?.repeat(period: _controller!.duration);
@@ -147,19 +152,14 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
         _controller?.repeat(period: defaultDuration);
       }
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 开始播放动画异常: $e');
+      debugPrint('_startPlayAnimation e: $e');
     }
   }
 
   /// 停止播放动画 - 优化版本
   void _stopPlayAnimation() {
-    try {
-      if (mounted) {
-        _controller?.stop();
-        debugPrint('🎧 AudioContainer: 动画已停止, msgId: $_msgId');
-      }
-    } catch (e) {
-      debugPrint('⚠️ AudioContainer: 停止动画异常: $e');
+    if (mounted) {
+      _controller?.stop();
     }
   }
 
@@ -183,35 +183,52 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
 
     return GestureDetector(
       onTap: () => _handleAudioTap(isRead),
-      child: Stack(
-        alignment: Alignment.topLeft,
-        children: [
-          _buildAudioContainer(isShowTrial, isRead),
-          _buildStatusTag(),
-        ],
-      ),
+      child: _buildAudioContainer(isShowTrial, isRead),
     );
   }
 
   /// 构建音频容器
   Widget _buildAudioContainer(bool isShowTrial, bool isRead) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 200,
-            height: 62,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0x80000000),
-              borderRadius: BorderRadius.circular(16),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 300,
+          height: 38,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF55CFDA), Color(0x0055CFDA)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
             ),
-            child: _buildAudioUI(),
+            borderRadius: BorderRadius.circular(16),
           ),
-        ],
-      ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: const Color(0x80000000),
+            ),
+            child: Row(
+              spacing: 8,
+              children: [
+                _buildStatusIcon(),
+                const Text(
+                  'Moans for you',
+                  style: TextStyle(
+                    color: Color(0xFF55CFDA),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Expanded(
+                  child: _buildAudioUI(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -221,13 +238,8 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
       final currentAudioState = _audioManager.getAudioState(_msgId);
       final currentState = currentAudioState?.state ?? AudioPlayState.stopped;
 
-      debugPrint(
-        '🎧 AudioContainer: 音频点击, msgId: $_msgId, 当前状态: $currentState',
-      );
-
       // VIP权限检查
       if (!DI.login.vipStatus.value) {
-        debugPrint('🔒 AudioContainer: 非VIP用户，跳转到VIP页面');
         logEvent('c_news_lockaudio');
         NTO.pushVip(VipSF.lockaudio);
         return;
@@ -236,45 +248,23 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
       // 根据当前状态决定操作
       switch (currentState) {
         case AudioPlayState.stopped:
-        case AudioPlayState.paused:
         case AudioPlayState.error:
           _startAudioPlay();
           break;
+
         case AudioPlayState.playing:
+          _pausedPlay();
+
+        case AudioPlayState.paused:
+          _resumePlay();
+
         case AudioPlayState.downloading:
           _stopAudioPlay();
           break;
       }
     } catch (e) {
-      debugPrint('⚠️ AudioContainer: 处理点击事件异常: $e');
+      debugPrint('_handleAudioTap e: $e');
     }
-  }
-
-  /// 构建状态标签 - 优化版本
-  Widget _buildStatusTag() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: const Color(0xFF85FFCD),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildStatusIcon(),
-          const SizedBox(width: 8),
-          Text(
-            'Moans For You',
-            style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   /// 构建状态图标 - 使用全局管理器状态
@@ -291,7 +281,6 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
           _audioManager.currentPlayingAudio.value?.msgId == _msgId) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
-            debugPrint('🎧 AudioContainer: 触发播放动画, msgId: $_msgId');
             _startPlayAnimation();
           }
         });
@@ -309,10 +298,12 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
           return _buildLoadingIcon();
         case AudioPlayState.playing:
           return _buildPlayingIcon();
+        case AudioPlayState.paused:
+          return _buildPausedIcon();
         case AudioPlayState.error:
           return _buildErrorIcon();
         default:
-          return _buildPausedIcon();
+          return _buildNormorIcon();
       }
     });
   }
@@ -320,24 +311,26 @@ class _VAudioState extends State<VAudio> with SingleTickerProviderStateMixin {
   /// 构建加载图标
   Widget _buildLoadingIcon() {
     return const SizedBox(
-      width: 20,
-      height: 20,
+      width: 16,
+      height: 16,
       child: CircularProgressIndicator(
-        color: Colors.blue,
+        color: Color(0xFF55CFDA),
         strokeWidth: 2,
         padding: EdgeInsets.all(2),
       ),
     );
   }
 
-  /// 构建播放图标
   Widget _buildPlayingIcon() {
-    return Image.asset('assets/images/voice-play.png', width: 20);
+    return Image.asset('assets/images/play@3x.png', width: 16);
   }
 
-  /// 构建暂停图标
   Widget _buildPausedIcon() {
-    return Image.asset('assets/images/voice-pause.png', width: 20);
+    return Image.asset('assets/images/pause@3x.png', width: 16);
+  }
+
+  Widget _buildNormorIcon() {
+    return Image.asset('assets/images/normal@3x.png', width: 16);
   }
 
   /// 构建错误图标

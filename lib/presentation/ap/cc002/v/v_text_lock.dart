@@ -28,8 +28,7 @@ class VTextLock extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.topStart,
           children: [
-            Positioned(top: 8, right: 0, bottom: 0, child: _buildContainer()),
-            _buildLabel(),
+            _buildContainer(),
             _buildLock(),
           ],
         ),
@@ -41,7 +40,7 @@ class VTextLock extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       alignment: Alignment.center,
-      color: const Color(0x801C1C1C),
+      color: const Color(0x80000000),
       child: Text(
         textContent,
         overflow: TextOverflow.ellipsis,
@@ -52,9 +51,13 @@ class VTextLock extends StatelessWidget {
         ),
       ),
     ).blurred(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
+        bottomRight: Radius.circular(16),
+      ),
       colorOpacity: 0.9,
-      blur: 100,
+      blur: 3,
       blurColor: const Color(0x1A1C1C1C),
     );
   }
@@ -62,32 +65,17 @@ class VTextLock extends StatelessWidget {
   Widget _buildLock() {
     return Column(
       children: [
-        const SizedBox(height: 26),
-        Row(
+        _buildLabel(),
+        const SizedBox(height: 10),
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "*****Tap to see the messages *****",
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 10,
+              "** Tap to see the messages **",
+              style: TextStyle(
+                color: Color(0xFFDF78B1),
+                fontSize: 12,
                 fontWeight: FontWeight.w400,
-              ),
-            ),
-            const SizedBox(width: 4),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFC584),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Text(
-                'message',
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                ),
               ),
             ),
           ],
@@ -97,24 +85,20 @@ class VTextLock extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 32,
+              height: 28,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: const Color(0xFF00AB8E),
+                borderRadius: BorderRadius.circular(10),
+                color: const Color(0x80DF78B1),
               ),
-              child: Row(
-                children: [
-                  Image.asset('assets/images/unlock_icon.png', width: 22),
-                  Text(
-                    'Unlock',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
+              alignment: Alignment.center,
+              child: const Text(
+                'Unlock',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ],
@@ -125,27 +109,35 @@ class VTextLock extends StatelessWidget {
   }
 
   Widget _buildLabel() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          height: 20,
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: const Color(0xFFFFC584),
-          ),
-          child: Text(
+    return Container(
+      height: 28,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      alignment: Alignment.centerLeft,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        gradient: LinearGradient(
+          colors: [Color(0x29DF78B1), Color(0x00DF78B1)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+      ),
+      child: Row(
+        children: [
+          const Text(
             'Unlock Text Reply',
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 10,
+            style: TextStyle(
+              color: Color(0xFFDF78B1),
+              fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
           ),
-        ),
-      ],
+          const Spacer(),
+          Image.asset(
+            'assets/images/locktext@3x.png',
+            width: 16,
+          ),
+        ],
+      ),
     );
   }
 }

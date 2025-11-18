@@ -17,3 +17,10 @@ samples, guidance on mobile development, and a full API reference.
 
 dart run build_runner clean
 dart run build_runner build
+
+1. undress 
+2. 打电话
+3. A面 login reward
+4. ablum 相册
+5. 消息: image video audio
+6. 

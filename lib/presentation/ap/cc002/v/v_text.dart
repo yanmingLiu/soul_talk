@@ -24,8 +24,10 @@ class VText extends StatefulWidget {
 
 class _VTextState extends State<VText> {
   static const Color _bgColor = Color(0x80000000);
-  static const BorderRadius _borderRadius = BorderRadius.all(
-    Radius.circular(16.0),
+  static const _borderRadius = BorderRadiusDirectional.only(
+    topStart: Radius.circular(16.0),
+    topEnd: Radius.circular(16.0),
+    bottomEnd: Radius.circular(16.0),
   );
 
   late final MsgBloc _ctr;
@@ -103,7 +105,7 @@ class _VTextState extends State<VText> {
       final isVip = _getVipStatusSafely();
       final isLocked = _isMessageLocked();
 
-      if (!isVip && isLocked) {
+      if (!isVip && !isLocked) {
         return VTextLock(textContent: widget.msg.answer ?? '');
       }
 
@@ -119,65 +121,13 @@ class _VTextState extends State<VText> {
     return widget.msg.textLock == MsgLock.private.value;
   }
 
-  // /// 翻译显示逻辑配置
-  // (bool, bool, String) _calculateTranslationState(Message msg) {
-  //   final hasTranslation =
-  //       msg.translateAnswer != null && msg.translateAnswer!.isNotEmpty;
-  //   final isAutoTranslateEnabled = DI.login.currentUser?.autoTranslate == true;
-  //   final isEnglishLocale = Get.deviceLocale?.languageCode == 'en';
-  //   final userRequestedTranslation = msg.showTranslate == true;
-
-  //   // 错误隔离设计：安全获取原始内容
-  //   final originalContent = msg.answer ?? '';
-  //   final translatedContent = msg.translateAnswer ?? '';
-
-  //   bool shouldShowTranslate = false;
-  //   bool shouldShowTransBtn = true;
-  //   String displayContent = originalContent;
-
-  //   if (isAutoTranslateEnabled) {
-  //     // 自动翻译模式
-  //     shouldShowTransBtn = false;
-  //     if (hasTranslation) {
-  //       shouldShowTranslate = true;
-  //       displayContent = translatedContent;
-  //     } else {
-  //       shouldShowTranslate = false;
-  //       displayContent = originalContent;
-  //     }
-  //   } else {
-  //     // 手动翻译模式
-  //     if (isEnglishLocale) {
-  //       // 英语环境下不显示翻译按钮
-  //       shouldShowTransBtn = false;
-  //     }
-
-  //     if (userRequestedTranslation && hasTranslation) {
-  //       shouldShowTranslate = true;
-  //       displayContent = translatedContent;
-  //     } else {
-  //       shouldShowTranslate = false;
-  //       displayContent = originalContent;
-  //     }
-  //   }
-
-  //   return (shouldShowTranslate, shouldShowTransBtn, displayContent);
-  // }
-
   Widget _buildText(BuildContext context) {
     final msg = widget.msg;
 
-    // // 使用优化后的翻译状态计算逻辑
-    // final (showTranslate, showTransBtn, content) = _calculateTranslationState(
-    //   msg,
-    // );
-
-    final textContent =
-        msg.translateAnswer ??
+    final textContent = msg.translateAnswer ??
         msg.answer ??
         "Hmm… we lost connection for a bit. Please try again!";
 
-    // 性能优化：预计算屏幕宽度约束
     final maxWidth = MediaQuery.of(context).size.width * 0.8;
 
     return Column(
@@ -268,9 +218,6 @@ class _VTextState extends State<VText> {
 
         // 举报按钮（非大屏模式下显示）
         if (!_isBig) _buildReportButton(),
-
-        // 翻译按钮
-        // if (showTransBtn) _buildTranslateButton(showTranslate),
       ],
     );
   }
@@ -294,33 +241,6 @@ class _VTextState extends State<VText> {
       child: Image.asset('assets/images/report@3x.png'),
     );
   }
-
-  /// 构建翻译按钮
-  // Widget _buildTranslateButton(bool showTranslate) {
-  //   return RepaintBoundary(
-  //     child: VButton(
-  //       onTap: () => _handleTranslateMessage(),
-  //       width: 24.0,
-  //       height: 24.0,
-
-  //       child: Image.asset(
-  //         showTranslate
-  //             ? 'assets/images/transed.png'
-  //             : 'assets/images/trans.png',
-  //         width: 24.0,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  /// 处理翻译消息事件
-  // void _handleTranslateMessage() {
-  //   try {
-  //     _ctr.translateMsg(widget.msg);
-  //   } catch (e) {
-  //     debugPrint('[TextContainer] 翻译消息失败: $e');
-  //   }
-  // }
 
   /// 构建消息操作按钮组
   List<Widget> _buildMsgActions(Message msg) {

@@ -124,9 +124,20 @@ class HomeBloc extends GetxController {
     }
   }
 
-  void jumpForA() {
-    recordInstallTime();
-    DI.storage.setRestart(true);
+  void jumpForA() async {
+    final isFirstLaunch = DI.storage.isRestart == false;
+
+    if (isFirstLaunch) {
+      recordInstallTime();
+      DI.storage.setRestart(true);
+    } else {
+      final isShowDailyReward = await shouldShowDailyReward();
+      if (isShowDailyReward) {
+        // 更新奖励时间戳
+        await DI.storage.setInstallTime(DateTime.now().millisecondsSinceEpoch);
+        VDialog.showLoginReward();
+      }
+    }
   }
 
   void jumpForB() async {
@@ -179,8 +190,7 @@ class HomeBloc extends GetxController {
     final now = DateTime.now();
 
     // 安装后第一天不弹窗，只有从第二天开始才弹窗
-    final isAfterSecondDay =
-        now.year > installTime.year ||
+    final isAfterSecondDay = now.year > installTime.year ||
         (now.year == installTime.year && now.month > installTime.month) ||
         (now.year == installTime.year &&
             now.month == installTime.month &&

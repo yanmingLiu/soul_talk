@@ -36,16 +36,15 @@
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Access to your local network is needed to enable features like device-to-device communication and smooth connectivity within your local network.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone so you can speak naturally during voice interactions with AI, ensuring smooth communication.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to your photo library so you can upload images to customize your chat background.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech recognition access is required to convert your voice to text, helping AI understand your needs accurately.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>With your permission, we may track your preferences to offer more relevant recommendations—like suggesting chat partners who share your interests—and personalized content tailored to you.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>We need access to your microphone so you can speak naturally during voice interactions with AI, ensuring smooth communication.</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Speech recognition access is required to convert your voice to text, helping AI understand your needs accurately.</string>
-    
-    <key>SKAdNetworkItems</key>
+	<key>SKAdNetworkItems</key>
 	<array>
 		<true/>
 		<dict>
@@ -249,6 +248,27 @@
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
 	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneClassName</key>
+					<string>UIWindowScene</string>
+					<key>UISceneConfigurationName</key>
+					<string>flutter</string>
+					<key>UISceneDelegateClassName</key>
+					<string>FlutterSceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -263,5 +283,26 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>UIApplicationSceneManifest</key>
+     <dict>
+      <key>UIApplicationSupportsMultipleScenes</key>
+      <false/>
+      <key>UISceneConfigurations</key>
+      <dict>
+      <key>UIWindowSceneSessionRoleApplication</key>
+        <array>
+          <dict>
+            <key>UISceneClassName</key>
+            <string>UIWindowScene</string>
+            <key>UISceneDelegateClassName</key>
+            <string>FlutterSceneDelegate</string>
+            <key>UISceneConfigurationName</key>
+            <string>flutter</string>
+            <key>UISceneStoryboardFile</key>
+            <string>Main</string>
+          </dict>
+        </array>
+       </dict>
+     </dict>
 </dict>
 </plist>

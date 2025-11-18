@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:soul_talk/core/constants/api_values.dart';
 import 'package:soul_talk/domain/entities/gen_upload.dart';
+import 'package:soul_talk/presentation/v000/toast.dart';
 
 import '../../domain/entities/base_model.dart';
 import '../../domain/entities/gen_histroy.dart';
@@ -102,9 +103,16 @@ class GenApi {
       const path = ApiConstants.upImageForAiImage;
 
       var response = await api.uploadFile(path, data: formData, options: ops);
-      final json = response.data['data'];
-      final data = GenUpload.fromJson(json);
-      return data;
+
+      final base = BaseModel.fromJson(
+        response.data,
+        (json) => GenUpload.fromJson(json),
+      );
+      if (base.code != 200) {
+        Toast.toast(base.message ?? '');
+      }
+
+      return base.data;
     } catch (e) {
       return null;
     }
@@ -188,9 +196,14 @@ class GenApi {
       const path = ApiConstants.upImageForAiVideo;
 
       final response = await api.uploadFile(path, data: formData, options: ops);
-      final json = response.data['data'];
-      final data = GenUpload.fromJson(json);
-      return data;
+      final base = BaseModel.fromJson(
+        response.data,
+        (json) => GenUpload.fromJson(json),
+      );
+      if (base.code != 200) {
+        Toast.toast(base.message ?? '');
+      }
+      return base.data;
     } catch (e) {
       return null;
     }

@@ -6,9 +6,11 @@ import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/domain/entities/sku.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
+import 'package:soul_talk/presentation/ap/fv005/v/v_tag.dart';
 import 'package:soul_talk/presentation/ap/fv005/v/v_team.dart';
 import 'package:soul_talk/presentation/v000/loading.dart';
 import 'package:soul_talk/presentation/v000/nav_back_btn.dart';
+import 'package:soul_talk/presentation/v000/v_bottom_btn.dart';
 import 'package:soul_talk/presentation/v000/v_button.dart';
 import 'package:soul_talk/presentation/v000/v_sheet.dart';
 import 'package:soul_talk/utils/info_utils.dart';
@@ -103,8 +105,6 @@ class _ConsPageState extends State<ConsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final price = _chooseProduct?.productDetails?.price ?? '_';
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -141,48 +141,7 @@ class _ConsPageState extends State<ConsPage> {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
-                          height: 100,
-                          padding: const EdgeInsets.symmetric(horizontal: 28),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFEF1F9),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Obx(() {
-                                      return Text(
-                                        DI.login.gemBalance.value.toString(),
-                                        style: const TextStyle(
-                                          color: Color(0xFFDF78B1),
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      );
-                                    }),
-                                    const Text(
-                                      'Remaining gems',
-                                      style: TextStyle(
-                                        color: Color(0xFF8C8C8C),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Image.asset(
-                                'assets/images/diamond22@3x.png',
-                                width: 70,
-                              ),
-                            ],
-                          ),
-                        ),
+                        _buildTop(),
                         const SizedBox(height: 24),
                         Text(
                           DI.storage.isBest
@@ -200,64 +159,94 @@ class _ConsPageState extends State<ConsPage> {
                     ),
                     const SizedBox(height: 24),
                     _buildList(),
+                    const SizedBox(height: 12),
                   ],
                 ),
               ),
             ),
-            Column(
-              spacing: 20,
+            _buildBottom(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Column _buildBottom() {
+    final price = _chooseProduct?.productDetails?.price ?? '_';
+
+    return Column(
+      spacing: 20,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Text(
+            'Please note that a one-time purchase will result in a one-time charge of $price to you.',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Color(0xFF727374),
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        VBottomBtn(
+          onTap: _buy,
+          title: 'Continue',
+          children: const Column(
+            children: [
+              SizedBox(height: 12),
+              PrivacyView(
+                type: PolicyBottomType.gems,
+                textColor: Color(0x40000000),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Container _buildTop() {
+    return Container(
+      height: 100,
+      padding: const EdgeInsets.symmetric(horizontal: 28),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFEF1F9),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Text(
-                    'Please note that a one-time purchase will result in a one-time charge of $price to you.',
-                    textAlign: TextAlign.center,
+                Obx(() {
+                  return Text(
+                    DI.login.gemBalance.value.toString(),
                     style: const TextStyle(
-                      color: Color(0xFF727374),
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
+                      color: Color(0xFFDF78B1),
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
                     ),
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 8),
-                      VButton(
-                        height: 48,
-                        color: const Color(0xFF55CFDA),
-                        onTap: _buy,
-                        margin: const EdgeInsets.symmetric(horizontal: 28),
-                        child: Center(
-                          child: Text(
-                            DI.storage.isBest ? 'Continue.' : 'Buy',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      const PrivacyView(
-                        type: PolicyBottomType.gems,
-                        textColor: Color(0x40000000),
-                      ),
-                    ],
+                  );
+                }),
+                const Text(
+                  'Remaining gems',
+                  style: TextStyle(
+                    color: Color(0xFF8C8C8C),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          Image.asset(
+            'assets/images/diamond22@3x.png',
+            width: 70,
+          ),
+        ],
       ),
     );
   }
@@ -297,7 +286,6 @@ class _ConsPageState extends State<ConsPage> {
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         final item = list[index];
-        final bestChoice = item.tag == 1;
         final isSelected = _chooseProduct?.sku == item.sku;
 
         // 根据产品信息计算折扣百分比，从90%到0%以20%为步长递减
@@ -307,6 +295,8 @@ class _ConsPageState extends State<ConsPage> {
         String discount = getDiscount(discountPercent);
         String numericPart = item.number.toString();
         String price = item.productDetails?.price ?? '-';
+
+        final tag = VTagExt.tag(item.tag);
 
         return InkWell(
           splashColor: Colors.transparent,
@@ -367,31 +357,7 @@ class _ConsPageState extends State<ConsPage> {
                   ],
                 ),
               ),
-              if (bestChoice)
-                Row(
-                  children: [
-                    Container(
-                      height: 20,
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF16C576), Color(0xFF4EAB7A)],
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Best Value',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              if (tag != null) tag,
             ],
           ),
         );

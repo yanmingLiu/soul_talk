@@ -40,9 +40,9 @@ class VCBottom extends StatelessWidget {
                       TextSpan(
                         text: isVideo ? '$createVideo' : '$createImg',
                         style: const TextStyle(
-                          color: Color(0xFFFF8800),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                       const WidgetSpan(child: SizedBox(width: 4)),

@@ -20,15 +20,15 @@ class VcPrompt extends StatelessWidget {
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: const Text(
-            "Custom Prompt:",
+            "Custom Prompt",
             style: TextStyle(
-              color: Color(0xFF333333),
+              color: Color(0xFF595959),
               fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
         InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),

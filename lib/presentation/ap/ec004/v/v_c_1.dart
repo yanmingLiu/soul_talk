@@ -97,10 +97,9 @@ class _VC1State extends State<VC1> {
 
     bool hasRole = widget.role != null;
 
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
       children: [
-        Positioned.fill(
+        Expanded(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(0),
             child: Column(
@@ -156,7 +155,6 @@ class _VC1State extends State<VC1> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 120),
               ],
             ),
           ),
@@ -183,8 +181,8 @@ class _VC1State extends State<VC1> {
               const SizedBox(height: 8),
               VButton(
                 onTap: widget.onTapGenRole,
-                color: Colors.white,
-                margin: const EdgeInsets.symmetric(horizontal: 50),
+                color: const Color(0xFFF0F0F0),
+                margin: const EdgeInsets.symmetric(horizontal: 30),
                 child: const Center(
                   child: Text(
                     "Undress the character",
@@ -197,7 +195,7 @@ class _VC1State extends State<VC1> {
                 ),
               ),
             ],
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
           ],
         ),
       ],

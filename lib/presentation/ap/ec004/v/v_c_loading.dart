@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class VCLoading extends StatelessWidget {
   const VCLoading({super.key});
@@ -14,39 +13,51 @@ class VCLoading extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 120),
-          Text(
-            "Generating your digital masterpiece...",
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.8),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+          Container(
+            width: 64,
+            height: 64,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: const Color(0x40FFFFFF),
+              borderRadius: BorderRadius.circular(20),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "Great art consumes computational power and time. Every second you wait is transforming into pixels of wonder.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.6),
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                backgroundColor: Color(0x80FFFFFF),
+                strokeWidth: 3,
+              ),
             ),
-          ),
-          const SizedBox(height: 40),
-          LoadingAnimationWidget.hexagonDots(
-            color: const Color(0xFF00AB8E),
-            size: 40,
           ),
           const SizedBox(height: 14),
           const Text(
-            "AI Generating...",
+            "AI Crafting...",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 24),
+          const Text(
+            "Creating your digital masterpiece...",
+            style: TextStyle(
+              color: Color(0xBFffffff),
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            "Great art takes computational power and time — every moment you wait turns into pixels that spark wonder.",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xBFffffff),
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 40),
         ],
       ),
     );

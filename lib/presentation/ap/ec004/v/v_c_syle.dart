@@ -20,38 +20,18 @@ class VCStyle extends StatelessWidget {
       return const SizedBox();
     }
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        spacing: 4,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Styles:",
-            style: TextStyle(
-              color: Color(0xFF595959),
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(0),
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: list.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: 79.0 / 32.0,
-            ),
-            itemBuilder: (_, index) {
-              final item = list[index];
-              final isSelected = item.style == selectedStyel?.style;
-              return _buildItem(item, isSelected);
-            },
-          ),
-        ],
+    return SizedBox(
+      height: 84,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        itemCount: list.length,
+        separatorBuilder: (context, index) => const SizedBox(width: 8),
+        itemBuilder: (_, index) {
+          final item = list[index];
+          final isSelected = item.style == selectedStyel?.style;
+          return _buildItem(item, isSelected);
+        },
       ),
     );
   }
@@ -61,30 +41,41 @@ class VCStyle extends StatelessWidget {
       onTap: () {
         onChooseed(item);
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF00AB8E) : Colors.white,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
+      child: SizedBox(
+        height: 84,
+        width: 52,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           spacing: 4,
           children: [
-            VImage(
-              url: item.icon ?? '',
-              width: 14,
-              color: isSelected ? Colors.white : const Color(0xFF666666),
-            ),
-            Expanded(
-              child: Text(
-                item.name ?? '',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: isSelected ? Colors.white : const Color(0xFF666666),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500,
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: BoxBorder.all(
+                  width: 2,
+                  color: isSelected ? const Color(0xFF55CFDA) : Colors.white,
                 ),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Center(
+                child: VImage(
+                  url: item.icon ?? '',
+                  width: 14,
+                  color: const Color(0xFF595959),
+                ),
+              ),
+            ),
+            Text(
+              item.name ?? '',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Color(0xFF595959),
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],

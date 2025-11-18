@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
-import 'package:soul_talk/presentation/v000/v_button.dart';
+import 'package:soul_talk/presentation/ap/ec004/v/v_c_close_btn.dart';
+import 'package:soul_talk/presentation/v000/v_bottom_btn.dart';
 import 'package:soul_talk/presentation/v000/v_image.dart';
 import 'package:soul_talk/router/nav_to.dart';
 import 'package:video_player/video_player.dart';
@@ -100,7 +101,7 @@ class _VC3State extends State<VC3> {
                                       strokeWidth: 2,
                                       backgroundColor: Colors.white,
                                       valueColor: AlwaysStoppedAnimation<Color>(
-                                        Color(0xFFFFDCA4),
+                                        Color(0xFF55CFDA),
                                       ),
                                     ),
                                   ),
@@ -115,12 +116,11 @@ class _VC3State extends State<VC3> {
                       },
                     ),
                   ),
-                  IconButton(
-                    onPressed: widget.onDeleteImage,
-                    icon: const Icon(
-                      Icons.cancel,
-                      color: Colors.black,
-                      size: 32,
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: VCCloseBtn(
+                      onTap: widget.onDeleteImage,
                     ),
                   ),
                 ],
@@ -129,22 +129,7 @@ class _VC3State extends State<VC3> {
           ),
         ),
         const Spacer(),
-        VButton(
-          onTap: widget.onTapGen,
-          color: Colors.black,
-          margin: const EdgeInsets.symmetric(horizontal: 50),
-          child: const Center(
-            child: Text(
-              "Generate another one",
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF85FFCD),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
+        VBottomBtn(onTap: widget.onTapGen, title: 'Generate another one'),
       ],
     );
   }

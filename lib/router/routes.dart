@@ -7,6 +7,8 @@ import 'package:soul_talk/presentation/ap/cc002/p/domino_edit_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/domino_page.dart';
 import 'package:soul_talk/presentation/ap/cc002/p/msg_page.dart';
 import 'package:soul_talk/presentation/ap/dm003/a_z_page.dart';
+import 'package:soul_talk/presentation/ap/ec004/p/c_role_page.dart';
+import 'package:soul_talk/presentation/ap/ec004/p/c_sku_page.dart';
 import 'package:soul_talk/presentation/ap/p006/p/p006_guide_page.dart';
 import 'package:soul_talk/presentation/ap/p006/p/p006_page.dart';
 
@@ -34,8 +36,7 @@ class Routes {
     GetPage(name: RouteConstants.profile, page: () => const ChaterCenterPage()),
     GetPage(name: RouteConstants.mask, page: () => const DominoPage()),
     GetPage(name: RouteConstants.maskEdit, page: () => const DominoEditPasge()),
-
-    // GetPage(name: RouteConstants.makeRole, page: () => const MakeRoleScreen()),
+    GetPage(name: RouteConstants.makeRole, page: () => const CRolePage()),
 
     // 特殊过渡效果路由
     GetPage(
@@ -78,7 +79,7 @@ class Routes {
       preventDuplicates: true,
       fullscreenDialog: true,
     ),
-    
+
     GetPage(
       name: RouteConstants.phoneGuide,
       page: () => const P006GuidePage(),
@@ -88,13 +89,6 @@ class Routes {
       fullscreenDialog: true,
     ),
 
-    // GetPage(
-    //   name: RouteConstants.countSku,
-    //   page: () => const AiCountSkuPage(),
-    //   transition: Transition.downToUp,
-    //   popGesture: false,
-    //   preventDuplicates: true,
-    //   fullscreenDialog: true,
-    // ),
+    GetPage(name: RouteConstants.countSku, page: () => const CSkuPage()),
   ];
 }

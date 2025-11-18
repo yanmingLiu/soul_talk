@@ -89,7 +89,7 @@ class _InputBarState extends State<InputBar> {
         textEditingController.text = list.randomOrNull ?? '';
         onSend();
       } else if (id == 1) {
-        // AppRoutes.pushUndr(ctr.role);
+        NTO.pushMakeRole(ctr.role);
       } else if (id == 2) {
         // showGift();
       } else if (id == 3) {
@@ -214,7 +214,6 @@ class _InputBarState extends State<InputBar> {
                     tags: ctr.inputTags.toList(),
                     onTap: onTapTag,
                   ),
-
             SizedBox(height: bottom > 0 ? bottom : 8),
           ],
         ),

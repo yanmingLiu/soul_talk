@@ -56,14 +56,13 @@ class _VC2State extends State<VC2> {
     final imgW = MediaQuery.sizeOf(context).width - 100;
     final imgH = imgW / 3 * 4;
 
-    bool hasCustomPrompt = customPrompt != null && customPrompt!.isNotEmpty;
     var avatar = widget.role?.avatar;
 
     var imagePath = widget.imagePath;
 
-    return Stack(
+    return Column(
       children: [
-        Positioned.fill(
+        Expanded(
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -118,19 +117,14 @@ class _VC2State extends State<VC2> {
                   isVideo: widget.isVideo,
                   customPrompt: customPrompt,
                 ),
-                const SizedBox(height: 140),
+                const SizedBox(height: 16),
               ],
             ),
           ),
         ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: VCBottom(
-            onTap: widget.onTapGen,
-            isVideo: widget.isVideo,
-          ),
+        VCBottom(
+          onTap: widget.onTapGen,
+          isVideo: widget.isVideo,
         ),
       ],
     );
@@ -154,11 +148,11 @@ class _VC2State extends State<VC2> {
           spacing: 4,
           children: [
             Text(
-              "Custom Prompt:",
+              "Custom Prompt",
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
+                color: Color(0xFF434343),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],

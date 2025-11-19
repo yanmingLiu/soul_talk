@@ -1,3 +1,4 @@
+import 'package:adjust_sdk/adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
@@ -8,6 +9,7 @@ import 'package:soul_talk/presentation/ap/ec004/p/c_tab_page.dart';
 
 import '../../../app/di_depency.dart';
 import '../../../core/analytics/analytics_service.dart';
+import '../../../utils/log_util.dart';
 import '../../v000/k_a_w.dart';
 
 enum MainTabBarIndex { home, ai, chat, me }
@@ -24,21 +26,6 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> with WidgetsBindingObserver {
   late List<Widget> pages = <Widget>[];
   List<MainTabBarIndex> indexs = [];
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    switch (state) {
-      case AppLifecycleState.paused:
-        DI.audio.stopAll();
-        break;
-      case AppLifecycleState.resumed:
-        Analytics().logSessionEvent();
-        break;
-      default:
-        break;
-    }
-  }
 
   @override
   void initState() {
@@ -67,6 +54,28 @@ class _RootPageState extends State<RootPage> with WidgetsBindingObserver {
     // 移除监听器
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    log.d('AppLifecycleState: $state');
+    switch (state) {
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.resumed:
+        Adjust.onResume();
+        Analytics().logSessionEvent();
+
+        break;
+      case AppLifecycleState.paused:
+        Adjust.onPause();
+        DI.audio.stopAll();
+        break;
+      case AppLifecycleState.detached:
+        break;
+      default:
+        break;
+    }
   }
 
   void _onTapItem(MainTabBarIndex index) {

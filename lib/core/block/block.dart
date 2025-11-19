@@ -1,33 +1,47 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/core/config/evn.dart';
 import 'package:soul_talk/core/constants/vs.dart';
 import 'package:soul_talk/utils/info_utils.dart';
 
 import '../../app/di_depency.dart';
 import '../../utils/log_util.dart';
+import 'other_block.dart';
 
 class Block {
   static Future request({bool isFisrt = false}) async {
-    final keyBird = DI.storage.isBest;
     if (ENV.isDebugMode) {
+      // 开发
       DI.storage.setIsBird(true);
-      return;
-    }
-    log.d('fetchSwitches isBig = $keyBird isFisrt = $isFisrt');
-    if (keyBird && isFisrt == false) {
-      return;
-    }
 
-    try {
-      if (Platform.isIOS) {
-        await _requestIos();
-      } else if (Platform.isAndroid) {
-        await _requestAnd();
+      // final isBest = DI.storage.isBest;
+      // final other = await OtherBlock.check();
+      // log.d('---block---: isBest = $isBest, other = $other');
+      // final res = isBest && other;
+      // await DI.storage.setIsBird(res);
+    } else {
+      /// 正式
+      try {
+        if (Platform.isIOS) {
+          await _requestIos();
+        } else if (Platform.isAndroid) {
+          await _requestAnd();
+        }
+      } catch (e) {
+        log.e('---block---Error in requesClk: $e');
       }
-    } catch (e) {
-      log.e('Error in requesClk: $e');
+
+      final isBest = DI.storage.isBest;
+      if (isBest) {
+        final other = await OtherBlock.check();
+        log.d('---block---: isBest = $isBest, other = $other');
+        final res = isBest && other;
+        await DI.storage.setIsBird(res);
+      } else {
+        logEvent("home_no", parameters: {"reason": "cloak"});
+      }
     }
   }
 
@@ -40,28 +54,28 @@ class Block {
       final idfv = await InfoUtils.getIdfv();
 
       final Map<String, dynamic> body = {
-        'melville': ENV.bundleId,
-        'picture': 'cypriot',
-        'whet': version,
-        'bergamot': deviceId,
-        'dominic': DateTime.now().millisecondsSinceEpoch,
-        'upsilon': idfa,
-        'franca': idfv,
+        'decadent': ENV.bundleId,
+        'gauze': 'vilify',
+        'quackery': version,
+        'nickname': deviceId,
+        'dell': DateTime.now().millisecondsSinceEpoch,
+        'porphyry': idfa,
+        'vandal': idfv,
       };
 
       final client = GetConnect(timeout: const Duration(seconds: 60));
 
       final response = await client.post(
-        'https://library.aimiappweb.com/bobble/penn/montreal',
+        'https://allegro.soultalkweb.com/sweaty/nih',
         body,
       );
       log.i('Response: $body\n ${response.body}');
 
-      var clkStatus = false;
-      if (response.isOk && response.body == 'gadfly') {
-        clkStatus = true;
+      var isBest = false;
+      if (response.isOk && response.body == 'caloric') {
+        isBest = true;
       }
-      await DI.storage.setBool(VS.keyClkStatus, clkStatus);
+      await DI.storage.setBool(VS.keyClkStatus, isBest);
     } catch (e) {
       log.e('Error in _requestIosClk: $e');
     }

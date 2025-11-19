@@ -95,6 +95,11 @@ dependencies:
   firebase_remote_config: ^6.1.0
   adjust_sdk: ^5.4.4
 
+  flutter_sim_check:
+    git:
+      url: https://github.com/yanmingLiu/sim_check
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

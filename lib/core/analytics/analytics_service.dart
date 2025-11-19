@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/core/config/evn.dart';
 import 'package:uuid/v4.dart';
@@ -38,9 +37,7 @@ class Analytics {
 
   final _adLogService = AnalyticsDB.instance;
   Timer? _uploadTimer;
-  Timer? _retryTimer;
   bool _isProcessingUpload = false;
-  // bool _isProcessingRetry = false;
 
   final connectTimeout = const Duration(seconds: 20);
   final receiveTimeout = const Duration(seconds: 20);
@@ -48,11 +45,10 @@ class Analytics {
 
   /// 异步启动定时器，避免阻塞应用启动
   void _startTimersAsync() {
-    // 使用微任务延迟执行，避免阻塞当前调用栈
-    // scheduleMicrotask(() {
-    //   _startUploadTimer();
-    //   // _startRetryTimer();
-    // });
+    // 延迟到下一个事件循环周期再启动定时器，避免占用微任务队列
+    Future(() {
+      _startUploadTimer();
+    });
   }
 
   void _startUploadTimer() {
@@ -65,20 +61,10 @@ class Analytics {
     });
   }
 
-  // void _startRetryTimer() {
-  //   _retryTimer?.cancel();
-  //   _retryTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
-  //     // 防止重复执行，避免并发问题
-  //     if (!_isProcessingRetry) {
-  //       _retryFailedLogsAsync();
-  //     }
-  //   });
-  // }
-
   /// 异步执行上传操作，避免阻塞定时器
   void _uploadPendingLogsAsync() {
-    // 使用微任务异步执行，避免阻塞定时器回调
-    scheduleMicrotask(() async {
+    // 放到事件队列执行，避免把耗时工作塞到微任务队列中
+    Future(() async {
       try {
         _isProcessingUpload = true;
         await _uploadPendingLogs();
@@ -90,27 +76,12 @@ class Analytics {
     });
   }
 
-  /// 异步执行重试操作，避免阻塞定时器
-  // void _retryFailedLogsAsync() {
-  //   // 使用微任务异步执行，避免阻塞定时器回调
-  //   scheduleMicrotask(() async {
-  //     try {
-  //       _isProcessingRetry = true;
-  //       await _retryFailedLogs();
-  //     } catch (e) {
-  //       log.e('[ad]log _retryFailedLogsAsync error: $e');
-  //     } finally {
-  //       _isProcessingRetry = false;
-  //     }
-  //   });
-  // }
-
   // TODO:-
   String get androidURL => ENV.isDebugMode ? "" : "";
 
   String get iosURL => ENV.isDebugMode
-      ? 'https://test-jetliner.aimiappweb.com/way/alfalfa'
-      : 'https://jetliner.aimiappweb.com/spector/vivian/cowslip';
+      ? 'https://test-tome.soultalkweb.com/seville/approve/stricken'
+      : 'https://tome.soultalkweb.com/abreact/spay/trend';
 
   late final Dio _dio = Dio(
     BaseOptions(
@@ -140,34 +111,33 @@ class Analytics {
       final osVersion = await InfoUtils.getOsVersion();
       final idfa = await InfoUtils.getIdfa();
       final snuggly = (Get.deviceLocale ?? const Locale('en_US')).toString();
-      final timeZone = InfoUtils.getBasicTimeZone();
-
-      if (Platform.isAndroid) {
-        final gaid = await InfoUtils.getGoogleAdId();
-        final androidId = await InfoUtils.getAndroidId();
-        return {"galloway": androidId, "beijing": gaid, "dahl": deviceId};
-      }
-
       final logId = uuid();
 
+      if (Platform.isAndroid) {
+        // final gaid = await InfoUtils.getGoogleAdId();
+        // final androidId = await InfoUtils.getAndroidId();
+        return {};
+      }
+
       return {
-        "munich": {
-          "picture": "cypriot",
-          "flop": osVersion,
-          "snuggly": snuggly,
-          "upsilon": idfa,
-          "require": "mcc",
-          "melville": 'com.aimi.chats',
-          "statute": logId,
+        "filet": {
+          "decadent": ENV.bundleId,
+          "quackery": version,
+          "goal": logId,
+          "acetate": deviceModel,
         },
-        "weak": {"chum": "", "devote": logId},
-        "spurious": {"bergamot": deviceId, "cortex": deviceModel},
-        "analogue": {
-          "franca": idfv,
-          "soma": timeZone,
-          "dominic": DateTime.now().millisecondsSinceEpoch,
-          "whet": version,
-          "bay": manufacturer,
+        "lion": {
+          "gauze": "vilify",
+          "nickname": deviceId,
+          "dell": DateTime.now().millisecondsSinceEpoch,
+          "arab": manufacturer,
+          "yourself": "Apple",
+          "honey": osVersion,
+          "frigga": "mcc",
+          "purchase": snuggly,
+          "porphyry": idfa,
+          "vandal": idfv,
+          "fermi": deviceId,
         },
       };
     } catch (e) {
@@ -181,23 +151,23 @@ class Analytics {
       var data = await _getCommonParams() ?? {};
 
       final build = await InfoUtils.buildNumber();
-      final isLimitAdTrackingEnabled =
-          await InfoUtils.isLimitAdTrackingEnabled();
+      final isLimitAdTrackingEnabled = await InfoUtils.isLimitAdTrackingEnabled();
       final agent = InfoUtils.userAgent();
 
       if (Platform.isAndroid) {
         // TODO:-
       } else {
-        data["killdeer"] = "job";
-        data["pellagra"] = "build/$build";
-        data["crone"] = agent;
-        data["dyeing"] = isLimitAdTrackingEnabled ? 'kate' : 'blanc';
-        data["wrathful"] = DateTime.now().millisecondsSinceEpoch;
-        data["atheist"] = DateTime.now().millisecondsSinceEpoch;
-        data["kosher"] = DateTime.now().millisecondsSinceEpoch;
-        data["fugue"] = DateTime.now().millisecondsSinceEpoch;
-        data["bell"] = DateTime.now().millisecondsSinceEpoch;
-        data["suicidal"] = DateTime.now().millisecondsSinceEpoch;
+        data["jason"] = {
+          "bistable": "build/$build",
+          "dey": agent,
+          "lady": isLimitAdTrackingEnabled ? 'skyline' : 'java',
+          "thorax": DateTime.now().millisecondsSinceEpoch,
+          "capuchin": DateTime.now().millisecondsSinceEpoch,
+          "pottery": DateTime.now().millisecondsSinceEpoch,
+          "quantico": DateTime.now().millisecondsSinceEpoch,
+          "forgiven": DateTime.now().millisecondsSinceEpoch,
+          "sadist": DateTime.now().millisecondsSinceEpoch,
+        };
       }
 
       final uniqueTimestamp = _adLogService.generateUniqueTimestamp();
@@ -227,7 +197,7 @@ class Analytics {
       if (Platform.isAndroid) {
         // TODO:-
       } else {
-        data['muff'] = {};
+        data['truffle'] = {};
       }
 
       final uniqueTimestamp = _adLogService.generateUniqueTimestamp();
@@ -262,10 +232,10 @@ class Analytics {
         //   data['$key@tung'] = value;
         // });
       } else if (Platform.isIOS) {
-        data['killdeer'] = name;
+        data['pewter'] = name;
         // 处理自定义参数
         params.forEach((key, value) {
-          data['cob|^$key'] = value;
+          data['plaid^$key'] = value;
         });
       }
 
@@ -296,37 +266,31 @@ class Analytics {
 
       if (logs.isEmpty) return;
 
-      final List<dynamic> dataList = logs
-          .map((log) => jsonDecode(log.data))
-          .toList();
+      final List<dynamic> dataList = logs.map((log) => jsonDecode(log.data)).toList();
 
       // 添加超时控制，避免网络请求卡住应用
-      final res = await _dio
-          .post('', data: dataList)
-          .timeout(
+      final res = await _dio.post('', data: dataList).timeout(
+        const Duration(seconds: 15),
+        onTimeout: () {
+          log.w('[ad]log Upload request timeout');
+          throw TimeoutException(
+            'Upload request timeout',
             const Duration(seconds: 15),
-            onTimeout: () {
-              log.w('[ad]log Upload request timeout');
-              throw TimeoutException(
-                'Upload request timeout',
-                const Duration(seconds: 15),
-              );
-            },
           );
+        },
+      );
 
       if (res.statusCode == 200) {
-        await _adLogService
-            .markLogsAsSuccess(logs)
-            .timeout(
+        await _adLogService.markLogsAsSuccess(logs).timeout(
+          const Duration(seconds: 5),
+          onTimeout: () {
+            log.w('[ad]log markLogsAsSuccess timeout');
+            throw TimeoutException(
+              'markLogsAsSuccess timeout',
               const Duration(seconds: 5),
-              onTimeout: () {
-                log.w('[ad]log markLogsAsSuccess timeout');
-                throw TimeoutException(
-                  'markLogsAsSuccess timeout',
-                  const Duration(seconds: 5),
-                );
-              },
             );
+          },
+        );
         log.d('[ad]log Batch upload success: ${logs.length} logs');
       } else {
         log.e('[ad]log Batch upload error: ${res.statusMessage}');
@@ -337,66 +301,10 @@ class Analytics {
     }
   }
 
-  // Future<void> _retryFailedLogs() async {
-  //   try {
-  //     final failedLogs = await _adLogService.getFailedLogs().timeout(
-  //       const Duration(seconds: 5),
-  //       onTimeout: () {
-  //         log.w('[ad]log getFailedLogs timeout, returning empty list');
-  //         return <AnalyticsData>[];
-  //       },
-  //     );
-
-  //     if (failedLogs.isEmpty) return;
-
-  //     final List<dynamic> dataList = failedLogs
-  //         .map((log) => jsonDecode(log.data))
-  //         .toList();
-
-  //     // 添加超时控制，避免网络请求卡住应用
-  //     final res = await _dio
-  //         .post('', data: dataList)
-  //         .timeout(
-  //           const Duration(seconds: 15),
-  //           onTimeout: () {
-  //             log.w('[ad]log Retry request timeout');
-  //             throw TimeoutException(
-  //               'Retry request timeout',
-  //               const Duration(seconds: 15),
-  //             );
-  //           },
-  //         );
-
-  //     if (res.statusCode == 200) {
-  //       await _adLogService
-  //           .markLogsAsSuccess(failedLogs)
-  //           .timeout(
-  //             const Duration(seconds: 5),
-  //             onTimeout: () {
-  //               log.w('[ad]log markLogsAsSuccess timeout in retry');
-  //               throw TimeoutException(
-  //                 'markLogsAsSuccess timeout',
-  //                 const Duration(seconds: 5),
-  //               );
-  //             },
-  //           );
-  //       log.d('[ad]log Retry success for: ${failedLogs.length}');
-  //     } else {
-  //       final ids = failedLogs.map((e) => e.id).toList();
-  //       log.e('[ad]log Retry failed for: $ids');
-  //     }
-  //   } catch (e) {
-  //     log.e('[ad]log Retry failed catch: $e');
-  //     // 重试失败不应影响应用正常运行，仅记录日志
-  //   }
-  // }
-
   /// 停止所有定时器，用于应用退出时清理资源
   void dispose() {
     _uploadTimer?.cancel();
-    _retryTimer?.cancel();
     _uploadTimer = null;
-    _retryTimer = null;
     log.d('[ad]log AppLogEvent disposed');
   }
 }
@@ -406,201 +314,7 @@ extension Clannish on Map<String, dynamic> {
     if (Platform.isAndroid) {
       return ''; //TODO:
     } else {
-      return this['munich']["statute"];
+      return this['filet']["goal"];
     }
-  }
-}
-
-class LogPage extends StatefulWidget {
-  const LogPage({super.key});
-
-  @override
-  State<LogPage> createState() => _LogPageState();
-}
-
-class _LogPageState extends State<LogPage> {
-  final _adLogService = AnalyticsDB.instance;
-  List<AnalyticsData> _logs = [];
-  bool _isLoading = true;
-  String _filterType = 'all'; // all, pending, failed
-
-  @override
-  void initState() {
-    super.initState();
-    _loadLogs();
-  }
-
-  Future<void> _loadLogs() async {
-    setState(() => _isLoading = true);
-    try {
-      final box = await _adLogService.box;
-      var logs = box.values.toList();
-
-      // Apply filter
-      switch (_filterType) {
-        case 'pending':
-          logs = logs.where((log) => !log.isUploaded).toList();
-          break;
-        case 'failed':
-          logs = logs.where((log) => !log.isSuccess).toList();
-          break;
-      }
-
-      // Sort by createTime descending
-      logs.sort((a, b) => b.createTime.compareTo(a.createTime));
-
-      setState(() {
-        _logs = logs;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() => _isLoading = false);
-      Get.snackbar('Error', 'Failed to load logs');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Event Logs'),
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              setState(() => _filterType = value);
-              _loadLogs();
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(value: 'all', child: Text('All Logs')),
-              const PopupMenuItem(
-                value: 'pending',
-                child: Text('Pending Logs'),
-              ),
-              const PopupMenuItem(value: 'failed', child: Text('Failed Logs')),
-            ],
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.filter_list),
-            ),
-          ),
-        ],
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _logs.isEmpty
-          ? const Center(child: Text('No logs found'))
-          : RefreshIndicator(
-              onRefresh: _loadLogs,
-              color: Colors.blue,
-              child: ListView.builder(
-                itemCount: _logs.length,
-                itemBuilder: (context, index) {
-                  final log = _logs[index];
-
-                  var name = log.eventType;
-
-                  return ListTile(
-                    title: Text(
-                      name,
-                      style: const TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'id: ${log.id}',
-                          style: const TextStyle(color: Colors.blue),
-                        ),
-                        Text(
-                          'Created: ${DateTime.fromMillisecondsSinceEpoch(log.createTime)}',
-                        ),
-                        if (log.uploadTime != null)
-                          Text(
-                            'Uploaded: ${DateTime.fromMillisecondsSinceEpoch(log.uploadTime!)}',
-                          ),
-                        Row(
-                          children: [
-                            Icon(
-                              log.isUploaded
-                                  ? Icons.cloud_done
-                                  : Icons.cloud_upload,
-                              color: log.isUploaded
-                                  ? Colors.green
-                                  : Colors.orange,
-                              size: 16,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              log.isUploaded ? 'Uploaded' : 'Pending',
-                              style: TextStyle(
-                                color: log.isUploaded
-                                    ? Colors.green
-                                    : Colors.orange,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            if (log.isUploaded)
-                              Icon(
-                                log.isSuccess
-                                    ? Icons.check_circle
-                                    : Icons.error,
-                                color: log.isSuccess
-                                    ? Colors.green
-                                    : Colors.red,
-                                size: 16,
-                              ),
-                            const SizedBox(width: 4),
-                            if (log.isUploaded)
-                              Text(
-                                log.isSuccess ? 'Success' : 'Failed',
-                                style: TextStyle(
-                                  color: log.isSuccess
-                                      ? Colors.green
-                                      : Colors.red,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text('Log Details - ${log.eventType}'),
-                          content: SingleChildScrollView(
-                            child: SelectableText(
-                              log.data,
-                            ), // 替换为SelectableText
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('Close'),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.content_copy),
-                              onPressed: () {
-                                Clipboard.setData(
-                                  ClipboardData(text: log.data),
-                                );
-                                Get.snackbar(
-                                  'Copied',
-                                  'Log data copied to clipboard',
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-    );
   }
 }

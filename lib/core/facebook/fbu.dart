@@ -9,7 +9,7 @@ class FBU {
 
   /// 统一的日志输出方法
   static void _log(String message) {
-    debugPrint('[fbtool] $message');
+    debugPrint('[FBU] $message');
   }
 
   // 记录Facebook SDK是否已经初始化

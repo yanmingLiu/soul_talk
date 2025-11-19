@@ -50,13 +50,13 @@ class _LaunchPageState extends State<LaunchPage>
   }
 
   void initUI() {
-    EasyRefresh.defaultHeaderBuilder = () =>
-        const MaterialHeader(color: Color(0xFFDF78B1));
+    EasyRefresh.defaultHeaderBuilder =
+        () => const MaterialHeader(color: Color(0xFFDF78B1));
     EasyRefresh.defaultFooterBuilder = () => const ClassicFooter(
-      showText: false,
-      showMessage: false,
-      iconTheme: IconThemeData(color: Color(0xFFDF78B1)),
-    );
+          showText: false,
+          showMessage: false,
+          iconTheme: IconThemeData(color: Color(0xFFDF78B1)),
+        );
     SmartDialog.config.toast = SmartConfigToast(alignment: Alignment.center);
   }
 
@@ -73,7 +73,7 @@ class _LaunchPageState extends State<LaunchPage>
         Block.request(isFisrt: true),
         PayUtils().query(),
         DI.login.loadAppLangs(),
-        // FBU.initializeWithRemoteConfig(),
+        FBU.initializeWithRemoteConfig(),
       ]).timeout(const Duration(seconds: 7));
 
       await DI.login.fetchUserInfo();

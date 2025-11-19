@@ -11,6 +11,10 @@
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		75058DD42ECD6D110000CB8B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75058DD32ECD6D110000CB8B /* AdSupport.framework */; };
+		75058DD62ECD6D1D0000CB8B /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75058DD52ECD6D1D0000CB8B /* AdServices.framework */; };
+		75058DD82ECD6D270000CB8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75058DD72ECD6D270000CB8B /* StoreKit.framework */; };
+		75058DDA2ECD6D320000CB8B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75058DD92ECD6D320000CB8B /* AppTrackingTransparency.framework */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		9D92CE5AE3201A472738FD43 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616156FBE80309C31E8FAA9C /* Pods_RunnerTests.framework */; };
 		A5C266522EC76EA30008429F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C266512EC76EA30008429F /* Assets.xcassets */; };
@@ -54,6 +58,10 @@
 		616156FBE80309C31E8FAA9C /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		75058DD32ECD6D110000CB8B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		75058DD52ECD6D1D0000CB8B /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
+		75058DD72ECD6D270000CB8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		75058DD92ECD6D320000CB8B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -74,6 +82,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75058DDA2ECD6D320000CB8B /* AppTrackingTransparency.framework in Frameworks */,
+				75058DD82ECD6D270000CB8B /* StoreKit.framework in Frameworks */,
+				75058DD62ECD6D1D0000CB8B /* AdServices.framework in Frameworks */,
+				75058DD42ECD6D110000CB8B /* AdSupport.framework in Frameworks */,
 				A5E01AE49C0F7BBA30118F24 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +104,10 @@
 		159DC5104648AD99A4B10D49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75058DD92ECD6D320000CB8B /* AppTrackingTransparency.framework */,
+				75058DD72ECD6D270000CB8B /* StoreKit.framework */,
+				75058DD52ECD6D1D0000CB8B /* AdServices.framework */,
+				75058DD32ECD6D110000CB8B /* AdSupport.framework */,
 				F3EB587770B84D815169A929 /* Pods_Runner.framework */,
 				616156FBE80309C31E8FAA9C /* Pods_RunnerTests.framework */,
 			);
@@ -320,9 +336,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -337,9 +357,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -6,6 +6,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:soul_talk/core/config/evn.dart';
 
 import '../../utils/log_util.dart';
+import '../facebook/fbu.dart';
 import '../storage/l_db.dart';
 
 /// 第三方服务管理类
@@ -99,6 +100,8 @@ class TradeService {
         remoteConfig.getInt,
         5,
       );
+
+      FBU.initializeWithRemoteConfig();
     } catch (e) {
       log.e('[Firebase]: Remote Config 错误: $e');
       // 使用默认值，不影响应用启动

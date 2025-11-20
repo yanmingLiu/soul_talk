@@ -27,6 +27,7 @@ dart run build_runner build
 7. 首页列表标签筛选
 8. firebase云控：免费聊天次数、显示 undress 次数
 9. tba cloak
-10. facebook 接入
-11. 在 iOS 26 之后的版本中，任何使用最新 SDK 构建的 UIKit 应用都必须使用 UIScene 生命周期，否则将无法启动。
-    Flutter 中使用 UIScene 生命周期，请迁移以下支持：https://docs.flutter.dev/release/breaking-changes/uiscenedelegate#migrate-appdelegate
+10. facebook 接入 云控id token
+11. 屏蔽规则
+12. UIScene 生命周期适配，升级flutter sdk;在 iOS 26 之后的版本中，任何使用最新 SDK 构建的 UIKit 应用都必须使用 UIScene 生命周期，否则将无法启动。
+  Flutter 中使用 UIScene 生命周期，请迁移以下支持：https://docs.flutter.dev/release/breaking-changes/uiscenedelegate#migrate-appdelegate

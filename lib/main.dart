@@ -30,7 +30,7 @@ void main() async {
   );
 
   // Change to Environment.prod for production
-  await DIDendency.init(env: Environment.dev);
+  await DIDendency.init(env: Environment.prod);
 
   /// 控制图片缓存大小
   PaintingBinding.instance.imageCache.maximumSize = 100;

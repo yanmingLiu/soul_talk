@@ -1,11 +1,13 @@
+import 'package:soul_talk/app/di_depency.dart';
 import 'package:soul_talk/core/config/evn.dart';
+import 'package:soul_talk/domain/entities/post.dart';
 
-import '../constants/api_values.dart';
-import '../network/dio_client.dart';
 import '../../domain/entities/base_model.dart';
 import '../../domain/entities/figure.dart';
 import '../../domain/entities/page_model.dart';
 import '../../domain/entities/tag.dart';
+import '../constants/api_values.dart';
+import '../network/dio_client.dart';
 import 'api.dart';
 
 class HomeApi {
@@ -18,9 +20,7 @@ class HomeApi {
         queryParameters: Api.queryParameters,
       );
       if (res.data is List) {
-        final list = (res.data as List)
-            .map((e) => TagReponse.fromJson(e))
-            .toList();
+        final list = (res.data as List).map((e) => TagReponse.fromJson(e)).toList();
         return list;
       } else {
         return null;
@@ -137,6 +137,30 @@ class HomeApi {
       return res.statusCode == 200;
     } catch (e) {
       return false;
+    }
+  }
+
+  static Future<List<Post>?> momensListPage({
+    required int page,
+    required int size,
+  }) async {
+    try {
+      var res = await api.post(
+        ApiConstants.momentsList,
+        data: {
+          'page': page,
+          'size': size,
+          'hide_character': DI.storage.isBest ? true : false,
+        },
+        queryParameters: Api.queryParameters,
+      );
+      final pageData = PageModel<Post>.fromJson(
+        res.data,
+        (json) => Post.fromJson(json),
+      );
+      return pageData.records;
+    } catch (e) {
+      return null;
     }
   }
 }

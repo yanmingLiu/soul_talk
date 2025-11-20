@@ -5,9 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:soul_talk/core/config/evn.dart';
 import 'package:soul_talk/utils/crypto_util.dart';
 
+import '../../utils/log_util.dart';
+
 class CryptoInterceptor extends Interceptor {
   void _log(dynamic content) {
-    print("[CryptoInterceptor]: $content");
+    log.d("[CryptoInterceptor]: $content");
   }
 
   @override

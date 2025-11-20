@@ -10,6 +10,7 @@ class NetOB {
   static NetOB get instance => _instance;
 
   final Connectivity _connectivity = Connectivity();
+  // ignore: unused_field
   StreamSubscription<List<ConnectivityResult>>? _subscription;
 
   // 当前连接状态（响应式）
@@ -17,8 +18,7 @@ class NetOB {
 
   /// 是否已连接网络
   bool get isConnected =>
-      _connectionStatus.isNotEmpty &&
-      !_connectionStatus.contains(ConnectivityResult.none);
+      _connectionStatus.isNotEmpty && !_connectionStatus.contains(ConnectivityResult.none);
 
   /// 是否为 WiFi
   bool get isWifi => _connectionStatus.contains(ConnectivityResult.wifi);

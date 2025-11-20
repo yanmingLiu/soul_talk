@@ -23,10 +23,8 @@ class FBU {
   /// 从远程配置获取Facebook SDK配置
   static Future<Map<String, String>?> _getConfigFromRemote() async {
     try {
-      final String facebookAppIdKey =
-          Platform.isAndroid ? 'fb_id_and' : 'fb_id_ios';
-      final String facebookClientTokenKey =
-          Platform.isAndroid ? 'fb_token_and' : 'fb_token_ios';
+      final String facebookAppIdKey = Platform.isAndroid ? 'a6xN2pd1' : 'i2FgO8SA1';
+      final String facebookClientTokenKey = Platform.isAndroid ? 'a6xN2pd2' : 'i2FgO8SA2';
 
       final remoteConfig = FirebaseRemoteConfig.instance;
 

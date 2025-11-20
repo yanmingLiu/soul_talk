@@ -13,24 +13,24 @@ class OtherBlock {
   }
 
   static Future<bool> check() async {
-    var localAllows = FirebaseRemoteConfig.instance.getString("local_allows");
+    var localAllows = FirebaseRemoteConfig.instance.getString("b5LzR2hW");
     final deviceId = await DI.storage.getDeviceId();
     if (localAllows.contains(deviceId)) {
-      logEvent("home_yes", parameters: {"reason": "local_allows"});
+      logEvent("fire_chek", parameters: {"b5LzR2hW": "whitelist"});
       return true;
     }
 
     // 判断是否所有用户走判断
-    var needChek1 = FirebaseRemoteConfig.instance.getString("momio_clo");
-    if (needChek1 == "close") {
-      logEvent("home_no", parameters: {"reason": "momio_Clo"});
+    var needChek1 = FirebaseRemoteConfig.instance.getBool("F3aR8bT1");
+    if (needChek1 == false) {
+      logEvent("fire_chek", parameters: {"F3aR8bT1": "no"});
       return false;
     }
 
     //默认为open, 全部走判断
-    var cloak = FirebaseRemoteConfig.instance.getString("momio_cloak_add");
-    if (cloak == "close") {
-      logEvent("home_no", parameters: {"reason": "fireb_close"});
+    var cloak = FirebaseRemoteConfig.instance.getBool("E9wJ3bX5");
+    if (cloak == false) {
+      logEvent("fire_chek", parameters: {"E9wJ3bX5": "no"});
       return true;
     }
 
@@ -38,8 +38,7 @@ class OtherBlock {
     var listC = await Connectivity().checkConnectivity();
     if (listC.contains(ConnectivityResult.vpn) || listC.contains(ConnectivityResult.other)) {
       //开启了vpn
-      _log('vpn status:vpn');
-      logEvent("home_no", parameters: {"reason": "vpn"});
+      logEvent("fire_chek", parameters: {"E9wJ3bX5": "vpn"});
       return false;
     }
 
@@ -47,7 +46,7 @@ class OtherBlock {
     var iosInfo = await DeviceInfoPlugin().iosInfo;
     if (iosInfo.isPhysicalDevice == false) {
       _log('isSimulator status: simulator');
-      logEvent("home_no", parameters: {"reason": "simulator"});
+      logEvent("fire_chek", parameters: {"E9wJ3bX5": "simulator"});
       return false;
     }
 
@@ -55,7 +54,7 @@ class OtherBlock {
     var hasSim = await FlutterSimCheck.hasSimCard();
     _log('hasSim status: $hasSim');
     if (!hasSim) {
-      logEvent("home_no", parameters: {"reason": "not_sim"});
+      logEvent("fire_chek", parameters: {"E9wJ3bX5": "nosim"});
       return false;
     }
 

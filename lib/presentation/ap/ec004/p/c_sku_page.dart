@@ -71,13 +71,13 @@ class _CSkuPageState extends State<CSkuPage> {
 
     if (isVideo) {
       aiSkuList.assignAll(
-        products.where((e) => e.createImg != null && e.createImg! > 0).toList(),
-      );
-    } else {
-      aiSkuList.assignAll(
         products
             .where((e) => e.createVideo != null && e.createVideo! > 0)
             .toList(),
+      );
+    } else {
+      aiSkuList.assignAll(
+        products.where((e) => e.createImg != null && e.createImg! > 0).toList(),
       );
     }
 

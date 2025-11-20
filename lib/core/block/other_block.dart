@@ -2,13 +2,15 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_sim_check/flutter_sim_check.dart';
+import 'package:soul_talk/core/block/ip_check.dart';
 
 import '../../app/di_depency.dart';
+import '../../utils/log_util.dart';
 import '../analytics/analytics_service.dart';
 
 class OtherBlock {
   static void _log(dynamic msg) {
-    print('[OtherBlock]: $msg');
+    log.d('[OtherBlock]: $msg');
   }
 
   static Future<bool> check() async {
@@ -52,19 +54,19 @@ class OtherBlock {
     var reasonList = [];
 
     // 判断 ip
-    // final ipc = IpCheck();
+    final ipc = IpCheck();
 
-    // final isIreland = await ipc.isIreland();
-    // final isChina = await ipc.isChina();
-    // _log('ip status: ireland: $isIreland, isChina: $isChina');
+    final isIreland = await ipc.isIreland();
+    final isChina = await ipc.isChina();
+    _log('ip status: ireland: $isIreland, isChina: $isChina');
 
-    // if (isIreland) {
-    //   logEvent("home_no", parameters: {"reason": "ireland"});
-    //   reasonList.add("ireland");
-    // } else if (isChina) {
-    //   logEvent("home_no", parameters: {"reason": "china"});
-    //   reasonList.add("china");
-    // }
+    if (isIreland) {
+      logEvent("home_no", parameters: {"reason": "ireland"});
+      reasonList.add("ireland");
+    } else if (isChina) {
+      logEvent("home_no", parameters: {"reason": "china"});
+      reasonList.add("china");
+    }
 
     if (isVpn) {
       reasonList.add("vpn");

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:soul_talk/presentation/ap/cc002/c/msg_bloc.dart';
 
 class VLevelSheet extends StatefulWidget {

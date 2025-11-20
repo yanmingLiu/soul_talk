@@ -203,12 +203,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
     if (_index == 0) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _buildIndex(),
-          const SizedBox(height: 16),
-          _buildIntro(),
-          _buildTags()
-        ],
+        children: [_buildIndex(), const SizedBox(height: 16), _buildIntro(), _buildTags()],
       );
     } else {
       return Column(
@@ -333,9 +328,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
                           ? 'assets/images/like_s.png'
                           : 'assets/images/like_d.png';
 
-                      final color = ctr.collect.value
-                          ? const Color(0xFFDF78B1)
-                          : Colors.white;
+                      final color = ctr.collect.value ? const Color(0xFFDF78B1) : Colors.white;
 
                       return _buildCount(
                         icon,
@@ -546,9 +539,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
         children: [
           Expanded(
             child: Obx(() {
-              final color = ctr.collect.value
-                  ? const Color(0xFFDF78B1)
-                  : const Color(0xFF8C8C8C);
+              final color = ctr.collect.value ? const Color(0xFFDF78B1) : const Color(0xFF8C8C8C);
 
               final title = ctr.collect.value ? "Unfollow" : 'Follow';
               return VButton(
@@ -589,104 +580,6 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActions() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFFFFF2F9), Color(0xFFFFFFFF)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 20),
-          const Text(
-            'optionTitle',
-            style: TextStyle(
-              color: Color(0xFF4D4D4D),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Column(
-            children: [
-              VButton(
-                height: 44,
-                borderRadius: BorderRadius.circular(0),
-                color: Colors.transparent,
-                onTap: ctr.clearHistory,
-                child: const Row(
-                  spacing: 4,
-                  children: [
-                    // Image.asset('assets/images/btnclear.png', width: 18),
-                    Text(
-                      'clearHistory',
-                      style: TextStyle(
-                        color: Color(0xFF4D4D4D),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Spacer(),
-                    Icon(Icons.chevron_right, color: Color(0xFF9D9D9D)),
-                  ],
-                ),
-              ),
-              Container(height: 1, color: const Color(0x1AFFFFFF)),
-              VButton(
-                onTap: () => NTO.report(),
-                height: 44,
-                borderRadius: BorderRadius.circular(0),
-                color: Colors.transparent,
-                child: const Row(
-                  spacing: 4,
-                  children: [
-                    // Image.asset('assets/images/btnreport.png', width: 18),
-                    Text(
-                      'report',
-                      style: TextStyle(
-                        color: Color(0xFF4D4D4D),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Spacer(),
-                    Icon(Icons.chevron_right, color: Color(0xFF9D9D9D)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          VButton(
-            onTap: ctr.deleteChat,
-            color: Colors.white,
-            child: const Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'deleteChat',
-                    style: TextStyle(
-                      color: Color(0xFFF04A4C),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 50),
         ],
       ),
     );

@@ -36,13 +36,13 @@ class VRewardView extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
+        const Row(
           spacing: 4,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Daily Reward',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
@@ -50,7 +50,7 @@ class VRewardView extends StatelessWidget {
             ),
             Text(
               '+50',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w800,
                 color: Colors.white,
@@ -100,13 +100,13 @@ class VRewardView extends StatelessWidget {
           },
           height: 48,
           borderRadius: BorderRadius.circular(12),
-          color: Color(0xFFDF78B1),
+          color: const Color(0xFFDF78B1),
           constraints: const BoxConstraints(minWidth: 44),
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Center(
+          child: const Center(
             child: Text(
               'Collect',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -115,7 +115,7 @@ class VRewardView extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        SizedBox(height: 48),
+        const SizedBox(height: 48),
       ],
     );
   }
@@ -124,13 +124,13 @@ class VRewardView extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
+        const Row(
           spacing: 4,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Daily Reward',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
@@ -138,7 +138,7 @@ class VRewardView extends StatelessWidget {
             ),
             Text(
               '+20',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w800,
                 color: Colors.white,
@@ -189,10 +189,10 @@ class VRewardView extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           constraints: const BoxConstraints(minWidth: 44),
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Center(
+          child: const Center(
             child: Text(
               'Go to pro',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -213,10 +213,10 @@ class VRewardView extends StatelessWidget {
           color: const Color(0x1AFFFFFF),
           constraints: const BoxConstraints(minWidth: 44),
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Center(
+          child: const Center(
             child: Text(
               'Collect',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,

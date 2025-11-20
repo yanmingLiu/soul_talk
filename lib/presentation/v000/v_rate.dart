@@ -44,7 +44,7 @@ class VRateApp extends StatelessWidget {
                     height: 64,
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
+                    child: const Text(
                       'Help Us Grow',
                       style: TextStyle(
                         fontSize: 20,
@@ -85,7 +85,7 @@ class VRateApp extends StatelessWidget {
                               },
                               color: const Color(0xFFDF78B1),
                               height: 48,
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   'Help SoulTalk',
                                   style: TextStyle(
@@ -103,10 +103,10 @@ class VRateApp extends StatelessWidget {
                               onTap: close,
                               borderColor: const Color(0xFF8C8C8C),
                               borderWidth: 2,
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   'Nope',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
                                     color: Color(0xFF595959),

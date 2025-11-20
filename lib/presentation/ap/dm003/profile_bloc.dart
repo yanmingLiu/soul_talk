@@ -81,12 +81,12 @@ class SettingController extends GetxController {
         },
         hintText: 'Input your nickname',
         maxLenght: 20,
-        subtitle: Row(
+        subtitle: const Row(
           spacing: 4,
           children: [
             Text(
               'What should your AI girlfriend call you?',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Color(0xFF434343),
                 fontSize: 16,
                 fontWeight: FontWeight.w500,

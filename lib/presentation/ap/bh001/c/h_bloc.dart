@@ -4,6 +4,7 @@ import 'package:soul_talk/core/analytics/analytics_service.dart';
 import 'package:soul_talk/core/data/h_pi.dart';
 import 'package:soul_talk/domain/entities/figure.dart';
 import 'package:soul_talk/domain/value_objects/enums.dart';
+import 'package:soul_talk/presentation/ap/bh001/p/h_post_page.dart';
 import 'package:soul_talk/presentation/ap/bh001/v/h_v_view.dart';
 import 'package:soul_talk/presentation/v000/v_dialog.dart';
 import 'package:soul_talk/router/nav_to.dart';
@@ -15,7 +16,7 @@ import '../../../../domain/entities/tag.dart';
 import '../../../../utils/log_util.dart';
 import '../../../v000/k_a_w.dart';
 
-enum HCate { all, realistic, anime, dressUp, video }
+enum HCate { all, realistic, anime, dressUp, video, post }
 
 enum FollowEvent { follow, unfollow }
 
@@ -33,6 +34,8 @@ extension HomeListCategoryExtension on HCate {
         return 'Dress Up';
       case HCate.video:
         return 'Video';
+      case HCate.post:
+        return 'Moments';
     }
   }
 
@@ -91,9 +94,13 @@ class HomeBloc extends GetxController {
         HCate.anime,
         if (isBird) HCate.video,
         if (isBird) HCate.dressUp,
+        if (isBird) HCate.post,
       ]);
 
       pages = categroyList.map((element) {
+        if (element == HCate.post) {
+          return const KeepAliveWrapper(child: HPostPage());
+        }
         return KeepAliveWrapper(child: HomeListView(cate: element));
       }).toList();
 

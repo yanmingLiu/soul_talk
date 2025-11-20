@@ -1,4 +1,3 @@
-import 'package:adjust_sdk/adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
@@ -63,12 +62,10 @@ class _RootPageState extends State<RootPage> with WidgetsBindingObserver {
       case AppLifecycleState.inactive:
         break;
       case AppLifecycleState.resumed:
-        Adjust.onResume();
         Analytics().logSessionEvent();
 
         break;
       case AppLifecycleState.paused:
-        Adjust.onPause();
         DI.audio.stopAll();
         break;
       case AppLifecycleState.detached:
@@ -110,9 +107,8 @@ class MainTabBar extends StatelessWidget {
     const space = 12.0;
     final bottom = MediaQuery.of(context).padding.bottom;
     final height = kBottomNavigationBarHeight + bottom;
-    final allWidth = MediaQuery.of(context).size.width -
-        12 * 2 -
-        (space * MainTabBarIndex.values.length);
+    final allWidth =
+        MediaQuery.of(context).size.width - 12 * 2 - (space * MainTabBarIndex.values.length);
 
     final count = DI.storage.isBest ? 4 : 3;
     final itemWidth = allWidth / count;

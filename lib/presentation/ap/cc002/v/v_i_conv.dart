@@ -41,7 +41,7 @@ class VIConvItem extends StatelessWidget {
       height: 96,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       type: ButtonType.border,
-      borderColor: Color(0x0F000000),
+      borderColor: const Color(0x0F000000),
       child: Row(
         spacing: 12,
         children: [

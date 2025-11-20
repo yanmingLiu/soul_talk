@@ -8,7 +8,7 @@ import 'log_util.dart';
 
 class CryptoUtil {
   static void _log(String message) {
-    // print("CryptoUtil: $message");
+    log.d("CryptoUtil: $message");
   }
 
   // AES 密钥和 IV
@@ -65,8 +65,7 @@ class CryptoUtil {
   }) {
     final uri = Uri.parse(originalUrl);
     // 1. 构建原始路径 + 查询参数的完整路径用于加密
-    final originalPathWithQuery =
-        '${uri.path}${uri.query.isNotEmpty ? '?${uri.query}' : ''}';
+    final originalPathWithQuery = '${uri.path}${uri.query.isNotEmpty ? '?${uri.query}' : ''}';
     _log('原始完整路径: $originalPathWithQuery');
 
     // 2. 加密整个路径（包括查询参数）

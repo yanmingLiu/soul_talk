@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -63,8 +61,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.transparent,
         fontFamily: 'Montserrat',
         textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),
-        appBarTheme: AppBarTheme(
-          color: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
           centerTitle: true,
           scrolledUnderElevation: 0.0,
           elevation: 0.0,
@@ -81,7 +79,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: VS.supportedLocales,
       locale: DI.login.locale,
       fallbackLocale: const Locale('en', 'US'),
-      translationsKeys: {},
+      translationsKeys: const {},
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

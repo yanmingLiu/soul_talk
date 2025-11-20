@@ -18,10 +18,10 @@ class ConsButton extends StatelessWidget {
     return GestureDetector(
       onTap: _onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Color(0x80DF78B1), width: 1),
+          border: Border.all(color: const Color(0x80DF78B1), width: 1),
         ),
         child: Row(
           spacing: 2,
@@ -30,7 +30,7 @@ class ConsButton extends StatelessWidget {
             Obx(() {
               return Text(
                 DI.login.gemBalance.value.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color(0xFF434343),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

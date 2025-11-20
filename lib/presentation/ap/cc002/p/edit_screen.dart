@@ -74,7 +74,7 @@ class _EditScreenState extends State<EditScreen> {
         color: Colors.transparent,
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Align(
               alignment: Alignment.centerRight,
               child: InkWell(
@@ -100,7 +100,7 @@ class _EditScreenState extends State<EditScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   if (widget.subtitle != null)
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -118,7 +118,7 @@ class _EditScreenState extends State<EditScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 1, color: Color(0x0F000000)),
+                      border: Border.all(width: 1, color: const Color(0x0F000000)),
                     ),
                     child: NotificationListener<ScrollNotification>(
                       onNotification: (notification) {
@@ -144,9 +144,7 @@ class _EditScreenState extends State<EditScreen> {
                             controller: textController,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero, // 添加内边距
-                              hintText:
-                                  widget.hintText ??
-                                  'Please input your custom text here...',
+                              hintText: widget.hintText ?? 'Please input your custom text here...',
                               counterText: '',
                               hintStyle: const TextStyle(
                                 color: Color(0xFFB3B3B3),
@@ -158,7 +156,7 @@ class _EditScreenState extends State<EditScreen> {
                             ),
                             focusNode: focusNode,
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           GestureDetector(
                             onTap: _onSure,
                             child: Align(

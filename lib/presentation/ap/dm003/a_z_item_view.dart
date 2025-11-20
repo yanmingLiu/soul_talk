@@ -21,7 +21,7 @@ class AzListItemView extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 48,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.white,
           border: isShowSeparator
@@ -47,8 +47,8 @@ class AzListItemView extends StatelessWidget {
                     width: 24,
                     height: 24,
                   )
-                : SizedBox.shrink(),
-            SizedBox(width: 16),
+                : const SizedBox.shrink(),
+            const SizedBox(width: 16),
           ],
         ),
       ),

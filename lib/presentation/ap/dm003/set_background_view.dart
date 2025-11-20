@@ -32,10 +32,10 @@ class SettingMessageBackground extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             spacing: 20,
             children: [
-              Text(
+              const Text(
                 'Set chat background',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,

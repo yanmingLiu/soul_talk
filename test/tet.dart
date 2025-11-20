@@ -7,14 +7,12 @@ dart run /Users/ai3/Documents/ai_mi/test/text_replace.dart
 /// 入口方法
 void main() {
   // 指定文件夹路径（你的开发机上的绝对路径）
-  const String folderPath =
-      '/Users/ai3/Documents/soul_talk/lib/domain/entities';
+  const String folderPath = '/Users/ai3/Documents/soul_talk/lib/domain/entities';
   // 调用替换方法
   replaceJsonModel(folderPath);
 
   // 替换 api path 中的字符串
-  const String filePath =
-      '/Users/ai3/Documents/soul_talk/lib/core/constants/api_values.dart';
+  const String filePath = '/Users/ai3/Documents/soul_talk/lib/core/constants/api_values.dart';
   replaceApiPath(filePath);
 }
 

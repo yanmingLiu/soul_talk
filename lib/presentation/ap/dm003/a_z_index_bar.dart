@@ -113,7 +113,7 @@ class _AzListIndexBarState extends State<AzListIndexBar> {
     widget.onSelectionUpdate?.call(firstChildIndex, cursorOffset);
   }
 
-  void _onGestureEnd([_]) {
+  void _onGestureEnd([dynamic details]) {
     selectedIndex.value = -1;
     widget.onSelectionEnd?.call();
   }

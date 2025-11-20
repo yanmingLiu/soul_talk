@@ -36,9 +36,8 @@ class VAlert extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (title?.isNotEmpty == true)
-            _buildText(title, 18, FontWeight.w400, Colors.black),
-          _buildText(message, 14, FontWeight.w400, Color(0xFF595959)),
+          if (title?.isNotEmpty == true) _buildText(title, 18, FontWeight.w400, Colors.black),
+          _buildText(message, 14, FontWeight.w400, const Color(0xFF595959)),
           if (messageWidget != null) messageWidget!,
           const SizedBox(height: 10),
           Row(

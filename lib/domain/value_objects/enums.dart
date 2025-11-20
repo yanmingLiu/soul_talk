@@ -53,6 +53,8 @@ enum VipSF {
   trans,
   dailyrd,
   scenario,
+  lpostvideo,
+  lpostpic,
 }
 
 enum ConsSF {

@@ -42,9 +42,7 @@ class _VC1State extends State<VC1> {
   void initState() {
     super.initState();
 
-    FileDownloader.instance
-        .downloadFile(videoUrl, fileType: FileType.video)
-        .then((localPath) {
+    FileDownloader.instance.downloadFile(videoUrl, fileType: FileType.video).then((localPath) {
       if (localPath != null) {
         _localVideoPath = localPath;
         if (widget.isVideo) {
@@ -88,9 +86,8 @@ class _VC1State extends State<VC1> {
     final text = !widget.isVideo
         ? "1.Two steps: Upload a photo, then click generate.\n2.No support for photos of minors.\n3.Upload a front-facing photo.\n4.Does not support multiple people photos."
         : "1.Two steps: Upload a photo, then click generate.\n2.No support for photos of minors.\n3.Upload a front-facing photo.";
-    final text2 = !widget.isVideo
-        ? "Undress Your Sweetheart Now !!"
-        : "Make your photo animated (NSFW)";
+    final text2 =
+        !widget.isVideo ? "Undress Your Sweetheart Now !!" : "Make your photo animated (NSFW)";
 
     final imgW = MediaQuery.sizeOf(context).width - 100;
     final imgH = imgW / 3 * 4;
@@ -183,10 +180,12 @@ class _VC1State extends State<VC1> {
                 onTap: widget.onTapGenRole,
                 color: const Color(0xFFF0F0F0),
                 margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "Undress the character",
-                    style: TextStyle(
+                    widget.hasHistory == true
+                        ? "View the character's nude"
+                        : "Undress the character",
+                    style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.w600,

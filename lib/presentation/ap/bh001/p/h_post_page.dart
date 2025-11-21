@@ -156,7 +156,8 @@ class _HPostPageState extends State<HPostPage> {
                       ),
                       child: Row(
                         children: [
-                          Image.asset('assets/images/post_video.png', width: 16),
+                          Image.asset('assets/images/post_video.png',
+                              width: 16),
                           const SizedBox(width: 4),
                           Text(
                             formatVideoDuration(data.duration ?? 0),
@@ -190,7 +191,7 @@ class _HPostPageState extends State<HPostPage> {
   Widget _buildLock(bool istop, bool isVideo, Post data) {
     Widget widget = GestureDetector(
       onTap: () {
-        NTO.pushVip(isVideo ? VipSF.lpostvideo : VipSF.lpostpic);
+        NTO.pushVip(isVideo ? VipSF.postvideo : VipSF.postpic);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),

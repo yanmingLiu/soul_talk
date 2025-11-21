@@ -27,8 +27,6 @@
     "editor.minimap.enabled": false,
     // 自动保存策略
     "files.autoSave": "onFocusChange",
-    // 热重载设置
-    "dart.flutterHotReloadOnSave": true,
     // 不调试外部库
     "dart.debugExternalPackageLibraries": false,
     "dart.debugSdkLibraries": false,

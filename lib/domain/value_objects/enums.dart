@@ -52,9 +52,7 @@ enum VipSF {
   videochat,
   trans,
   dailyrd,
-  scenario,
-  lpostvideo,
-  lpostpic,
+  scenario
 }
 
 enum ConsSF {

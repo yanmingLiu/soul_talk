@@ -34,6 +34,7 @@ class ConsButton extends StatelessWidget {
                   color: Color(0xFF434343),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
+                  fontFamily: 'Montserrat',
                 ),
               );
             }),

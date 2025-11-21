@@ -156,7 +156,6 @@ flutter:
           weight: 700
         - asset: assets/font/Montserrat-ExtraBold-4.otf
           weight: 800
-          style: italic
         - asset: assets/font/Montserrat-Black-2.otf
           weight: 900
   #

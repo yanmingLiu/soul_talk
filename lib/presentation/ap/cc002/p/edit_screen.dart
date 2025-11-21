@@ -89,6 +89,7 @@ class _EditScreenState extends State<EditScreen> {
               ),
             ),
             Container(
+              padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: const BoxDecoration(
                 color: Color(0xFFF9F9F9),
                 borderRadius: BorderRadius.only(
@@ -100,7 +101,6 @@ class _EditScreenState extends State<EditScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: 20),
                   if (widget.subtitle != null)
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -118,7 +118,8 @@ class _EditScreenState extends State<EditScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 1, color: const Color(0x0F000000)),
+                      border:
+                          Border.all(width: 1, color: const Color(0x0F000000)),
                     ),
                     child: NotificationListener<ScrollNotification>(
                       onNotification: (notification) {
@@ -144,7 +145,8 @@ class _EditScreenState extends State<EditScreen> {
                             controller: textController,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero, // 添加内边距
-                              hintText: widget.hintText ?? 'Please input your custom text here...',
+                              hintText: widget.hintText ??
+                                  'Please input your custom text here...',
                               counterText: '',
                               hintStyle: const TextStyle(
                                 color: Color(0xFFB3B3B3),

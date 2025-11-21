@@ -47,9 +47,9 @@ class _VipTimerState extends State<VipTimer> {
           builder: (context, value, child) {
             final minutesStr = value.inMinutes.toString().padLeft(2, '0');
             final secondsStr = (value.inSeconds % 60).toString().padLeft(
-              2,
-              '0',
-            );
+                  2,
+                  '0',
+                );
             return Row(
               children: [
                 _buildDigit(minutesStr[0]),
@@ -61,7 +61,7 @@ class _VipTimerState extends State<VipTimer> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: Colors.red,
+                    color: Color(0xFFDF78B1),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -78,19 +78,23 @@ class _VipTimerState extends State<VipTimer> {
 
   Container _buildDigit(String digit) {
     return Container(
-      width: 24,
-      height: 24,
+      width: 26,
+      height: 26,
       decoration: BoxDecoration(
         color: const Color(0x1AFFFFFF),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(6),
+        border: BoxBorder.all(
+          width: 1,
+          color: const Color(0x33FFFFFF),
+        ),
       ),
       child: Center(
         child: Text(
           digit,
           style: const TextStyle(
-            color: Colors.amber,
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

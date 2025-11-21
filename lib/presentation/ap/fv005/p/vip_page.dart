@@ -47,6 +47,7 @@ class VipPage extends GetView<VipController> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
+                  color: const Color(0x80000000),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(width: 1, color: const Color(0x80FFFFFF)),
                 ),

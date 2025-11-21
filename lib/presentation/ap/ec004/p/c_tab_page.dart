@@ -82,7 +82,7 @@ class _CTabPageState extends State<CTabPage> {
                 _linkedController.select(index);
               },
             ),
-            if (index != tabTitles.length - 1) const SizedBox(width: 8),
+            if (index != tabTitles.length - 1) const SizedBox(width: 24),
           ],
         ],
       ),

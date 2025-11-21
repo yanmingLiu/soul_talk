@@ -62,7 +62,7 @@ class VCStyle extends StatelessWidget {
               child: Center(
                 child: VImage(
                   url: item.icon ?? '',
-                  width: 14,
+                  width: 20,
                   color: const Color(0xFF595959),
                 ),
               ),

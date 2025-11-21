@@ -30,15 +30,14 @@ class SkuItemWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(14),
             margin: EdgeInsets.only(top: 8, left: tagMarginLeft),
-            constraints: const BoxConstraints(minWidth: 150, maxWidth: 250),
+            constraints: const BoxConstraints(minWidth: 80, maxWidth: 180),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               border: Border.all(
-                color: isSelected
-                    ? const Color(0xFFDF78B1)
-                    : Colors.transparent,
+                color:
+                    isSelected ? const Color(0xFFDF78B1) : Colors.transparent,
                 width: 2.0,
               ),
               color: isSelected
@@ -57,11 +56,7 @@ class SkuItemWidget extends StatelessWidget {
 
   /// 构建大版本内容
   Widget _buildBigVersionContent(String price, bool isLifetime, int? skuType) {
-    if (isLifetime) {
-      return _buildLifetimeContent(price);
-    } else {
-      return _buildSubscriptionContent(price);
-    }
+    return _buildSubscriptionContent(price, isLifetime);
   }
 
   /// 构建小版本内容
@@ -86,7 +81,6 @@ class SkuItemWidget extends StatelessWidget {
             ),
           ),
         ),
-
         Flexible(
           child: FittedBox(
             fit: BoxFit.scaleDown,
@@ -107,179 +101,113 @@ class SkuItemWidget extends StatelessWidget {
     );
   }
 
-  /// 构建终身版内容
-  Widget _buildLifetimeContent(String price) {
-    final rawPrice = skuData.productDetails?.rawPrice ?? 0;
-    final symbol = skuData.productDetails?.currencySymbol ?? '';
-    final originalPrice = '$symbol${numFixed(rawPrice * 6, position: 2)}';
-    final title = _getSkuTitle();
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    price,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 2),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      originalPrice,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(height: 1, color: const Color(0x33FFFFFF)),
-        Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: isSelected
-                          ? Colors.white
-                          : const Color(0xFFA8A8A8),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 2),
-              // Assets.images.gems.image(width: 24),
-              Image.asset('assets/images/diamond.png', width: 24),
-              const SizedBox(width: 2),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    skuData.number.toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: isSelected
-                          ? Colors.white
-                          : const Color(0xFFA8A8A8),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
   /// 构建订阅版内容
-  Widget _buildSubscriptionContent(String price) {
+  Widget _buildSubscriptionContent(String price, bool isLifetime) {
     final rawPrice = skuData.productDetails?.rawPrice ?? 0;
     final symbol = skuData.productDetails?.currencySymbol ?? '';
     final title = _getSkuTitle();
 
-    String originalPrice;
+    String originalPrice = '';
     if (skuData.skuType == 2) {
       final weekPrice = numFixed(rawPrice / 4, position: 2);
       originalPrice = '$symbol$weekPrice';
-    } else {
+    } else if (skuData.skuType == 3) {
       final weekPrice = numFixed(rawPrice / 48, position: 2);
       originalPrice = '$symbol$weekPrice';
+    } else if (skuData.skuType == 4) {
+      originalPrice = '$symbol${numFixed(rawPrice * 6, position: 2)}';
     }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    originalPrice,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 2),
-              const Flexible(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 4),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
+        Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        isLifetime
+            ? Row(
+                spacing: 2,
+                children: [
+                  Flexible(
                     child: Text(
-                      '/WEEK',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                      '+ ${skuData.number.toString()}',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
+                  Image.asset(
+                    'assets/images/diamond.png',
+                    width: 22,
+                  ),
+                ],
+              )
+            : Row(
+                spacing: 2,
+                children: [
+                  Flexible(
+                    child: Text(
+                      originalPrice,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    '/Week',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0x80FFFFFF),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+        isLifetime
+            ? Row(
+                spacing: 4,
+                children: [
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      color: Color(0x80FFFFFF),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      color: Color(0x80FFFFFF),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.lineThrough,
+                      decorationColor: Color(0x80FFFFFF),
+                    ),
+                  ),
+                ],
+              )
+            : Text(
+                price,
+                style: const TextStyle(
+                  color: Color(0x80FFFFFF),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-            ],
-          ),
-        ),
-        Container(height: 1, color: const Color(0x33FFFFFF)),
-        Flexible(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              '$title $price',
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: isSelected ? Colors.white : const Color(0xFFA8A8A8),
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
@@ -290,11 +218,13 @@ class SkuItemWidget extends StatelessWidget {
       height: 24,
       width: 80,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           Positioned.fill(
             child: Image.asset('assets/images/hot@3x.png', fit: BoxFit.fill),
           ),
-          const Center(
+          const Padding(
+            padding: EdgeInsets.only(bottom: 4),
             child: Text(
               "BEST OFFER",
               style: TextStyle(

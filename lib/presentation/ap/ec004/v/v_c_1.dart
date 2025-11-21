@@ -42,7 +42,9 @@ class _VC1State extends State<VC1> {
   void initState() {
     super.initState();
 
-    FileDownloader.instance.downloadFile(videoUrl, fileType: FileType.video).then((localPath) {
+    FileDownloader.instance
+        .downloadFile(videoUrl, fileType: FileType.video)
+        .then((localPath) {
       if (localPath != null) {
         _localVideoPath = localPath;
         if (widget.isVideo) {
@@ -86,8 +88,9 @@ class _VC1State extends State<VC1> {
     final text = !widget.isVideo
         ? "1.Two steps: Upload a photo, then click generate.\n2.No support for photos of minors.\n3.Upload a front-facing photo.\n4.Does not support multiple people photos."
         : "1.Two steps: Upload a photo, then click generate.\n2.No support for photos of minors.\n3.Upload a front-facing photo.";
-    final text2 =
-        !widget.isVideo ? "Undress Your Sweetheart Now !!" : "Make your photo animated (NSFW)";
+    final text2 = !widget.isVideo
+        ? "Undress Your Sweetheart Now !!"
+        : "Make your photo animated (NSFW)";
 
     final imgW = MediaQuery.sizeOf(context).width - 100;
     final imgH = imgW / 3 * 4;

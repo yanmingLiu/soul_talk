@@ -110,7 +110,7 @@ class _ConverPageState extends State<ConverPage> with RouteAware {
       height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Row(
-        spacing: 12,
+        spacing: 24,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [_buildItem(titles[0], 0), _buildItem(titles[1], 1)],
       ),

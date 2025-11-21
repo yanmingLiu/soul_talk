@@ -63,7 +63,6 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Obx(() {
                   final isVip = DI.login.vipStatus.value;
                   return isVip
@@ -137,7 +136,6 @@ class ProfilePage extends StatelessWidget {
                           ),
                         );
                 }),
-
                 Obx(() {
                   final lang = DI.login.sessionLang.value;
                   final name = lang?.label ?? '-';
@@ -150,7 +148,6 @@ class ProfilePage extends StatelessWidget {
                     },
                   );
                 }),
-
                 _buildItem(
                   icon: 'assets/images/nick@3x(2).png',
                   title: 'Feedback',
@@ -158,13 +155,11 @@ class ProfilePage extends StatelessWidget {
                     NTO.toEmail();
                   },
                 ),
-
                 _buildItem(
                   icon: 'assets/images/nick@3x(3).png',
                   title: 'Set chat background',
                   onTap: ctr.changeChatBackground,
                 ),
-
                 Obx(() {
                   return _buildItem(
                     icon: 'assets/images/nick@3x(1).png',
@@ -175,7 +170,6 @@ class ProfilePage extends StatelessWidget {
                     },
                   );
                 }),
-
                 _buildItem(
                   icon: 'assets/images/nick@3x(4).png',
                   title: 'Privacy policy',
@@ -183,7 +177,6 @@ class ProfilePage extends StatelessWidget {
                     NTO.toPrivacy();
                   },
                 ),
-
                 _buildItem(
                   icon: 'assets/images/nick@3x(5).png',
                   title: 'Terms of use',
@@ -232,6 +225,7 @@ class ProfilePage extends StatelessWidget {
                 color: Color(0xFF595959),
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
+                fontFamily: 'Montserrat',
               ),
             ),
             const SizedBox(width: 12),

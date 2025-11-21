@@ -92,7 +92,8 @@ class _VTextState extends State<VText> {
         return false;
       }
 
-      return msg.source == MsgType.sendText || (sendText != null && msg.onAnswer != true);
+      return msg.source == MsgType.sendText ||
+          (sendText != null && msg.onAnswer != true);
     } catch (e) {
       debugPrint('[TextContainer] 判断发送消息显示失败: $e');
       return false;
@@ -123,8 +124,9 @@ class _VTextState extends State<VText> {
   Widget _buildText(BuildContext context) {
     final msg = widget.msg;
 
-    final textContent =
-        msg.translateAnswer ?? msg.answer ?? "Hmm… we lost connection for a bit. Please try again!";
+    final textContent = msg.translateAnswer ??
+        msg.answer ??
+        "Hmm… we lost connection for a bit. Please try again!";
 
     final maxWidth = MediaQuery.of(context).size.width * 0.8;
 
@@ -208,7 +210,7 @@ class _VTextState extends State<VText> {
     required bool showTransBtn,
   }) {
     return Wrap(
-      spacing: 16,
+      spacing: 8,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         // 只有最后一条消息才显示消息操作按钮
@@ -247,7 +249,6 @@ class _VTextState extends State<VText> {
     return [
       // 续写按钮
       _buildContinueButton(),
-
       // 编辑和刷新按钮（仅特定消息类型）
       if (hasEditAndRefresh) ...[
         _buildEditButton(msg),
@@ -294,7 +295,11 @@ class _VTextState extends State<VText> {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () => _handleEditMessage(msg),
-      child: Image.asset('assets/images/msg_edit@3x.png', width: 32),
+      child: Image.asset(
+        'assets/images/msg_edit@3x.png',
+        width: 40,
+        height: 32,
+      ),
     );
   }
 
@@ -325,7 +330,11 @@ class _VTextState extends State<VText> {
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () => _handleResendMessage(msg),
-        child: Image.asset('assets/images/retry@3x.png', width: 32),
+        child: Image.asset(
+          'assets/images/retry@3x.png',
+          width: 40,
+          height: 32,
+        ),
       ),
     );
   }

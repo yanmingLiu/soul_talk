@@ -71,11 +71,10 @@ class VRateApp extends StatelessWidget {
                           children: [
                             Text(
                               msg,
-                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.black,
+                                color: Color(0xFF595959),
                               ),
                             ),
                             const SizedBox(height: 16),

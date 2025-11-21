@@ -34,13 +34,15 @@ class Block {
       }
 
       final isBest = DI.storage.isBest;
+
       if (isBest) {
+        logEvent("fire_chek", parameters: {"reason": "cloak_b"});
         final other = await OtherBlock.check();
         log.d('---block---: isBest = $isBest, other = $other');
         final res = isBest && other;
         await DI.storage.setIsBird(res);
       } else {
-        logEvent("home_no", parameters: {"reason": "cloak"});
+        logEvent("fire_chek", parameters: {"reason": "cloak_a"});
       }
     }
   }

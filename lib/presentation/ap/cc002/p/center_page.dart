@@ -179,6 +179,7 @@ class _ChaterCenterPageState extends State<ChaterCenterPage> {
                     _buildInfo(width, totalHeight),
                     const SizedBox(height: 16),
                     DI.storage.isBest ? _buildContent2() : _buildContent1(),
+                    const SizedBox(height: 160)
                   ],
                 ),
               ),

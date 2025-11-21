@@ -19,7 +19,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   final ctr = Get.put(HomeBloc());
 
   late LinkedController _linkedController;
@@ -111,8 +112,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
+              spacing: 2,
               children: [
-                const Text('Discover'),
+                const Text(
+                  'Discover',
+                  style: const TextStyle(
+                    color: Color(0xFF434343),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
                 Image.asset('assets/images/star.png', width: 22),
               ],
             ),

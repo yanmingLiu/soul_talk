@@ -215,6 +215,7 @@ class ProfilePage extends StatelessWidget {
                   color: Color(0xFF999999),
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
+                  fontFamily: 'Montserrat',
                 ),
               ),
             ),

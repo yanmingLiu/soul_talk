@@ -66,7 +66,7 @@ class _MessagePageState extends State<MessagePage> with RouteAware {
           Positioned.fill(
             child: VImage(url: ctr.session.background ?? role.avatar),
           ),
-          Container(color: const Color(0x33000000)),
+          Positioned.fill(child: Container(color: const Color(0x60000000))),
           if (DI.storage.chatBgImagePath.isNotEmpty)
             Positioned.fill(
               child: Image.file(

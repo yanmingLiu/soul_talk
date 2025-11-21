@@ -81,6 +81,16 @@ class _CTabPageState extends State<CTabPage> {
               onTap: () {
                 _linkedController.select(index);
               },
+              textStyle: const TextStyle(
+                color: Color(0x80000000),
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
+              activeTextStyle: const TextStyle(
+                color: Color(0xFFDF78B1),
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
             ),
             if (index != tabTitles.length - 1) const SizedBox(width: 24),
           ],

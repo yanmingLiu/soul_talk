@@ -92,8 +92,7 @@ class _VTextState extends State<VText> {
         return false;
       }
 
-      return msg.source == MsgType.sendText ||
-          (sendText != null && msg.onAnswer != true);
+      return msg.source == MsgType.sendText || (sendText != null && msg.onAnswer != true);
     } catch (e) {
       debugPrint('[TextContainer] 判断发送消息显示失败: $e');
       return false;
@@ -105,7 +104,7 @@ class _VTextState extends State<VText> {
       final isVip = _getVipStatusSafely();
       final isLocked = _isMessageLocked();
 
-      if (!isVip && !isLocked) {
+      if (!isVip && isLocked) {
         return VTextLock(textContent: widget.msg.answer ?? '');
       }
 
@@ -124,9 +123,8 @@ class _VTextState extends State<VText> {
   Widget _buildText(BuildContext context) {
     final msg = widget.msg;
 
-    final textContent = msg.translateAnswer ??
-        msg.answer ??
-        "Hmm… we lost connection for a bit. Please try again!";
+    final textContent =
+        msg.translateAnswer ?? msg.answer ?? "Hmm… we lost connection for a bit. Please try again!";
 
     final maxWidth = MediaQuery.of(context).size.width * 0.8;
 

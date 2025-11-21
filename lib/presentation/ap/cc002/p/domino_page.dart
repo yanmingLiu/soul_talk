@@ -141,8 +141,7 @@ class DominoPage extends GetView<DominoBloc> {
           ),
           const SizedBox(height: 16),
           Obx(() {
-            if (controller.maskList.isEmpty &&
-                controller.emptyType.value != null) {
+            if (controller.maskList.isEmpty && controller.emptyType.value != null) {
               return SizedBox(
                 width: double.infinity,
                 height: 400,

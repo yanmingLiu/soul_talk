@@ -1,5 +1,4 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:soul_talk/core/data/ma_pi.dart';
 import 'package:soul_talk/domain/entities/mask.dart';
@@ -31,12 +30,7 @@ class DominoBloc extends GetxController {
       controlFinishLoad: true,
     );
 
-    // 延迟触发刷新
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 300)).then((_) {
-        refreshController.callRefresh();
-      });
-    });
+    onRefresh();
   }
 
   @override
@@ -83,9 +77,7 @@ class DominoBloc extends GetxController {
       maskList.addAll(records ?? []);
 
       // 自动选择当前会话的 mask
-      if (selectedMask.value == null &&
-          maskList.isNotEmpty &&
-          msgCtr.session.profileId != null) {
+      if (selectedMask.value == null && maskList.isNotEmpty && msgCtr.session.profileId != null) {
         selectedMask.value = maskList.firstWhereOrNull(
           (element) => element.id == msgCtr.session.profileId,
         );

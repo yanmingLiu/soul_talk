@@ -16,9 +16,9 @@ import '../core/analytics/analytics_service.dart';
 import '../core/data/lo_pi.dart';
 import '../core/data/p_pi.dart';
 import '../domain/entities/order.dart';
-import '../presentation/v000/v_dialog.dart';
 import '../presentation/v000/loading.dart';
 import '../presentation/v000/toast.dart';
+import '../presentation/v000/v_dialog.dart';
 import 'log_util.dart';
 
 enum IAPEvent { vipSucc, goldSucc }
@@ -60,9 +60,9 @@ class PayUtils {
   void _initIAP() {
     _subscription = _inAppPurchase.purchaseStream.listen(
       (purchaseDetailsList) => _processPurchaseDetails(purchaseDetailsList),
-      onError: (error) => log.e('[iap] 购买监听错误: $error'),
+      onError: (error) => log.e('[iap] error: $error'),
       onDone: () {
-        log.d('[iap] 购买监听完成');
+        log.d('[iap] finish');
         Loading.dismiss();
       },
     );
@@ -102,17 +102,19 @@ class PayUtils {
     }
 
     // 根据 sku.orderNum 从小到大排序
-    consumableList =
-        allList.where((sku) => _consumableIds.contains(sku.sku)).toList()
-          ..sort((a, b) => (a.orderNum ?? 0).compareTo(b.orderNum ?? 0));
+    consumableList = allList
+        .where((sku) => _consumableIds.contains(sku.sku))
+        .toList()
+      ..sort((a, b) => (a.orderNum ?? 0).compareTo(b.orderNum ?? 0));
 
-    subscriptionList =
-        allList.where((sku) => _subscriptionIds.contains(sku.sku)).toList()
-          ..sort((a, b) => (a.orderNum ?? 0).compareTo(b.orderNum ?? 0));
+    subscriptionList = allList
+        .where((sku) => _subscriptionIds.contains(sku.sku))
+        .toList()
+      ..sort((a, b) => (a.orderNum ?? 0).compareTo(b.orderNum ?? 0));
   }
 
   Future<void> _getSkuDatas() async {
-    log.d('[iap] _getSkuDatas');
+    // log.d('[iap] _getSkuDatas');
     final list = await PayApi.getSkuList();
     allList = list ?? [];
 
@@ -187,7 +189,7 @@ class PayUtils {
     List<PurchaseDetails> purchaseDetailsList,
   ) async {
     if (purchaseDetailsList.isEmpty) {
-      log.d('[iap] 购买详情列表为空，可能是取消支付');
+      log.d('[iap] purchaseDetailsList.isEmpty');
       Loading.dismiss();
       return;
     }
@@ -237,22 +239,18 @@ class PayUtils {
   Future<void> _handleSuccessfulPurchase(
     PurchaseDetails purchaseDetails,
   ) async {
-    log.d(' 购买成功 status: ${purchaseDetails.status}');
-    log.d(
-      ' 购买成功 pendingCompletePurchase: ${purchaseDetails.pendingCompletePurchase}',
-    );
-    log.d(
-      '[iap] 成功购买: ${purchaseDetails.productID}, ${purchaseDetails.purchaseID}, ${purchaseDetails.transactionDate}',
-    );
+    log.d('[iap] _handleSuccessfulPurchase');
+    // log.d('[iap] status: ${purchaseDetails.status}');
+    // log.d('[iap] ${purchaseDetails.productID}, ${purchaseDetails.purchaseID}');
     if (!_isUserBuy) {
-      log.d('[iap] 自动购买, 不需要处理');
+      log.d('[iap] !_isUserBuy');
       return;
     }
 
     if (await _verifyAndCompletePurchase(purchaseDetails)) {
       await _markPurchaseAsProcessed(purchaseDetails.purchaseID);
     } else {
-      log.e('[iap] 验证失败: ${purchaseDetails.productID}');
+      log.e('[iap] verify error❌: ${purchaseDetails.productID}');
     }
     _isUserBuy = false;
     _currentSkuData = null;
@@ -297,26 +295,25 @@ class PayUtils {
 
       // 获取服务器验证数据 v2
       var receipt = purchaseDetails.verificationData.serverVerificationData;
-      final localVerificationData =
-          purchaseDetails.verificationData.localVerificationData;
-      log.d('[iap] receipt: $receipt');
-      log.d('[iap] localVerificationData: $localVerificationData');
+      // final localVerificationData = purchaseDetails.verificationData.localVerificationData;
+      // log.d('[iap] receipt: $receipt');
+      // log.d('[iap] localVerificationData: $localVerificationData');
 
       // 如果没有 v2 票据，就刷新并获取 v1 票据
       if (receipt.isEmpty) {
         // 刷新并获取 v1 票据 ：
         final iosPlatformAddition = InAppPurchase.instance
             .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-        PurchaseVerificationData? verificationData = await iosPlatformAddition
-            .refreshPurchaseVerificationData();
+        PurchaseVerificationData? verificationData =
+            await iosPlatformAddition.refreshPurchaseVerificationData();
 
         String? vdl =
             verificationData?.localVerificationData; // 这就是 v1 的 Base64 字符串
         String? vds = verificationData?.serverVerificationData;
-        log.d('[iap] vdl: $vdl');
-        log.d('[iap] vds: $vds');
+        // log.d('[iap] vdl: $vdl');
+        // log.d('[iap] vds: $vds');
 
-        receipt = vds ?? '';
+        receipt = vds ?? vdl ?? '';
       }
 
       var result = await PayApi.verifyIosOrder(
@@ -361,9 +358,8 @@ class PayUtils {
   }
 
   Future<void> _createOrder(ProductDetails productDetails) async {
-    final orderType = _consumableIds.contains(productDetails.id)
-        ? 'GEMS'
-        : 'SUBSCRIPTION';
+    final orderType =
+        _consumableIds.contains(productDetails.id) ? 'GEMS' : 'SUBSCRIPTION';
 
     if (Platform.isIOS) {
       try {
@@ -446,7 +442,7 @@ class PayUtils {
 
     if (_consumableIds.contains(id)) {
       path = 'gems';
-      from = _consFrom?.name ?? '';
+      from = _consFrom?.name ?? ConsSF.home.name;
       logEvent('suc_gems');
       final name = 'suc_${path}_${id}_$from';
       log.d('[iap] report: $name');
@@ -461,7 +457,7 @@ class PayUtils {
       iapEvent.value = (IAPEvent.goldSucc, id, _eventCounter.value);
     } else {
       path = 'sub';
-      from = _vipFrom?.name ?? '';
+      from = _vipFrom?.name ?? VipSF.homevip.name;
       logEvent('suc_sub');
       final name = 'suc_${path}_${id}_$from';
       log.d('[iap] report: $name');
